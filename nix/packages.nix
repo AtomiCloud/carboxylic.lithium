@@ -23,6 +23,7 @@ let
         inherit
 
           # standard
+          xmlstarlet
           coreutils
           findutils
           gnugrep

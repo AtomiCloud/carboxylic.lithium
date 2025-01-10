@@ -10,6 +10,7 @@ with packages;
     jq
     yq
     curl
+    xmlstarlet
   ];
 
   dev = [
