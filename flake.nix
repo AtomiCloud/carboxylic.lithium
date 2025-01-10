@@ -1,5 +1,5 @@
 {
-  description = "Let___platform___ Let___service___";
+  description = "Carboxylic Lithium";
   inputs = {
     # util
     flake-utils.url = "github:numtide/flake-utils";
