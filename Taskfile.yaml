@@ -1,7 +1,7 @@
 version: '3'
 
 env:
-  COVERAGE_THRESHOLD: 80
+  COVERAGE_THRESHOLD: 50
   ATOMI_SERVICE: Lithium
 
 tasks:

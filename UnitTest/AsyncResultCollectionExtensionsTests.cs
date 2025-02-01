@@ -15,18 +15,17 @@ public class AsyncResultCollectionExtensionsTests
         {
             // Case 1: All successes
             Add(
-                (List<Task<Result<int>>>)
-                    [
-                        Task.FromResult((Result<int>)1),
-                        Task.FromResult((Result<int>)2),
-                        Task.FromResult((Result<int>)3),
-                        Task.FromResult((Result<int>)0),
-                        Task.FromResult((Result<int>)(-1)),
-                    ]
+                [
+                    Task.FromResult((Result<int>)1),
+                    Task.FromResult((Result<int>)2),
+                    Task.FromResult((Result<int>)3),
+                    Task.FromResult((Result<int>)0),
+                    Task.FromResult((Result<int>)(-1)),
+                ]
             );
 
             // Case 2: Empty collection (which means no failures too)
-            Add((List<Task<Result<int>>>)[]);
+            Add([]);
         }
     }
 
@@ -50,38 +49,31 @@ public class AsyncResultCollectionExtensionsTests
         {
             // Case 1: Contains one failure
             Add(
-                (List<Task<Result<int>>>)
-                    [
-                        Task.FromResult((Result<int>)1),
-                        Task.FromResult((Result<int>)new InvalidOperationException()),
-                        Task.FromResult((Result<int>)3),
-                        Task.FromResult((Result<int>)(-5)),
-                    ]
+                [
+                    Task.FromResult((Result<int>)1),
+                    Task.FromResult((Result<int>)new InvalidOperationException()),
+                    Task.FromResult((Result<int>)3),
+                    Task.FromResult((Result<int>)(-5)),
+                ]
             );
 
             // Case 2: Mixed, two failures
             Add(
-                (List<Task<Result<int>>>)
-                    [
-                        Task.FromResult(
-                            (Result<int>)new InvalidOperationException("First failure")
-                        ),
-                        Task.FromResult((Result<int>)1),
-                        Task.FromResult((Result<int>)new Exception("Second failure")),
-                        Task.FromResult((Result<int>)2),
-                        Task.FromResult((Result<int>)(-3)),
-                    ]
+                [
+                    Task.FromResult((Result<int>)new InvalidOperationException("First failure")),
+                    Task.FromResult((Result<int>)1),
+                    Task.FromResult((Result<int>)new Exception("Second failure")),
+                    Task.FromResult((Result<int>)2),
+                    Task.FromResult((Result<int>)(-3)),
+                ]
             );
 
             // Case 3: All failures
             Add(
-                (List<Task<Result<int>>>)
-                    [
-                        Task.FromResult((Result<int>)new Exception("Failure")),
-                        Task.FromResult(
-                            (Result<int>)new InvalidOperationException("Second Failure")
-                        ),
-                    ]
+                [
+                    Task.FromResult((Result<int>)new Exception("Failure")),
+                    Task.FromResult((Result<int>)new InvalidOperationException("Second Failure")),
+                ]
             );
         }
     }
@@ -122,32 +114,29 @@ public class AsyncResultCollectionExtensionsTests
 
             // Case 2: Success in the middle
             Add(
-                (List<Task<Result<int>>>)
-                    [
-                        Task.FromResult((Result<int>)new Exception("Error")),
-                        Task.FromResult((Result<int>)2),
-                        Task.FromResult((Result<int>)new InvalidOperationException()),
-                    ]
+                [
+                    Task.FromResult((Result<int>)new Exception("Error")),
+                    Task.FromResult((Result<int>)2),
+                    Task.FromResult((Result<int>)new InvalidOperationException()),
+                ]
             );
 
             // Case 3: Success last
             Add(
-                (List<Task<Result<int>>>)
-                    [
-                        Task.FromResult((Result<int>)new Exception()),
-                        Task.FromResult((Result<int>)new InvalidOperationException()),
-                        Task.FromResult((Result<int>)3),
-                    ]
+                [
+                    Task.FromResult((Result<int>)new Exception()),
+                    Task.FromResult((Result<int>)new InvalidOperationException()),
+                    Task.FromResult((Result<int>)3),
+                ]
             );
 
             // Case 4: Multiple successes
             Add(
-                (List<Task<Result<int>>>)
-                    [
-                        Task.FromResult((Result<int>)1),
-                        Task.FromResult((Result<int>)2),
-                        Task.FromResult((Result<int>)3),
-                    ]
+                [
+                    Task.FromResult((Result<int>)1),
+                    Task.FromResult((Result<int>)2),
+                    Task.FromResult((Result<int>)3),
+                ]
             );
         }
     }
@@ -173,16 +162,15 @@ public class AsyncResultCollectionExtensionsTests
         {
             // Case 1: All failures
             Add(
-                (List<Task<Result<int>>>)
-                    [
-                        Task.FromResult((Result<int>)new Exception()),
-                        Task.FromResult((Result<int>)new InvalidOperationException()),
-                        Task.FromResult((Result<int>)new Exception("Another error")),
-                    ]
+                [
+                    Task.FromResult((Result<int>)new Exception()),
+                    Task.FromResult((Result<int>)new InvalidOperationException()),
+                    Task.FromResult((Result<int>)new Exception("Another error")),
+                ]
             );
 
             // Case 2: Empty collection, false because there's no success
-            Add((List<Task<Result<int>>>)[]);
+            Add([]);
         }
     }
 
@@ -213,16 +201,15 @@ public class AsyncResultCollectionExtensionsTests
         {
             // Case 1: All failures
             Add(
-                (List<Task<Result<int>>>)
-                    [
-                        Task.FromResult((Result<int>)new Exception()),
-                        Task.FromResult((Result<int>)new InvalidOperationException()),
-                        Task.FromResult((Result<int>)new Exception("Another error")),
-                    ]
+                [
+                    Task.FromResult((Result<int>)new Exception()),
+                    Task.FromResult((Result<int>)new InvalidOperationException()),
+                    Task.FromResult((Result<int>)new Exception("Another error")),
+                ]
             );
 
             // Case 2: Empty collection, should return true as there are no successes
-            Add((List<Task<Result<int>>>)[]);
+            Add([]);
         }
     }
 
@@ -249,42 +236,38 @@ public class AsyncResultCollectionExtensionsTests
         {
             // Case 1: Success first
             Add(
-                (List<Task<Result<int>>>)
-                    [
-                        Task.FromResult((Result<int>)1),
-                        Task.FromResult((Result<int>)new InvalidOperationException()),
-                        Task.FromResult((Result<int>)new Exception()),
-                    ]
+                [
+                    Task.FromResult((Result<int>)1),
+                    Task.FromResult((Result<int>)new InvalidOperationException()),
+                    Task.FromResult((Result<int>)new Exception()),
+                ]
             );
 
             // Case 2: Success in the middle
             Add(
-                (List<Task<Result<int>>>)
-                    [
-                        Task.FromResult((Result<int>)new Exception("Error")),
-                        Task.FromResult((Result<int>)2),
-                        Task.FromResult((Result<int>)new InvalidOperationException()),
-                    ]
+                [
+                    Task.FromResult((Result<int>)new Exception("Error")),
+                    Task.FromResult((Result<int>)2),
+                    Task.FromResult((Result<int>)new InvalidOperationException()),
+                ]
             );
 
             // Case 3: Success last
             Add(
-                (List<Task<Result<int>>>)
-                    [
-                        Task.FromResult((Result<int>)new Exception()),
-                        Task.FromResult((Result<int>)new InvalidOperationException()),
-                        Task.FromResult((Result<int>)3),
-                    ]
+                [
+                    Task.FromResult((Result<int>)new Exception()),
+                    Task.FromResult((Result<int>)new InvalidOperationException()),
+                    Task.FromResult((Result<int>)3),
+                ]
             );
 
             // Case 4: Mixed with multiple successes
             Add(
-                (List<Task<Result<int>>>)
-                    [
-                        Task.FromResult((Result<int>)1),
-                        Task.FromResult((Result<int>)new Exception("Failure")),
-                        Task.FromResult((Result<int>)2),
-                    ]
+                [
+                    Task.FromResult((Result<int>)1),
+                    Task.FromResult((Result<int>)new Exception("Failure")),
+                    Task.FromResult((Result<int>)2),
+                ]
             );
         }
     }
@@ -316,44 +299,38 @@ public class AsyncResultCollectionExtensionsTests
         {
             // Case 1: Failure first
             Add(
-                (List<Task<Result<int>>>)
-                    [
-                        Task.FromResult((Result<int>)new InvalidOperationException()),
-                        Task.FromResult((Result<int>)1),
-                        Task.FromResult((Result<int>)2),
-                    ]
+                [
+                    Task.FromResult((Result<int>)new InvalidOperationException()),
+                    Task.FromResult((Result<int>)1),
+                    Task.FromResult((Result<int>)2),
+                ]
             );
 
             // Case 2: Failure in the middle
             Add(
-                (List<Task<Result<int>>>)
-                    [
-                        Task.FromResult((Result<int>)1),
-                        Task.FromResult((Result<int>)new Exception("Error")),
-                        Task.FromResult((Result<int>)2),
-                    ]
+                [
+                    Task.FromResult((Result<int>)1),
+                    Task.FromResult((Result<int>)new Exception("Error")),
+                    Task.FromResult((Result<int>)2),
+                ]
             );
 
             // Case 3: Failure last
             Add(
-                (List<Task<Result<int>>>)
-                    [
-                        Task.FromResult((Result<int>)1),
-                        Task.FromResult((Result<int>)2),
-                        Task.FromResult((Result<int>)new Exception()),
-                    ]
+                [
+                    Task.FromResult((Result<int>)1),
+                    Task.FromResult((Result<int>)2),
+                    Task.FromResult((Result<int>)new Exception()),
+                ]
             );
 
             // Case 4: Multiple failures
             Add(
-                (List<Task<Result<int>>>)
-                    [
-                        Task.FromResult((Result<int>)new Exception("First failure")),
-                        Task.FromResult(
-                            (Result<int>)new InvalidOperationException("Second failure")
-                        ),
-                        Task.FromResult((Result<int>)1),
-                    ]
+                [
+                    Task.FromResult((Result<int>)new Exception("First failure")),
+                    Task.FromResult((Result<int>)new InvalidOperationException("Second failure")),
+                    Task.FromResult((Result<int>)1),
+                ]
             );
         }
     }
@@ -379,16 +356,15 @@ public class AsyncResultCollectionExtensionsTests
         {
             // Case 1: All successes
             Add(
-                (List<Task<Result<int>>>)
-                    [
-                        Task.FromResult((Result<int>)1),
-                        Task.FromResult((Result<int>)2),
-                        Task.FromResult((Result<int>)0),
-                    ]
+                [
+                    Task.FromResult((Result<int>)1),
+                    Task.FromResult((Result<int>)2),
+                    Task.FromResult((Result<int>)0),
+                ]
             );
 
             // Case 2: Empty collection, naturally returning false
-            Add((List<Task<Result<int>>>)[]);
+            Add([]);
         }
     }
 
@@ -421,28 +397,26 @@ public class AsyncResultCollectionExtensionsTests
         {
             // Case 1: Simple all successes
             Add(
-                (List<Task<Result<int>>>)
-                    [
-                        Task.FromResult((Result<int>)1),
-                        Task.FromResult((Result<int>)2),
-                        Task.FromResult((Result<int>)3),
-                    ],
+                [
+                    Task.FromResult((Result<int>)1),
+                    Task.FromResult((Result<int>)2),
+                    Task.FromResult((Result<int>)3),
+                ],
                 (List<int>)[1, 2, 3]
             );
 
             // Case 2: Including boundary values
             Add(
-                (List<Task<Result<int>>>)
-                    [
-                        Task.FromResult((Result<int>)int.MaxValue),
-                        Task.FromResult((Result<int>)int.MinValue),
-                        Task.FromResult((Result<int>)0),
-                    ],
+                [
+                    Task.FromResult((Result<int>)int.MaxValue),
+                    Task.FromResult((Result<int>)int.MinValue),
+                    Task.FromResult((Result<int>)0),
+                ],
                 (List<int>)[int.MaxValue, int.MinValue, 0]
             );
 
             // Case 3: Empty collection leading to empty result
-            Add((List<Task<Result<int>>>)[], (List<int>)[]);
+            Add([], (List<int>)[]);
         }
     }
 
@@ -470,45 +444,37 @@ public class AsyncResultCollectionExtensionsTests
         {
             // Case 1: Failure at start
             Add(
-                (List<Task<Result<int>>>)
-                    [
-                        Task.FromResult(
-                            (Result<int>)new InvalidOperationException("First failure")
-                        ),
-                        Task.FromResult((Result<int>)2),
-                        Task.FromResult((Result<int>)3),
-                    ]
+                [
+                    Task.FromResult((Result<int>)new InvalidOperationException("First failure")),
+                    Task.FromResult((Result<int>)2),
+                    Task.FromResult((Result<int>)3),
+                ]
             );
 
             // Case 2: Failure in the middle
             Add(
-                (List<Task<Result<int>>>)
-                    [
-                        Task.FromResult((Result<int>)1),
-                        Task.FromResult((Result<int>)new ArgumentException("Middle failure")),
-                        Task.FromResult((Result<int>)3),
-                    ]
+                [
+                    Task.FromResult((Result<int>)1),
+                    Task.FromResult((Result<int>)new ArgumentException("Middle failure")),
+                    Task.FromResult((Result<int>)3),
+                ]
             );
 
             // Case 3: Failure at the end
             Add(
-                (List<Task<Result<int>>>)
-                    [
-                        Task.FromResult((Result<int>)1),
-                        Task.FromResult((Result<int>)2),
-                        Task.FromResult((Result<int>)new Exception("Last failure")),
-                    ]
+                [
+                    Task.FromResult((Result<int>)1),
+                    Task.FromResult((Result<int>)2),
+                    Task.FromResult((Result<int>)new Exception("Last failure")),
+                ]
             );
 
             // Case 4: Multiple failures
             Add(
-                (List<Task<Result<int>>>)
-                    [
-                        Task.FromResult((Result<int>)new Exception("Multi-failure 1")),
-                        Task.FromResult(
-                            (Result<int>)new InvalidOperationException("Multi-failure 2")
-                        ),
-                    ]
+                [
+                    Task.FromResult((Result<int>)new Exception("Multi-failure 1")),
+                    Task.FromResult((Result<int>)new InvalidOperationException("Multi-failure 2")),
+                ]
             );
         }
     }
@@ -545,25 +511,23 @@ public class AsyncResultCollectionExtensionsTests
             var ex1 = new InvalidOperationException("Error 1");
             var ex2 = new ArgumentException("Error 2");
             Add(
-                (List<Task<Result<int>>>)
-                    [Task.FromResult((Result<int>)ex1), Task.FromResult((Result<int>)ex2)],
+                [Task.FromResult((Result<int>)ex1), Task.FromResult((Result<int>)ex2)],
                 (List<Exception>)[ex1, ex2]
             );
 
             // Case 2: Mixed entries
             var ex3 = new Exception("General Error");
             Add(
-                (List<Task<Result<int>>>)
-                    [
-                        Task.FromResult((Result<int>)1),
-                        Task.FromResult((Result<int>)ex3),
-                        Task.FromResult((Result<int>)3),
-                    ],
+                [
+                    Task.FromResult((Result<int>)1),
+                    Task.FromResult((Result<int>)ex3),
+                    Task.FromResult((Result<int>)3),
+                ],
                 (List<Exception>)[ex3]
             );
 
             // Case 3: Empty collection, expecting empty result
-            Add((List<Task<Result<int>>>)[], (List<Exception>)[]);
+            Add([], (List<Exception>)[]);
         }
     }
 
@@ -590,10 +554,7 @@ public class AsyncResultCollectionExtensionsTests
         public GetFailures_Should_ReturnEmpty_IfNoFailures_Data()
         {
             // Case 1: All successes
-            Add(
-                (List<Task<Result<int>>>)
-                    [Task.FromResult((Result<int>)1), Task.FromResult((Result<int>)2)]
-            );
+            Add([Task.FromResult((Result<int>)1), Task.FromResult((Result<int>)2)]);
         }
     }
 
@@ -625,29 +586,27 @@ public class AsyncResultCollectionExtensionsTests
         {
             // Case 1: Only successes
             Add(
-                (List<Task<Result<int>>>)
-                    [
-                        Task.FromResult((Result<int>)1),
-                        Task.FromResult((Result<int>)2),
-                        Task.FromResult((Result<int>)3),
-                    ],
+                [
+                    Task.FromResult((Result<int>)1),
+                    Task.FromResult((Result<int>)2),
+                    Task.FromResult((Result<int>)3),
+                ],
                 (List<int>)[1, 2, 3]
             );
 
             // Case 2: Mixed, with more successes than failures
             Add(
-                (List<Task<Result<int>>>)
-                    [
-                        Task.FromResult((Result<int>)1),
-                        Task.FromResult((Result<int>)new Exception("Failure")),
-                        Task.FromResult((Result<int>)2),
-                        Task.FromResult((Result<int>)3),
-                    ],
+                [
+                    Task.FromResult((Result<int>)1),
+                    Task.FromResult((Result<int>)new Exception("Failure")),
+                    Task.FromResult((Result<int>)2),
+                    Task.FromResult((Result<int>)3),
+                ],
                 (List<int>)[1, 2, 3]
             );
 
             // Case 3: Empty list gives empty success list
-            Add((List<Task<Result<int>>>)[], (List<int>)[]);
+            Add([], (List<int>)[]);
         }
     }
 
@@ -673,13 +632,10 @@ public class AsyncResultCollectionExtensionsTests
         {
             // Case 1: All failures
             Add(
-                (List<Task<Result<int>>>)
-                    [
-                        Task.FromResult<Result<int>>(new Exception("Failure")),
-                        Task.FromResult<Result<int>>(
-                            new InvalidOperationException("Another failure")
-                        ),
-                    ]
+                [
+                    Task.FromResult<Result<int>>(new Exception("Failure")),
+                    Task.FromResult<Result<int>>(new InvalidOperationException("Another failure")),
+                ]
             );
         }
     }
@@ -712,28 +668,26 @@ public class AsyncResultCollectionExtensionsTests
         {
             // Case 1: All successes
             Add(
-                (List<Task<Result<int>>>)
-                    [
-                        Task.FromResult((Result<int>)1),
-                        Task.FromResult((Result<int>)2),
-                        Task.FromResult((Result<int>)3),
-                    ],
+                [
+                    Task.FromResult((Result<int>)1),
+                    Task.FromResult((Result<int>)2),
+                    Task.FromResult((Result<int>)3),
+                ],
                 (List<Result<int>>)[1, 2, 3]
             );
 
             // Case 2: Mixed results
             Add(
-                (List<Task<Result<int>>>)
-                    [
-                        Task.FromResult((Result<int>)1),
-                        Task.FromResult((Result<int>)new InvalidOperationException("Fail")),
-                        Task.FromResult((Result<int>)3),
-                    ],
+                [
+                    Task.FromResult((Result<int>)1),
+                    Task.FromResult((Result<int>)new InvalidOperationException("Fail")),
+                    Task.FromResult((Result<int>)3),
+                ],
                 (List<Result<int>>)[1, new InvalidOperationException("Fail"), 3]
             );
 
             // Case 3: Empty collection
-            Add((List<Task<Result<int>>>)[], (List<Result<int>>)[]);
+            Add([], (List<Result<int>>)[]);
         }
     }
 
@@ -766,31 +720,28 @@ public class AsyncResultCollectionExtensionsTests
         {
             // Case 1: Mixed successes and failures
             Add(
-                (List<Task<Result<int>>>)
-                    [
-                        Task.FromResult((Result<int>)1),
-                        Task.FromResult((Result<int>)new InvalidOperationException("Fail")),
-                        Task.FromResult((Result<int>)2),
-                    ]
+                [
+                    Task.FromResult((Result<int>)1),
+                    Task.FromResult((Result<int>)new InvalidOperationException("Fail")),
+                    Task.FromResult((Result<int>)2),
+                ]
             );
 
             // Case 2: All successes
             Add(
-                (List<Task<Result<int>>>)
-                    [
-                        Task.FromResult((Result<int>)10),
-                        Task.FromResult((Result<int>)20),
-                        Task.FromResult((Result<int>)30),
-                    ]
+                [
+                    Task.FromResult((Result<int>)10),
+                    Task.FromResult((Result<int>)20),
+                    Task.FromResult((Result<int>)30),
+                ]
             );
 
             // Case 3: All failures
             Add(
-                (List<Task<Result<int>>>)
-                    [
-                        Task.FromResult((Result<int>)new Exception("Error 1")),
-                        Task.FromResult((Result<int>)new InvalidOperationException("Error 2")),
-                    ]
+                [
+                    Task.FromResult((Result<int>)new Exception("Error 1")),
+                    Task.FromResult((Result<int>)new InvalidOperationException("Error 2")),
+                ]
             );
         }
     }
@@ -823,39 +774,36 @@ public class AsyncResultCollectionExtensionsTests
         {
             // Case 1: Mixed collection
             Add(
-                (List<Task<Result<int>>>)
-                    [
-                        Task.FromResult((Result<int>)1),
-                        Task.FromResult((Result<int>)new InvalidOperationException("Failure")),
-                        Task.FromResult((Result<int>)2),
-                    ],
+                [
+                    Task.FromResult((Result<int>)1),
+                    Task.FromResult((Result<int>)new InvalidOperationException("Failure")),
+                    Task.FromResult((Result<int>)2),
+                ],
                 (List<Result<int>>)[1, new InvalidOperationException("Failure"), 2]
             );
 
             // Case 2: All successes
             Add(
-                (List<Task<Result<int>>>)
-                    [
-                        Task.FromResult((Result<int>)10),
-                        Task.FromResult((Result<int>)20),
-                        Task.FromResult((Result<int>)30),
-                    ],
+                [
+                    Task.FromResult((Result<int>)10),
+                    Task.FromResult((Result<int>)20),
+                    Task.FromResult((Result<int>)30),
+                ],
                 (List<Result<int>>)[10, 20, 30]
             );
 
             // Case 3: All failures
             Add(
-                (List<Task<Result<int>>>)
-                    [
-                        Task.FromResult((Result<int>)new Exception("Error 1")),
-                        Task.FromResult((Result<int>)new InvalidOperationException("Error 2")),
-                    ],
+                [
+                    Task.FromResult((Result<int>)new Exception("Error 1")),
+                    Task.FromResult((Result<int>)new InvalidOperationException("Error 2")),
+                ],
                 (List<Result<int>>)
                     [new Exception("Error 1"), new InvalidOperationException("Error 2")]
             );
 
             // Case 4: Empty collection
-            Add((List<Task<Result<int>>>)[], (List<Result<int>>)[]);
+            Add([], (List<Result<int>>)[]);
         }
     }
 
@@ -1048,7 +996,7 @@ public class AsyncResultCollectionExtensionsTests
         };
 
         // Assert
-        act.Should()
+        await act.Should()
             .ThrowAsync<Exception>()
             .WithMessage(expected.Message)
             .Where(x => x.GetType() == expected.GetType());
@@ -1309,7 +1257,7 @@ public class AsyncResultCollectionExtensionsTests
         };
 
         // Assert
-        act.Should()
+        await act.Should()
             .ThrowAsync<Exception>()
             .WithMessage(expected.Message)
             .Where(x => x.GetType() == expected.GetType());
@@ -1710,7 +1658,7 @@ public class AsyncResultCollectionExtensionsTests
         };
 
         // Assert
-        act.Should()
+        await act.Should()
             .ThrowAsync<Exception>()
             .WithMessage(expected.Message)
             .Where(x => x.GetType() == expected.GetType());
@@ -1787,4 +1735,1712 @@ public class AsyncResultCollectionExtensionsTests
     }
 
     // 14 END
+
+    // ========================
+    // 15) DoEach (Overload B)
+    // ========================
+
+    // Success scenarios for DoEach (Overload B)
+    private class DoEach_OverloadB_Success_Data
+        : TheoryData<
+            IEnumerable<Task<Result<int>>>,
+            Func<int, int>,
+            DoType,
+            IEnumerable<Task<Result<int>>>
+        >
+    {
+        public DoEach_OverloadB_Success_Data()
+        {
+            // Identity transformation with Ignore DoType
+            Add(
+                [Task.FromResult((Result<int>)1), Task.FromResult((Result<int>)2)],
+                x => x,
+                DoType.Ignore,
+                [Task.FromResult((Result<int>)1), Task.FromResult((Result<int>)2)]
+            );
+
+            // Increment transformation with Ignore DoType
+            Add(
+                [Task.FromResult((Result<int>)2), Task.FromResult((Result<int>)11)],
+                x => x + 1,
+                DoType.Ignore,
+                [Task.FromResult((Result<int>)2), Task.FromResult((Result<int>)11)]
+            );
+
+            // Transformation to negative with Ignore DoType
+            Add(
+                [Task.FromResult((Result<int>)(-1))],
+                x => -x,
+                DoType.Ignore,
+                [Task.FromResult((Result<int>)(int)-1)]
+            );
+        }
+    }
+
+    // AsyncResultCollectionExtensions.DoEach should return equivalent results for successful transformations
+    [Theory]
+    [ClassData(typeof(DoEach_OverloadB_Success_Data))]
+    public async Task DoEach_Should_ReturnSuccess(
+        IEnumerable<Task<Result<int>>> inputs,
+        Func<int, int> transformation,
+        DoType doType,
+        IEnumerable<Task<Result<int>>> expected
+    )
+    {
+        // Act
+        var actual = await Task.WhenAll(inputs.DoEach(doType, transformation, Errors.MapNone));
+        var ex = await Task.WhenAll(expected);
+        // Assert
+        actual.Should().BeEquivalentTo(ex);
+    }
+
+    // Failure scenarios for DoEach (Overload B)
+    private class DoEach_OverloadB_Failure_Data
+        : TheoryData<
+            IEnumerable<Task<Result<int>>>,
+            Func<int, int>,
+            DoType,
+            IEnumerable<Task<Result<int>>>
+        >
+    {
+        public DoEach_OverloadB_Failure_Data()
+        {
+            // Fails with mapped InvalidOperationException when using MapErrors DoType
+            Add(
+                [Task.FromResult((Result<int>)1)],
+                _ => throw new InvalidOperationException("Invalid operation"),
+                DoType.MapErrors,
+                [Task.FromResult((Result<int>)new InvalidOperationException("Invalid operation"))]
+            );
+
+            // Failure due to negative to positive constraint when using MapErrors DoType
+            Add(
+                [Task.FromResult((Result<int>)(-1))],
+                x => throw new NullReferenceException($"Value must be non-negative but got {x}"),
+                DoType.MapErrors,
+                [
+                    Task.FromResult(
+                        (Result<int>)
+                            new NullReferenceException("Value must be non-negative but got -1")
+                    ),
+                ]
+            );
+        }
+    }
+
+    // AsyncResultCollectionExtensions.DoEach should handle exceptions and return failures when they occur
+    [Theory]
+    [ClassData(typeof(DoEach_OverloadB_Failure_Data))]
+    public async Task DoEach_Should_ReturnFailure(
+        IEnumerable<Task<Result<int>>> inputs,
+        Func<int, int> transformation,
+        DoType doType,
+        IEnumerable<Task<Result<int>>> expected
+    )
+    {
+        // Act
+        var actual = await Task.WhenAll(inputs.DoEach(doType, transformation, Errors.MapAll));
+        var ex = await Task.WhenAll(expected);
+        // Assert
+        actual.Should().BeEquivalentTo(ex);
+    }
+
+    // Exception Propagation scenarios for DoEach (Overload B)
+    private class DoEach_OverloadB_PropagateException_Data
+        : TheoryData<IEnumerable<Task<Result<int>>>, Func<int, int>, DoType, Exception>
+    {
+        public DoEach_OverloadB_PropagateException_Data()
+        {
+            // Propagates FormatException that is not mapped
+            Add(
+                [Task.FromResult((Result<int>)5)],
+                _ => throw new FormatException("Invalid format exception"),
+                DoType.Ignore,
+                new FormatException("Invalid format exception")
+            );
+
+            // Propagates NullReferenceException that is not mapped
+            Add(
+                [Task.FromResult((Result<int>)0)],
+                _ => throw new NullReferenceException("Null reference error"),
+                DoType.Ignore,
+                new NullReferenceException("Null reference error")
+            );
+        }
+    }
+
+    // AsyncResultCollectionExtensions.DoEach should propagate exceptions that aren't mapped
+    [Theory]
+    [ClassData(typeof(DoEach_OverloadB_PropagateException_Data))]
+    public async Task DoEach_Should_PropagateUnmappedException(
+        IEnumerable<Task<Result<int>>> inputs,
+        Func<int, int> transformation,
+        DoType doType,
+        Exception expected
+    )
+    {
+        // Act
+        var act = async () =>
+            await Task.WhenAll(inputs.DoEach(doType, transformation, Errors.MapNone));
+
+        // Assert
+        await act.Should().ThrowAsync<Exception>().WithMessage(expected.Message);
+    }
+
+    // 15 END
+
+    // ==============
+    // DoEach (Overload C)
+    // ==============
+
+    // Success scenarios for DoEach (Overload C)
+    private class DoEach_OverloadC_Success_Data
+        : TheoryData<
+            IEnumerable<Task<Result<int>>>,
+            Action<int>,
+            DoType,
+            IEnumerable<Task<Result<int>>>
+        >
+    {
+        public DoEach_OverloadC_Success_Data()
+        {
+            // Identity no-op action with Ignore DoType
+            Add(
+                [Task.FromResult((Result<int>)1)],
+                x => { },
+                DoType.Ignore,
+                [Task.FromResult((Result<int>)1)]
+            );
+
+            // Logging action with Ignore DoType
+            Add(
+                [Task.FromResult((Result<int>)2)],
+                x => Console.WriteLine($"Processed value: {x}"),
+                DoType.Ignore,
+                [Task.FromResult((Result<int>)2)]
+            );
+        }
+    }
+
+    // AsyncResultCollectionExtensions.DoEach (Overload C) should complete successfully for no-op actions
+    [Theory]
+    [ClassData(typeof(DoEach_OverloadC_Success_Data))]
+    public async Task DoEachC_Should_ReturnSuccess(
+        IEnumerable<Task<Result<int>>> inputs,
+        Action<int> action,
+        DoType doType,
+        IEnumerable<Task<Result<int>>> expected
+    )
+    {
+        // Act
+        var results = inputs.DoEach(doType, action, Errors.MapNone);
+
+        // Assert
+        (await Task.WhenAll(results))
+            .Should()
+            .BeEquivalentTo(await Task.WhenAll(expected));
+    }
+
+    // Failure scenarios for DoEach (Overload C)
+    private class DoEach_OverloadC_Failure_Data
+        : TheoryData<
+            IEnumerable<Task<Result<int>>>,
+            Action<int>,
+            DoType,
+            IEnumerable<Task<Result<int>>>
+        >
+    {
+        public DoEach_OverloadC_Failure_Data()
+        {
+            // Method fails by throwing InvalidOperationException with MapErrors DoType
+            Add(
+                [Task.FromResult((Result<int>)1)],
+                _ => throw new InvalidOperationException("Invalid action execution"),
+                DoType.MapErrors,
+                [
+                    Task.FromResult(
+                        (Result<int>)new InvalidOperationException("Invalid action execution")
+                    ),
+                ]
+            );
+
+            // Method fails with ArgumentOutOfRangeException using MapErrors DoType
+            Add(
+                [Task.FromResult((Result<int>)3)],
+                _ => throw new NullReferenceException("Index out of range during action execution"),
+                DoType.MapErrors,
+                [
+                    Task.FromResult(
+                        (Result<int>)
+                            new NullReferenceException("Index out of range during action execution")
+                    ),
+                ]
+            );
+        }
+    }
+
+    // AsyncResultCollectionExtensions.DoEach (Overload C) should handle failures and map exceptions properly
+    [Theory]
+    [ClassData(typeof(DoEach_OverloadC_Failure_Data))]
+    public async Task DoEachC_Should_ReturnFailure(
+        IEnumerable<Task<Result<int>>> inputs,
+        Action<int> action,
+        DoType doType,
+        IEnumerable<Task<Result<int>>> expected
+    )
+    {
+        // Act
+        var results = inputs.DoEach(doType, action, Errors.MapAll);
+
+        // Assert
+        (await Task.WhenAll(results))
+            .Should()
+            .BeEquivalentTo(await Task.WhenAll(expected));
+    }
+
+    // Exception Propagation scenarios for DoEach (Overload C)
+    private class DoEach_OverloadC_PropagateException_Data
+        : TheoryData<IEnumerable<Task<Result<int>>>, Action<int>, DoType, Exception>
+    {
+        public DoEach_OverloadC_PropagateException_Data()
+        {
+            // FormatException propagates when unmapped
+            Add(
+                [Task.FromResult((Result<int>)5)],
+                _ => throw new FormatException("FormatException in action"),
+                DoType.Ignore,
+                new FormatException("FormatException in action")
+            );
+
+            // NullReferenceException propagates when unmapped
+            Add(
+                [Task.FromResult((Result<int>)0)],
+                _ => throw new NullReferenceException("NullReferenceException in action"),
+                DoType.Ignore,
+                new NullReferenceException("NullReferenceException in action")
+            );
+        }
+    }
+
+    // AsyncResultCollectionExtensions.DoEach (Overload C) should propagate unmapped exceptions properly
+    [Theory]
+    [ClassData(typeof(DoEach_OverloadC_PropagateException_Data))]
+    public async Task DoEachC_Should_PropagateUnmappedException(
+        IEnumerable<Task<Result<int>>> inputs,
+        Action<int> action,
+        DoType doType,
+        Exception expected
+    )
+    {
+        // Act
+        var act = async () =>
+        {
+            await Task.WhenAll(inputs.DoEach(doType, action, Errors.MapNone));
+        };
+
+        // Assert
+        await act.Should().ThrowAsync<Exception>().WithMessage(expected.Message);
+    }
+
+    // 16 END
+
+
+    // ===============================
+    // 17) ThenAwaitEach (Overload A)
+    // ===============================
+
+    // Success scenarios for ThenAwaitEach (Overload A)
+    private class ThenAwaitEach_OverloadA_Success_Data
+        : TheoryData<
+            IEnumerable<Task<Result<int>>>,
+            Func<int, Task<Result<string>>>,
+            IEnumerable<Task<Result<string>>>
+        >
+    {
+        public ThenAwaitEach_OverloadA_Success_Data()
+        {
+            // Async transformation to a prefixed string
+            Add(
+                [Task.FromResult((Result<int>)1)],
+                async val => await Task.FromResult((Result<string>)$"Prefixed-{val}"),
+                [Task.FromResult((Result<string>)"Prefixed-1")]
+            );
+
+            // Async multiplication and conversion to string
+            Add(
+                [Task.FromResult((Result<int>)2)],
+                async val => await Task.FromResult((Result<string>)($"Doubled-{val * 2}")),
+                [Task.FromResult((Result<string>)"Doubled-4")]
+            );
+        }
+    }
+
+    // AsyncResultCollectionExtensions.ThenAwaitEach should successfully apply async transformations
+    [Theory]
+    [ClassData(typeof(ThenAwaitEach_OverloadA_Success_Data))]
+    public async Task ThenAwaitEachA_Should_ReturnSuccess(
+        IEnumerable<Task<Result<int>>> inputs,
+        Func<int, Task<Result<string>>> transform,
+        IEnumerable<Task<Result<string>>> expected
+    )
+    {
+        // Act
+        var actual = await Task.WhenAll(inputs.ThenAwaitEach(transform));
+
+        // Assert
+        actual.Should().BeEquivalentTo(await Task.WhenAll(expected));
+    }
+
+    // Failure scenarios for ThenAwaitEach (Overload A)
+    private class ThenAwaitEach_OverloadA_Failure_Data
+        : TheoryData<
+            IEnumerable<Task<Result<int>>>,
+            Func<int, Task<Result<string>>>,
+            IEnumerable<Task<Result<string>>>
+        >
+    {
+        public ThenAwaitEach_OverloadA_Failure_Data()
+        {
+            // Transformation fails with InvalidOperationException
+            Add(
+                [Task.FromResult((Result<int>)1)],
+                async val =>
+                    await Task.FromResult(
+                        (Result<string>)new InvalidOperationException("Transformation failure")
+                    ),
+                [
+                    Task.FromResult(
+                        (Result<string>)new InvalidOperationException("Transformation failure")
+                    ),
+                ]
+            );
+
+            // Transformation fails due to null value constraint
+            Add(
+                [Task.FromResult((Result<int>)(-1))],
+                async val =>
+                    await Task.FromResult(
+                        (Result<string>)new NullReferenceException("Value cannot be null")
+                    ),
+                [
+                    Task.FromResult(
+                        (Result<string>)new NullReferenceException("Value cannot be null")
+                    ),
+                ]
+            );
+        }
+    }
+
+    // AsyncResultCollectionExtensions.ThenAwaitEach should correctly capture failures in transformations
+    [Theory]
+    [ClassData(typeof(ThenAwaitEach_OverloadA_Failure_Data))]
+    public async Task ThenAwaitEachA_Should_CaptureFailure(
+        IEnumerable<Task<Result<int>>> inputs,
+        Func<int, Task<Result<string>>> transform,
+        IEnumerable<Task<Result<string>>> expected
+    )
+    {
+        // Act
+        var actual = await Task.WhenAll(inputs.ThenAwaitEach(transform));
+
+        // Assert
+        actual.Should().BeEquivalentTo(await Task.WhenAll(expected));
+    }
+
+    // Exception Propagation scenarios for ThenAwaitEach (Overload A)
+    private class ThenAwaitEach_OverloadA_PropagateException_Data
+        : TheoryData<IEnumerable<Task<Result<int>>>, Func<int, Task<Result<string>>>, Exception>
+    {
+        public ThenAwaitEach_OverloadA_PropagateException_Data()
+        {
+            // FormatException during async operation
+            Add(
+                [Task.FromResult((Result<int>)5)],
+                async val =>
+                {
+                    await Task.Yield();
+                    throw new FormatException("Async formatting exception");
+                },
+                new FormatException("Async formatting exception")
+            );
+
+            // NullReferenceException in async transformation
+            Add(
+                [Task.FromResult((Result<int>)0)],
+                async val =>
+                {
+                    await Task.Yield();
+                    throw new NullReferenceException("Null reference in async operation");
+                },
+                new NullReferenceException("Null reference in async operation")
+            );
+        }
+    }
+
+    // AsyncResultCollectionExtensions.ThenAwaitEach should propagate unmapped exceptions in async transformations
+    [Theory]
+    [ClassData(typeof(ThenAwaitEach_OverloadA_PropagateException_Data))]
+    public async Task ThenAwaitEachA_Should_PropagateUnmappedException(
+        IEnumerable<Task<Result<int>>> inputs,
+        Func<int, Task<Result<string>>> transform,
+        Exception expected
+    )
+    {
+        // Act
+        Func<Task> act = () => Task.WhenAll(inputs.ThenAwaitEach(transform));
+
+        // Assert
+        await act.Should()
+            .ThrowAsync<Exception>()
+            .WithMessage(expected.Message)
+            .Where(x => x.GetType() == expected.GetType());
+    }
+
+    // 17 END
+
+    // ===============================
+    // 18) ThenAwaitEach (Overload B)
+    // ===============================
+
+    // Success scenarios for ThenAwaitEach (Overload B)
+    private class ThenAwaitEach_OverloadB_Success_Data
+        : TheoryData<
+            IEnumerable<Task<Result<int>>>,
+            Func<int, Task<string>>,
+            IEnumerable<Task<Result<string>>>
+        >
+    {
+        public ThenAwaitEach_OverloadB_Success_Data()
+        {
+            // Async transformation to append suffix
+            Add(
+                [Task.FromResult((Result<int>)1)],
+                async val => await Task.FromResult($"Appended-{val}"),
+                [Task.FromResult((Result<string>)"Appended-1")]
+            );
+
+            // Async multiply and convert to string
+            Add(
+                [Task.FromResult((Result<int>)3)],
+                async val => await Task.FromResult($"Tripled-{val * 3}"),
+                [Task.FromResult((Result<string>)"Tripled-9")]
+            );
+        }
+    }
+
+    // AsyncResultCollectionExtensions.ThenAwaitEach (Overload B) should successfully apply async string transformations
+    [Theory]
+    [ClassData(typeof(ThenAwaitEach_OverloadB_Success_Data))]
+    public async Task ThenAwaitEachB_Should_ReturnSuccess(
+        IEnumerable<Task<Result<int>>> inputs,
+        Func<int, Task<string>> transform,
+        IEnumerable<Task<Result<string>>> expected
+    )
+    {
+        // Act
+        var actual = await Task.WhenAll(inputs.ThenAwaitEach(transform, Errors.MapNone));
+
+        // Assert
+        actual.Should().BeEquivalentTo(await Task.WhenAll(expected));
+    }
+
+    // Failure scenarios for ThenAwaitEach (Overload B)
+    private class ThenAwaitEach_OverloadB_Failure_Data
+        : TheoryData<
+            IEnumerable<Task<Result<int>>>,
+            Func<int, Task<string>>,
+            IEnumerable<Task<Result<string>>>
+        >
+    {
+        public ThenAwaitEach_OverloadB_Failure_Data()
+        {
+            // Fails with InvalidOperationException
+            Add(
+                [Task.FromResult((Result<int>)2)],
+                async val =>
+                {
+                    await Task.Yield();
+                    throw new InvalidOperationException("Operation failed");
+                },
+                [Task.FromResult((Result<string>)new InvalidOperationException("Operation failed"))]
+            );
+
+            // Fails due to null constraint throwing exception
+            Add(
+                [Task.FromResult((Result<int>)4)],
+                async val =>
+                {
+                    await Task.Yield();
+                    throw new NullReferenceException("Null value encountered");
+                },
+                [
+                    Task.FromResult(
+                        (Result<string>)new NullReferenceException("Null value encountered")
+                    ),
+                ]
+            );
+        }
+    }
+
+    // AsyncResultCollectionExtensions.ThenAwaitEach (Overload B) should handle exceptional transforms as failures
+    [Theory]
+    [ClassData(typeof(ThenAwaitEach_OverloadB_Failure_Data))]
+    public async Task ThenAwaitEachB_Should_CaptureFailure(
+        IEnumerable<Task<Result<int>>> inputs,
+        Func<int, Task<string>> transform,
+        IEnumerable<Task<Result<string>>> expected
+    )
+    {
+        // Act
+        var actual = await Task.WhenAll(inputs.ThenAwaitEach(transform, Errors.MapAll));
+
+        // Assert
+        actual.Should().BeEquivalentTo(await Task.WhenAll(expected));
+    }
+
+    // Exception Propagation scenarios for ThenAwaitEach (Overload B)
+    private class ThenAwaitEach_OverloadB_PropagateException_Data
+        : TheoryData<IEnumerable<Task<Result<int>>>, Func<int, Task<string>>, Exception>
+    {
+        public ThenAwaitEach_OverloadB_PropagateException_Data()
+        {
+            // Propagate FormatException
+            Add(
+                [Task.FromResult((Result<int>)8)],
+                async val =>
+                {
+                    await Task.Yield();
+                    throw new FormatException("Unexpected format");
+                },
+                new FormatException("Unexpected format")
+            );
+
+            // Propagate NullReferenceException
+            Add(
+                [Task.FromResult((Result<int>)10)],
+                async val =>
+                {
+                    await Task.Yield();
+                    throw new NullReferenceException("Null reference issue");
+                },
+                new NullReferenceException("Null reference issue")
+            );
+        }
+    }
+
+    // AsyncResultCollectionExtensions.ThenAwaitEach (Overload B) should propagate unmapped exceptions
+    [Theory]
+    [ClassData(typeof(ThenAwaitEach_OverloadB_PropagateException_Data))]
+    public async Task ThenAwaitEachB_Should_PropagateUnmappedException(
+        IEnumerable<Task<Result<int>>> inputs,
+        Func<int, Task<string>> transform,
+        Exception expected
+    )
+    {
+        // Act
+        Func<Task> act = () => Task.WhenAll(inputs.ThenAwaitEach(transform, Errors.MapNone));
+
+        // Assert
+        await act.Should()
+            .ThrowAsync<Exception>()
+            .WithMessage(expected.Message)
+            .Where(x => x.GetType() == expected.GetType());
+    }
+
+    // 18 END
+
+    // ===============================
+    // 19) ThenAwaitEach (Overload C)
+    // ===============================
+
+    // Success scenarios for ThenAwaitEach (Overload C)
+    private class ThenAwaitEach_OverloadC_Success_Data
+        : TheoryData<
+            IEnumerable<Task<Result<int>>>,
+            Func<int, Task>,
+            IEnumerable<Task<Result<Unit>>>
+        >
+    {
+        public ThenAwaitEach_OverloadC_Success_Data()
+        {
+            // Async no-op action
+            Add(
+                [Task.FromResult((Result<int>)1)],
+                async val => await Task.CompletedTask,
+                [Task.FromResult((Result<Unit>)new Unit())]
+            );
+
+            // Async delay action
+            Add(
+                [Task.FromResult((Result<int>)2)],
+                async val => await Task.Delay(5),
+                [Task.FromResult((Result<Unit>)new Unit())]
+            );
+        }
+    }
+
+    // AsyncResultCollectionExtensions.ThenAwaitEach (Overload C) should successfully complete async actions
+    [Theory]
+    [ClassData(typeof(ThenAwaitEach_OverloadC_Success_Data))]
+    public async Task ThenAwaitEachC_Should_ReturnSuccess(
+        IEnumerable<Task<Result<int>>> inputs,
+        Func<int, Task> action,
+        IEnumerable<Task<Result<Unit>>> expected
+    )
+    {
+        // Act
+        var actual = await Task.WhenAll(inputs.ThenAwaitEach(action, Errors.MapNone));
+
+        // Assert
+        actual.Should().BeEquivalentTo(await Task.WhenAll(expected));
+    }
+
+    // Failure scenarios for ThenAwaitEach (Overload C)
+    private class ThenAwaitEach_OverloadC_Failure_Data
+        : TheoryData<
+            IEnumerable<Task<Result<int>>>,
+            Func<int, Task>,
+            IEnumerable<Task<Result<Unit>>>
+        >
+    {
+        public ThenAwaitEach_OverloadC_Failure_Data()
+        {
+            // Fail due to InvalidOperationException during action
+            Add(
+                [Task.FromResult((Result<int>)3)],
+                async val =>
+                {
+                    await Task.Yield();
+                    throw new InvalidOperationException("Operation failed");
+                },
+                [Task.FromResult((Result<Unit>)new InvalidOperationException("Operation failed"))]
+            );
+
+            // Fail due to NullReferenceException during execution
+            Add(
+                [Task.FromResult((Result<int>)4)],
+                async val =>
+                {
+                    await Task.Yield();
+                    throw new NullReferenceException("Null value encountered");
+                },
+                [
+                    Task.FromResult(
+                        (Result<Unit>)new NullReferenceException("Null value encountered")
+                    ),
+                ]
+            );
+        }
+    }
+
+    // AsyncResultCollectionExtensions.ThenAwaitEach (Overload C) should capture exceptions as failures during actions
+    [Theory]
+    [ClassData(typeof(ThenAwaitEach_OverloadC_Failure_Data))]
+    public async Task ThenAwaitEachC_Should_CaptureFailure(
+        IEnumerable<Task<Result<int>>> inputs,
+        Func<int, Task> action,
+        IEnumerable<Task<Result<Unit>>> expected
+    )
+    {
+        // Act
+        var actual = await Task.WhenAll(inputs.ThenAwaitEach(action, Errors.MapAll));
+
+        // Assert
+        actual.Should().BeEquivalentTo(await Task.WhenAll(expected));
+    }
+
+    // Exception Propagation scenarios for ThenAwaitEach (Overload C)
+    private class ThenAwaitEach_OverloadC_PropagateException_Data
+        : TheoryData<IEnumerable<Task<Result<int>>>, Func<int, Task>, Exception>
+    {
+        public ThenAwaitEach_OverloadC_PropagateException_Data()
+        {
+            // Propagate FormatException during async execution
+            Add(
+                [Task.FromResult((Result<int>)6)],
+                async val =>
+                {
+                    await Task.Yield();
+                    throw new FormatException("Unexpected format");
+                },
+                new FormatException("Unexpected format")
+            );
+
+            // Propagate NullReferenceException during async transformation
+            Add(
+                [Task.FromResult((Result<int>)8)],
+                async val =>
+                {
+                    await Task.Yield();
+                    throw new NullReferenceException("Null value error");
+                },
+                new NullReferenceException("Null value error")
+            );
+        }
+    }
+
+    // AsyncResultCollectionExtensions.ThenAwaitEach (Overload C) should propagate unmapped exceptions
+    [Theory]
+    [ClassData(typeof(ThenAwaitEach_OverloadC_PropagateException_Data))]
+    public async Task ThenAwaitEachC_Should_PropagateUnmappedException(
+        IEnumerable<Task<Result<int>>> inputs,
+        Func<int, Task> action,
+        Exception expected
+    )
+    {
+        // Act
+        Func<Task> act = () => Task.WhenAll(inputs.ThenAwaitEach(action, Errors.MapNone));
+
+        // Assert
+        await act.Should()
+            .ThrowAsync<Exception>()
+            .WithMessage(expected.Message)
+            .Where(x => x.GetType() == expected.GetType());
+    }
+
+    // 19 END
+
+    // ===============================
+    // 20) ThenEach (Overload A)
+    // ===============================
+
+    // Success scenarios for ThenEach (Overload A)
+    private class ThenEach_OverloadA_Success_Data
+        : TheoryData<
+            IEnumerable<Task<Result<int>>>,
+            Func<int, Result<string>>,
+            IEnumerable<Task<Result<string>>>
+        >
+    {
+        public ThenEach_OverloadA_Success_Data()
+        {
+            // Simple string transformation
+            Add(
+                [Task.FromResult((Result<int>)1)],
+                val => (Result<string>)($"Converted to string {val}"),
+                [Task.FromResult((Result<string>)"Converted to string 1")]
+            );
+
+            // Multiply by 2 and convert to string
+            Add(
+                [Task.FromResult((Result<int>)3)],
+                val => (Result<string>)($"Twice the value is {val * 2}"),
+                [Task.FromResult((Result<string>)"Twice the value is 6")]
+            );
+        }
+    }
+
+    // AsyncResultCollectionExtensions.ThenEach (Overload A) should apply transformations successfully
+    [Theory]
+    [ClassData(typeof(ThenEach_OverloadA_Success_Data))]
+    public async Task ThenEachA_Should_ReturnSuccess(
+        IEnumerable<Task<Result<int>>> inputs,
+        Func<int, Result<string>> transform,
+        IEnumerable<Task<Result<string>>> expected
+    )
+    {
+        // Act
+        var actual = await Task.WhenAll(inputs.ThenEach(transform));
+
+        // Assert
+        actual.Should().BeEquivalentTo(await Task.WhenAll(expected));
+    }
+
+    // Failure scenarios for ThenEach (Overload A)
+    private class ThenEach_OverloadA_Failure_Data
+        : TheoryData<
+            IEnumerable<Task<Result<int>>>,
+            Func<int, Result<string>>,
+            IEnumerable<Task<Result<string>>>
+        >
+    {
+        public ThenEach_OverloadA_Failure_Data()
+        {
+            // Fail transformation by throwing InvalidOperationException
+            Add(
+                [Task.FromResult((Result<int>)2)],
+                val => new InvalidOperationException("Operation failed"),
+                [Task.FromResult((Result<string>)new InvalidOperationException("Operation failed"))]
+            );
+
+            // Fail due to NullReferenceException in transformation
+            Add(
+                [Task.FromResult((Result<int>)5)],
+                val => new NullReferenceException("Null reference encountered"),
+                [
+                    Task.FromResult(
+                        (Result<string>)new NullReferenceException("Null reference encountered")
+                    ),
+                ]
+            );
+        }
+    }
+
+    // AsyncResultCollectionExtensions.ThenEach (Overload A) should recover from failures as exceptions
+    [Theory]
+    [ClassData(typeof(ThenEach_OverloadA_Failure_Data))]
+    public async Task ThenEachA_Should_CaptureFailure(
+        IEnumerable<Task<Result<int>>> inputs,
+        Func<int, Result<string>> transform,
+        IEnumerable<Task<Result<string>>> expected
+    )
+    {
+        // Act
+        var actual = await Task.WhenAll(inputs.ThenEach(transform));
+
+        // Assert
+        actual.Should().BeEquivalentTo(await Task.WhenAll(expected));
+    }
+
+    // Exception Propagation scenarios for ThenEach (Overload A)
+    private class ThenEach_OverloadA_PropagateException_Data
+        : TheoryData<IEnumerable<Task<Result<int>>>, Func<int, Result<string>>, Exception>
+    {
+        public ThenEach_OverloadA_PropagateException_Data()
+        {
+            // Propagate FormatException
+            Add(
+                [Task.FromResult((Result<int>)4)],
+                val => throw new FormatException("Improper format"),
+                new FormatException("Improper format")
+            );
+
+            // Propagate NullReferenceException
+            Add(
+                [Task.FromResult((Result<int>)7)],
+                val => throw new NullReferenceException("Null issue"),
+                new NullReferenceException("Null issue")
+            );
+        }
+    }
+
+    // AsyncResultCollectionExtensions.ThenEach (Overload A) should propagate unmapped exceptions
+    [Theory]
+    [ClassData(typeof(ThenEach_OverloadA_PropagateException_Data))]
+    public async Task ThenEachA_Should_PropagateUnmappedException(
+        IEnumerable<Task<Result<int>>> inputs,
+        Func<int, Result<string>> transform,
+        Exception expected
+    )
+    {
+        // Act
+        Func<Task> act = () => Task.WhenAll(inputs.ThenEach(transform));
+
+        // Assert
+        await act.Should()
+            .ThrowAsync<Exception>()
+            .WithMessage(expected.Message)
+            .Where(x => x.GetType() == expected.GetType());
+    }
+
+    // 20 END
+
+    // ===============================
+    // 21) ThenEach (Overload B)
+    // ===============================
+
+    // Success scenarios for ThenEach (Overload B)
+    private class ThenEach_OverloadB_Success_Data
+        : TheoryData<
+            IEnumerable<Task<Result<int>>>,
+            Func<int, string>,
+            IEnumerable<Task<Result<string>>>
+        >
+    {
+        public ThenEach_OverloadB_Success_Data()
+        {
+            // Simple transformation to string
+            Add(
+                [Task.FromResult((Result<int>)1)],
+                val => $"String-{val}",
+                [Task.FromResult((Result<string>)"String-1")]
+            );
+
+            // Doubling the value and converting to string
+            Add(
+                [Task.FromResult((Result<int>)2)],
+                val => $"Double-{val * 2}",
+                [Task.FromResult((Result<string>)"Double-4")]
+            );
+        }
+    }
+
+    // AsyncResultCollectionExtensions.ThenEach (Overload B) should successfully apply synchronous transformations
+    [Theory]
+    [ClassData(typeof(ThenEach_OverloadB_Success_Data))]
+    public async Task ThenEachB_Should_ReturnSuccess(
+        IEnumerable<Task<Result<int>>> inputs,
+        Func<int, string> transform,
+        IEnumerable<Task<Result<string>>> expected
+    )
+    {
+        // Act
+        var actual = await Task.WhenAll(inputs.ThenEach(transform, Errors.MapNone));
+
+        // Assert
+        actual.Should().BeEquivalentTo(await Task.WhenAll(expected));
+    }
+
+    // Failure scenarios for ThenEach (Overload B)
+    private class ThenEach_OverloadB_Failure_Data
+        : TheoryData<
+            IEnumerable<Task<Result<int>>>,
+            Func<int, string>,
+            IEnumerable<Task<Result<string>>>
+        >
+    {
+        public ThenEach_OverloadB_Failure_Data()
+        {
+            // Throw InvalidOperationException
+            Add(
+                [Task.FromResult((Result<int>)1)],
+                val => throw new InvalidOperationException("Failed transformation"),
+                [
+                    Task.FromResult(
+                        (Result<string>)new InvalidOperationException("Failed transformation")
+                    ),
+                ]
+            );
+
+            // Throw NullReferenceException
+            Add(
+                [Task.FromResult((Result<int>)3)],
+                val => throw new NullReferenceException("Null reference during transformation"),
+                [
+                    Task.FromResult(
+                        (Result<string>)
+                            new NullReferenceException("Null reference during transformation")
+                    ),
+                ]
+            );
+        }
+    }
+
+    // AsyncResultCollectionExtensions.ThenEach (Overload B) should handle exceptions and map them to Result<string>
+    [Theory]
+    [ClassData(typeof(ThenEach_OverloadB_Failure_Data))]
+    public async Task ThenEachB_Should_CaptureFailure(
+        IEnumerable<Task<Result<int>>> inputs,
+        Func<int, string> transform,
+        IEnumerable<Task<Result<string>>> expected
+    )
+    {
+        // Act
+        var actual = await Task.WhenAll(inputs.ThenEach(transform, Errors.MapAll));
+
+        // Assert
+        actual.Should().BeEquivalentTo(await Task.WhenAll(expected));
+    }
+
+    // Exception Propagation scenarios for ThenEach (Overload B)
+    private class ThenEach_OverloadB_PropagateException_Data
+        : TheoryData<IEnumerable<Task<Result<int>>>, Func<int, string>, Exception>
+    {
+        public ThenEach_OverloadB_PropagateException_Data()
+        {
+            // Propagate FormatException
+            Add(
+                [Task.FromResult((Result<int>)5)],
+                val => throw new FormatException("Invalid format detected"),
+                new FormatException("Invalid format detected")
+            );
+
+            // Propagate NullReferenceException
+            Add(
+                [Task.FromResult((Result<int>)8)],
+                val => throw new NullReferenceException("Issue with null reference"),
+                new NullReferenceException("Issue with null reference")
+            );
+        }
+    }
+
+    // AsyncResultCollectionExtensions.ThenEach (Overload B) should propagate unmapped exceptions
+    [Theory]
+    [ClassData(typeof(ThenEach_OverloadB_PropagateException_Data))]
+    public async Task ThenEachB_Should_PropagateUnmappedException(
+        IEnumerable<Task<Result<int>>> inputs,
+        Func<int, string> transform,
+        Exception expected
+    )
+    {
+        // Act
+        Func<Task> act = () => Task.WhenAll(inputs.ThenEach(transform, Errors.MapNone));
+
+        // Assert
+        await act.Should()
+            .ThrowAsync<Exception>()
+            .WithMessage(expected.Message)
+            .Where(x => x.GetType() == expected.GetType());
+    }
+
+    // 21 END
+
+    // ===============================
+    // 22) ThenEach (Overload C)
+    // ===============================
+
+    // Success scenarios for ThenEach (Overload C)
+    private class ThenEach_OverloadC_Success_Data
+        : TheoryData<IEnumerable<Task<Result<int>>>, Action<int>, IEnumerable<Task<Result<Unit>>>>
+    {
+        public ThenEach_OverloadC_Success_Data()
+        {
+            // No-op action
+            Add(
+                [Task.FromResult((Result<int>)1)],
+                val => { },
+                [Task.FromResult((Result<Unit>)new Unit())]
+            );
+
+            // Logging action
+            Add(
+                [Task.FromResult((Result<int>)2)],
+                val => Console.WriteLine($"Value processed: {val}"),
+                [Task.FromResult((Result<Unit>)new Unit())]
+            );
+        }
+    }
+
+    // AsyncResultCollectionExtensions.ThenEach (Overload C) should execute actions successfully
+    [Theory]
+    [ClassData(typeof(ThenEach_OverloadC_Success_Data))]
+    public async Task ThenEachC_Should_ReturnSuccess(
+        IEnumerable<Task<Result<int>>> inputs,
+        Action<int> action,
+        IEnumerable<Task<Result<Unit>>> expected
+    )
+    {
+        // Act
+        var actual = await Task.WhenAll(inputs.ThenEach(action, Errors.MapNone));
+
+        // Assert
+        actual.Should().BeEquivalentTo(await Task.WhenAll(expected));
+    }
+
+    // Failure scenarios for ThenEach (Overload C)
+    private class ThenEach_OverloadC_Failure_Data
+        : TheoryData<IEnumerable<Task<Result<int>>>, Action<int>, IEnumerable<Task<Result<Unit>>>>
+    {
+        public ThenEach_OverloadC_Failure_Data()
+        {
+            // Action fails with InvalidOperationException
+            Add(
+                [Task.FromResult((Result<int>)3)],
+                val => throw new InvalidOperationException("Invalid operation"),
+                [Task.FromResult((Result<Unit>)new InvalidOperationException("Invalid operation"))]
+            );
+
+            // Action fails with NullReferenceException
+            Add(
+                [Task.FromResult((Result<int>)4)],
+                val => throw new NullReferenceException("Null reference error"),
+                [Task.FromResult((Result<Unit>)new NullReferenceException("Null reference error"))]
+            );
+        }
+    }
+
+    // AsyncResultCollectionExtensions.ThenEach (Overload C) should map exceptions to Result<Unit> for failures
+    [Theory]
+    [ClassData(typeof(ThenEach_OverloadC_Failure_Data))]
+    public async Task ThenEachC_Should_CaptureFailure(
+        IEnumerable<Task<Result<int>>> inputs,
+        Action<int> action,
+        IEnumerable<Task<Result<Unit>>> expected
+    )
+    {
+        // Act
+        var actual = await Task.WhenAll(inputs.ThenEach(action, Errors.MapAll));
+
+        // Assert
+        actual.Should().BeEquivalentTo(await Task.WhenAll(expected));
+    }
+
+    // Exception Propagation scenarios for ThenEach (Overload C)
+    private class ThenEach_OverloadC_PropagateException_Data
+        : TheoryData<IEnumerable<Task<Result<int>>>, Action<int>, Exception>
+    {
+        public ThenEach_OverloadC_PropagateException_Data()
+        {
+            // Propagate FormatException
+            Add(
+                [Task.FromResult((Result<int>)5)],
+                val => throw new FormatException("Format exception encountered"),
+                new FormatException("Format exception encountered")
+            );
+
+            // Propagate NullReferenceException
+            Add(
+                [Task.FromResult((Result<int>)6)],
+                val => throw new NullReferenceException("Null encountered"),
+                new NullReferenceException("Null encountered")
+            );
+        }
+    }
+
+    // AsyncResultCollectionExtensions.ThenEach (Overload C) should propagate exceptions that aren't mapped
+    [Theory]
+    [ClassData(typeof(ThenEach_OverloadC_PropagateException_Data))]
+    public async Task ThenEachC_Should_PropagateUnmappedException(
+        IEnumerable<Task<Result<int>>> inputs,
+        Action<int> action,
+        Exception expected
+    )
+    {
+        // Act
+        Func<Task> act = () => Task.WhenAll(inputs.ThenEach(action, Errors.MapNone));
+
+        // Assert
+        await act.Should()
+            .ThrowAsync<Exception>()
+            .WithMessage(expected.Message)
+            .Where(x => x.GetType() == expected.GetType());
+    }
+
+    // 22 END
+
+    // ===============================
+    // 23) AssertAwaitEach (Overload A)
+    // ===============================
+
+    // Success scenarios for AssertAwaitEach (Overload A)
+    private class AssertAwaitEach_OverloadA_Success_Data
+        : TheoryData<
+            IEnumerable<Task<Result<int>>>,
+            Func<int, Task<Result<bool>>>,
+            IEnumerable<Task<Result<int>>>
+        >
+    {
+        public AssertAwaitEach_OverloadA_Success_Data()
+        {
+            // Assert true for all items
+            Add(
+                [Task.FromResult((Result<int>)1)],
+                async val => await Task.FromResult((Result<bool>)true),
+                [Task.FromResult((Result<int>)1)]
+            );
+
+            // Assert each is positive
+            Add(
+                [Task.FromResult((Result<int>)2)],
+                async val => await Task.FromResult((Result<bool>)(val > 0)),
+                [Task.FromResult((Result<int>)2)]
+            );
+        }
+    }
+
+    // AsyncResultCollectionExtensions.AssertAwaitEach (Overload A) should pass assertions
+    [Theory]
+    [ClassData(typeof(AssertAwaitEach_OverloadA_Success_Data))]
+    public async Task AssertAwaitEachA_Should_PassAssertion(
+        IEnumerable<Task<Result<int>>> inputs,
+        Func<int, Task<Result<bool>>> assertion,
+        IEnumerable<Task<Result<int>>> expected
+    )
+    {
+        // Act
+        var actual = await Task.WhenAll(inputs.AssertAwaitEach(assertion));
+
+        // Assert
+        actual.Should().BeEquivalentTo(await Task.WhenAll(expected));
+    }
+
+    // Assertion failure scenarios for AssertAwaitEach (Overload A)
+    private class AssertAwaitEach_OverloadA_Failure_Data
+        : TheoryData<
+            IEnumerable<Task<Result<int>>>,
+            Func<int, Task<Result<bool>>>,
+            string,
+            Result<int>[]
+        >
+    {
+        public AssertAwaitEach_OverloadA_Failure_Data()
+        {
+            // Fail on non-zero requirement
+            Add(
+                [Task.FromResult((Result<int>)0)],
+                async val => await Task.FromResult((Result<bool>)(val != 0)),
+                "Value should be non-zero",
+                [new AssertionException("Value should be non-zero")]
+            );
+
+            // Fail if not greater than 1
+            Add(
+                [Task.FromResult((Result<int>)1)],
+                async val => await Task.FromResult((Result<bool>)(val > 1)),
+                "Value should be greater than 1",
+                [new AssertionException("Value should be greater than 1")]
+            );
+        }
+    }
+
+    // AsyncResultCollectionExtensions.AssertAwaitEach (Overload A) should handle assertion failures
+    [Theory]
+    [ClassData(typeof(AssertAwaitEach_OverloadA_Failure_Data))]
+    public async Task AssertAwaitEachA_Should_ReturnAssertionFailure(
+        IEnumerable<Task<Result<int>>> inputs,
+        Func<int, Task<Result<bool>>> assertion,
+        string assertionMessage,
+        Result<int>[] expected
+    )
+    {
+        // Act
+        var actual = await Task.WhenAll(inputs.AssertAwaitEach(assertion, assertionMessage));
+
+        // Assert
+        actual.Should().BeEquivalentTo(expected);
+    }
+
+    // Exception Propagation scenarios for AssertAwaitEach (Overload A)
+    private class AssertAwaitEach_OverloadA_PropagateException_Data
+        : TheoryData<IEnumerable<Task<Result<int>>>, Func<int, Task<Result<bool>>>, Exception>
+    {
+        public AssertAwaitEach_OverloadA_PropagateException_Data()
+        {
+            // Propagate FormatException in assertion
+            Add(
+                [Task.FromResult((Result<int>)5)],
+                async val =>
+                {
+                    await Task.Yield();
+                    throw new FormatException("Assertion threw format exception");
+                },
+                new FormatException("Assertion threw format exception")
+            );
+
+            // Propagate NullReferenceException in assertion
+            Add(
+                [Task.FromResult((Result<int>)6)],
+                async val =>
+                {
+                    await Task.Yield();
+                    throw new NullReferenceException("Null assertion");
+                },
+                new NullReferenceException("Null assertion")
+            );
+        }
+    }
+
+    // AsyncResultCollectionExtensions.AssertAwaitEach (Overload A) should propagate exceptions during assertions
+    [Theory]
+    [ClassData(typeof(AssertAwaitEach_OverloadA_PropagateException_Data))]
+    public async Task AssertAwaitEachA_Should_PropagateExceptionInAssertion(
+        IEnumerable<Task<Result<int>>> inputs,
+        Func<int, Task<Result<bool>>> assertion,
+        Exception expected
+    )
+    {
+        // Act
+        Func<Task> act = () => Task.WhenAll(inputs.AssertAwaitEach(assertion));
+
+        // Assert
+        await act.Should()
+            .ThrowAsync<Exception>()
+            .WithMessage(expected.Message)
+            .Where(x => x.GetType() == expected.GetType());
+    }
+
+    // 23 END
+
+
+    // ===============================
+    // 24) AssertAwaitEach (Overload B)
+    // ===============================
+
+    // Success scenarios for AssertAwaitEach (Overload B)
+    private class AssertAwaitEach_OverloadB_Success_Data
+        : TheoryData<
+            IEnumerable<Task<Result<int>>>,
+            Func<int, Task<bool>>,
+            IEnumerable<Task<Result<int>>>
+        >
+    {
+        public AssertAwaitEach_OverloadB_Success_Data()
+        {
+            // Assert true for all items
+            Add(
+                [Task.FromResult((Result<int>)1)],
+                async val => await Task.FromResult(true),
+                [Task.FromResult((Result<int>)1)]
+            );
+
+            // Assert each is positive
+            Add(
+                [Task.FromResult((Result<int>)3)],
+                async val => await Task.FromResult(val > 0),
+                [Task.FromResult((Result<int>)3)]
+            );
+        }
+    }
+
+    // AsyncResultCollectionExtensions.AssertAwaitEach (Overload B) should pass assertions
+    [Theory]
+    [ClassData(typeof(AssertAwaitEach_OverloadB_Success_Data))]
+    public async Task AssertAwaitEachB_Should_PassAssertion(
+        IEnumerable<Task<Result<int>>> inputs,
+        Func<int, Task<bool>> assertion,
+        IEnumerable<Task<Result<int>>> expected
+    )
+    {
+        // Act
+        var actual = await Task.WhenAll(inputs.AssertAwaitEach(assertion, Errors.MapNone));
+
+        // Assert
+        actual.Should().BeEquivalentTo(await Task.WhenAll(expected));
+    }
+
+    // Assertion failure scenarios for AssertAwaitEach (Overload B)
+    private class AssertAwaitEach_OverloadB_Failure_Data
+        : TheoryData<IEnumerable<Task<Result<int>>>, Func<int, Task<bool>>, string, Result<int>[]>
+    {
+        public AssertAwaitEach_OverloadB_Failure_Data()
+        {
+            // Fail on non-zero requirement
+            Add(
+                [Task.FromResult((Result<int>)0)],
+                async val => await Task.FromResult(val != 0),
+                "Value must not be zero",
+                [new AssertionException("Value must not be zero")]
+            );
+
+            // Fail if not greater than 5
+            Add(
+                [Task.FromResult((Result<int>)2)],
+                async val => await Task.FromResult(val > 5),
+                "Value should exceed 5",
+                [new AssertionException("Value should exceed 5")]
+            );
+        }
+    }
+
+    // AsyncResultCollectionExtensions.AssertAwaitEach (Overload B) should handle assertion failures
+    [Theory]
+    [ClassData(typeof(AssertAwaitEach_OverloadB_Failure_Data))]
+    public async Task AssertAwaitEachB_Should_ReturnAssertionFailure(
+        IEnumerable<Task<Result<int>>> inputs,
+        Func<int, Task<bool>> assertion,
+        string assertionMessage,
+        Result<int>[] expected
+    )
+    {
+        // Act
+        var actual = await Task.WhenAll(
+            inputs.AssertAwaitEach(assertion, Errors.MapNone, assertionMessage)
+        );
+
+        // Assert
+        actual.Should().BeEquivalentTo(expected);
+    }
+
+    // Exception Propagation scenarios for AssertAwaitEach (Overload B)
+    private class AssertAwaitEach_OverloadB_PropagateException_Data
+        : TheoryData<IEnumerable<Task<Result<int>>>, Func<int, Task<bool>>, Exception>
+    {
+        public AssertAwaitEach_OverloadB_PropagateException_Data()
+        {
+            // Propagate FormatException in assertion
+            Add(
+                [Task.FromResult((Result<int>)5)],
+                async val =>
+                {
+                    await Task.Yield();
+                    throw new FormatException("Unexpected format exception in assertion");
+                },
+                new FormatException("Unexpected format exception in assertion")
+            );
+
+            // Propagate NullReferenceException in assertion
+            Add(
+                [Task.FromResult((Result<int>)7)],
+                async val =>
+                {
+                    await Task.Yield();
+                    throw new NullReferenceException("Null reference encountered in assertion");
+                },
+                new NullReferenceException("Null reference encountered in assertion")
+            );
+        }
+    }
+
+    // AsyncResultCollectionExtensions.AssertAwaitEach (Overload B) should propagate exceptions during assertions
+    [Theory]
+    [ClassData(typeof(AssertAwaitEach_OverloadB_PropagateException_Data))]
+    public async Task AssertAwaitEachB_Should_PropagateExceptionInAssertion(
+        IEnumerable<Task<Result<int>>> inputs,
+        Func<int, Task<bool>> assertion,
+        Exception expected
+    )
+    {
+        // Act
+        Func<Task> act = () => Task.WhenAll(inputs.AssertAwaitEach(assertion, Errors.MapNone));
+
+        // Assert
+        await act.Should()
+            .ThrowAsync<Exception>()
+            .WithMessage(expected.Message)
+            .Where(x => x.GetType() == expected.GetType());
+    }
+
+    // ===============================
+    // 25) AssertEach (Overload A)
+    // ===============================
+
+    // Success scenarios for AssertEach (Overload A)
+    private class AssertEach_OverloadA_Success_Data
+        : TheoryData<
+            IEnumerable<Task<Result<int>>>,
+            Func<int, Result<bool>>,
+            IEnumerable<Task<Result<int>>>
+        >
+    {
+        public AssertEach_OverloadA_Success_Data()
+        {
+            // Assert success for non-zero values
+            Add(
+                [Task.FromResult((Result<int>)1)],
+                val => (Result<bool>)true,
+                [Task.FromResult((Result<int>)1)]
+            );
+
+            // Assert positive values
+            Add(
+                [Task.FromResult((Result<int>)5)],
+                val => (Result<bool>)(val > 0),
+                [Task.FromResult((Result<int>)5)]
+            );
+        }
+    }
+
+    // AsyncResultCollectionExtensions.AssertEach (Overload A) should pass assertions
+    [Theory]
+    [ClassData(typeof(AssertEach_OverloadA_Success_Data))]
+    public async Task AssertEachA_Should_PassAssertion(
+        IEnumerable<Task<Result<int>>> inputs,
+        Func<int, Result<bool>> assertion,
+        IEnumerable<Task<Result<int>>> expected
+    )
+    {
+        // Act
+        var actual = await Task.WhenAll(inputs.AssertEach(assertion));
+
+        // Assert
+        actual.Should().BeEquivalentTo(await Task.WhenAll(expected));
+    }
+
+    // Assertion failure scenarios for AssertEach (Overload A)
+    private class AssertEach_OverloadA_Failure_Data
+        : TheoryData<IEnumerable<Task<Result<int>>>, Func<int, Result<bool>>, string, Result<int>[]>
+    {
+        public AssertEach_OverloadA_Failure_Data()
+        {
+            // Fail on zero
+            Add(
+                [Task.FromResult((Result<int>)0), Task.FromResult((Result<int>)0)],
+                val => (Result<bool>)(val != 0),
+                "Expected value to be non-zero",
+                [
+                    new AssertionException("Expected value to be non-zero"),
+                    new AssertionException("Expected value to be non-zero"),
+                ]
+            );
+
+            // Fail if not greater than 10
+            Add(
+                [Task.FromResult((Result<int>)3)],
+                val => (Result<bool>)(val > 10),
+                "Expected value to be greater than 10",
+                [new AssertionException("Expected value to be greater than 10")]
+            );
+        }
+    }
+
+    // AsyncResultCollectionExtensions.AssertEach (Overload A) should handle assertion failures
+    [Theory]
+    [ClassData(typeof(AssertEach_OverloadA_Failure_Data))]
+    public async Task AssertEachA_Should_ReturnAssertionFailure(
+        IEnumerable<Task<Result<int>>> inputs,
+        Func<int, Result<bool>> assertion,
+        string assertionMessage,
+        Result<int>[] expected
+    )
+    {
+        // Act
+        var actual = await Task.WhenAll(inputs.AssertEach(assertion, assertionMessage));
+
+        // Assert
+        actual.Should().BeEquivalentTo(expected);
+    }
+
+    // Exception Propagation scenarios for AssertEach (Overload A)
+    private class AssertEach_OverloadA_PropagateException_Data
+        : TheoryData<IEnumerable<Task<Result<int>>>, Func<int, Result<bool>>, Exception>
+    {
+        public AssertEach_OverloadA_PropagateException_Data()
+        {
+            // Propagate FormatException during assertion
+            Add(
+                [Task.FromResult((Result<int>)4)],
+                val => throw new FormatException("Formatting exception in assertion"),
+                new FormatException("Formatting exception in assertion")
+            );
+
+            // Propagate NullReferenceException during assertion
+            Add(
+                [Task.FromResult((Result<int>)6)],
+                val => throw new NullReferenceException("Null reference error in assertion"),
+                new NullReferenceException("Null reference error in assertion")
+            );
+        }
+    }
+
+    // AsyncResultCollectionExtensions.AssertEach (Overload A) should propagate exceptions occurring during assertions
+    [Theory]
+    [ClassData(typeof(AssertEach_OverloadA_PropagateException_Data))]
+    public async Task AssertEachA_Should_PropagateExceptionInAssertion(
+        IEnumerable<Task<Result<int>>> inputs,
+        Func<int, Result<bool>> assertion,
+        Exception expected
+    )
+    {
+        // Act
+        Func<Task> act = () => Task.WhenAll(inputs.AssertEach(assertion));
+
+        // Assert
+        await act.Should()
+            .ThrowAsync<Exception>()
+            .WithMessage(expected.Message)
+            .Where(x => x.GetType() == expected.GetType());
+    }
+
+    // ===============================
+    // 26) AssertEach (Overload B)
+    // ===============================
+
+    // Success scenarios for AssertEach (Overload B)
+    private class AssertEach_OverloadB_Success_Data
+        : TheoryData<
+            IEnumerable<Task<Result<int>>>,
+            Func<int, bool>,
+            IEnumerable<Task<Result<int>>>
+        >
+    {
+        public AssertEach_OverloadB_Success_Data()
+        {
+            // Assert all values are non-zero
+            Add(
+                [Task.FromResult((Result<int>)1)],
+                val => val != 0,
+                [Task.FromResult((Result<int>)1)]
+            );
+
+            // Assert numbers are positive
+            Add(
+                [Task.FromResult((Result<int>)4)],
+                val => val > 0,
+                [Task.FromResult((Result<int>)4)]
+            );
+        }
+    }
+
+    // AsyncResultCollectionExtensions.AssertEach (Overload B) should pass assertions
+    [Theory]
+    [ClassData(typeof(AssertEach_OverloadB_Success_Data))]
+    public async Task AssertEachB_Should_PassAssertion(
+        IEnumerable<Task<Result<int>>> inputs,
+        Func<int, bool> assertion,
+        IEnumerable<Task<Result<int>>> expected
+    )
+    {
+        // Act
+        var actual = await Task.WhenAll(inputs.AssertEach(assertion, Errors.MapNone));
+
+        // Assert
+        actual.Should().BeEquivalentTo(await Task.WhenAll(expected));
+    }
+
+    // Assertion failure scenarios for AssertEach (Overload B)
+    private class AssertEach_OverloadB_Failure_Data
+        : TheoryData<IEnumerable<Task<Result<int>>>, Func<int, bool>, string, Result<int>[]>
+    {
+        public AssertEach_OverloadB_Failure_Data()
+        {
+            // Fail on zero
+            Add(
+                [Task.FromResult((Result<int>)0)],
+                val => val != 0,
+                "Value should not be zero",
+                [new AssertionException("Value should not be zero")]
+            );
+
+            // Fail if not greater than 3
+            Add(
+                [Task.FromResult((Result<int>)2), Task.FromResult((Result<int>)1)],
+                val => val > 3,
+                "Value must be greater than 3",
+                [
+                    new AssertionException("Value must be greater than 3"),
+                    new AssertionException("Value must be greater than 3"),
+                ]
+            );
+        }
+    }
+
+    // AsyncResultCollectionExtensions.AssertEach (Overload B) should handle assertion failures
+    [Theory]
+    [ClassData(typeof(AssertEach_OverloadB_Failure_Data))]
+    public async Task AssertEachB_Should_ReturnAssertionFailure(
+        IEnumerable<Task<Result<int>>> inputs,
+        Func<int, bool> assertion,
+        string assertionMessage,
+        Result<int>[] expected
+    )
+    {
+        // Act
+        var actual = await Task.WhenAll(
+            inputs.AssertEach(assertion, Errors.MapNone, assertionMessage)
+        );
+
+        // Assert
+        actual.Should().BeEquivalentTo(expected);
+    }
+
+    // Exception Propagation scenarios for AssertEach (Overload B)
+    private class AssertEach_OverloadB_PropagateException_Data
+        : TheoryData<IEnumerable<Task<Result<int>>>, Func<int, bool>, Exception>
+    {
+        public AssertEach_OverloadB_PropagateException_Data()
+        {
+            // Propagate FormatException during assertion
+            Add(
+                [Task.FromResult((Result<int>)5)],
+                val => throw new FormatException("Exception in format during assertion"),
+                new FormatException("Exception in format during assertion")
+            );
+
+            // Propagate NullReferenceException during assertion
+            Add(
+                [Task.FromResult((Result<int>)7)],
+                val => throw new NullReferenceException("Null reference during assertion"),
+                new NullReferenceException("Null reference during assertion")
+            );
+        }
+    }
+
+    // AsyncResultCollectionExtensions.AssertEach (Overload B) should propagate exceptions that occur during assertions
+    [Theory]
+    [ClassData(typeof(AssertEach_OverloadB_PropagateException_Data))]
+    public async Task AssertEachB_Should_PropagateExceptionInAssertion(
+        IEnumerable<Task<Result<int>>> inputs,
+        Func<int, bool> assertion,
+        Exception expected
+    )
+    {
+        // Act
+        Func<Task> act = () => Task.WhenAll(inputs.AssertEach(assertion, Errors.MapNone));
+
+        // Assert
+        await act.Should()
+            .ThrowAsync<Exception>()
+            .WithMessage(expected.Message)
+            .Where(x => x.GetType() == expected.GetType());
+    }
 }

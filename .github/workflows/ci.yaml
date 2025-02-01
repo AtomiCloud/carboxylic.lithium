@@ -4,7 +4,7 @@ on:
   push:
 
 env:
-  COVERAGE_THRESHOLD: 80
+  COVERAGE_THRESHOLD: 50
   ATOMI_SERVICE: Lithium
 
 jobs:

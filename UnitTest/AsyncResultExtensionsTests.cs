@@ -132,7 +132,11 @@ public class AsyncResultExtensionsTests
                     await Task.Delay(1); // simulate a small async delay
                     return $"got negative {num}";
                 },
-                async ex => $"[ERROR] {ex.Message}",
+                async ex =>
+                {
+                    await Task.Yield();
+                    return $"[ERROR] {ex.Message}";
+                },
                 "got negative -999"
             );
         }
@@ -171,16 +175,20 @@ public class AsyncResultExtensionsTests
             // 1) ArgumentNullException
             Add(
                 Task.FromResult((Result<int>)new NullReferenceException("some detail #1")),
-                async num => $"success: {num}",
-                async ex => $"caught: {ex.Message}",
+                async num =>
+                {
+                    await Task.Yield();
+                    return $"success: {num}";
+                },
+                async ex => await Task.FromResult($"caught: {ex.Message}"),
                 "caught: some detail #1"
             );
 
             // 2) InvalidOperationException
             Add(
                 Task.FromResult((Result<int>)new InvalidOperationException("test message #2")),
-                async num => $"should not run: {num}",
-                async ex => $"handled => {ex.Message}",
+                num => Task.FromResult($"should not run: {num}"),
+                ex => Task.FromResult($"handled => {ex.Message}"),
                 "handled => test message #2"
             );
         }
@@ -236,17 +244,32 @@ public class AsyncResultExtensionsTests
             // 1) Basic success (42)
             Add(
                 Task.FromResult((Result<int>)42),
-                async (int val) => throw new CallbackExecutedException($"SUCCESS: Value={val}"),
-                async ex => throw new CallbackExecutedException($"FAILURE: {ex.Message}"),
+                async (int val) =>
+                {
+                    await Task.Yield();
+                    throw new CallbackExecutedException($"SUCCESS: Value={val}");
+                },
+                async ex =>
+                {
+                    await Task.Yield();
+                    throw new CallbackExecutedException($"FAILURE: {ex.Message}");
+                },
                 "SUCCESS: Value=42"
             );
 
             // 2) Negative success (-10)
             Add(
                 Task.FromResult((Result<int>)(-10)),
-                async (int val) => throw new CallbackExecutedException($"OK with negative {val}"),
+                async (int val) =>
+                {
+                    await Task.Yield();
+                    throw new CallbackExecutedException($"OK with negative {val}");
+                },
                 async ex =>
-                    throw new CallbackExecutedException($"Should NOT see error => {ex.Message}"),
+                {
+                    await Task.Yield();
+                    throw new CallbackExecutedException($"Should NOT see error => {ex.Message}");
+                },
                 "OK with negative -10"
             );
         }
@@ -266,8 +289,6 @@ public class AsyncResultExtensionsTests
 
         async Task Act()
         {
-            // If 'input' is success, we expect successCallback to throw our custom exception
-            // If any other scenario, the test will see the thrown exception or no exception.
             await input.MatchAwait(successCallback, failureCallback);
         }
 
@@ -294,8 +315,16 @@ public class AsyncResultExtensionsTests
             var ex1 = new NullReferenceException("Missing param");
             Add(
                 Task.FromResult((Result<int>)ex1),
-                async val => throw new CallbackExecutedException($"WRONG success call => {val}"),
-                async ex => throw new CallbackExecutedException($"FAIL path => {ex.Message}"),
+                async val =>
+                {
+                    await Task.Yield();
+                    throw new CallbackExecutedException($"WRONG success call => {val}");
+                },
+                async ex =>
+                {
+                    await Task.Yield();
+                    throw new CallbackExecutedException($"FAIL path => {ex.Message}");
+                },
                 "FAIL path => Missing param"
             );
 
@@ -304,8 +333,15 @@ public class AsyncResultExtensionsTests
             Add(
                 Task.FromResult((Result<int>)ex2),
                 async val =>
-                    throw new CallbackExecutedException($"Wrongly invoked success => {val}"),
-                async ex => throw new CallbackExecutedException($"Fail: {ex.Message}"),
+                {
+                    await Task.Yield();
+                    throw new CallbackExecutedException($"Wrongly invoked success => {val}");
+                },
+                async ex =>
+                {
+                    await Task.Yield();
+                    throw new CallbackExecutedException($"Fail: {ex.Message}");
+                },
                 "Fail: some invalid op"
             );
         }
@@ -476,7 +512,7 @@ public class AsyncResultExtensionsTests
             Add(
                 Task.FromResult((Result<int>)42),
                 DoType.MapErrors,
-                async val => (Result<string>)$"Transformed:{val}",
+                async val => await Task.FromResult((Result<string>)$"Transformed:{val}"),
                 42
             );
 
@@ -484,7 +520,7 @@ public class AsyncResultExtensionsTests
             Add(
                 Task.FromResult((Result<int>)100),
                 DoType.Ignore,
-                async val => (Result<string>)$"Value:{val}",
+                async val => await Task.FromResult((Result<string>)$"Value:{val}"),
                 100
             );
         }
@@ -520,7 +556,7 @@ public class AsyncResultExtensionsTests
             Add(
                 Task.FromResult((Result<int>)ex1),
                 DoType.MapErrors,
-                async val => (Result<string>)"ShouldNotHappen",
+                val => Task.FromResult((Result<string>)"ShouldNotHappen"),
                 ex1
             );
 
@@ -529,7 +565,7 @@ public class AsyncResultExtensionsTests
             Add(
                 Task.FromResult((Result<int>)ex2),
                 DoType.Ignore,
-                async val => (Result<string>)"NotCalled",
+                val => Task.FromResult((Result<string>)"NotCalled"),
                 ex2
             );
         }
@@ -617,7 +653,11 @@ public class AsyncResultExtensionsTests
             Add(
                 Task.FromResult((Result<int>)42),
                 DoType.MapErrors,
-                async _ => throw new InvalidOperationException("Operation exception"),
+                async _ =>
+                {
+                    await Task.Yield();
+                    throw new InvalidOperationException("Operation exception");
+                },
                 new InvalidOperationException("Operation exception")
             );
 
@@ -625,7 +665,11 @@ public class AsyncResultExtensionsTests
             Add(
                 Task.FromResult((Result<int>)99),
                 DoType.MapErrors,
-                async _ => throw new ArgumentException("Arg exception"), // Exception to map
+                async _ =>
+                {
+                    await Task.Yield();
+                    throw new ArgumentException("Arg exception");
+                }, // Exception to map
                 new ArgumentException("Arg exception") // Expected mapped exception
             );
         }
@@ -662,7 +706,11 @@ public class AsyncResultExtensionsTests
             Add(
                 Task.FromResult((Result<int>)123),
                 DoType.MapErrors,
-                async _ => throw new FormatException("Unhandled FormatException"),
+                async _ =>
+                {
+                    await Task.Yield();
+                    throw new FormatException("Unhandled FormatException");
+                },
                 new FormatException("Unhandled FormatException")
             );
 
@@ -671,7 +719,10 @@ public class AsyncResultExtensionsTests
                 Task.FromResult((Result<int>)456),
                 DoType.MapErrors,
                 async _ =>
-                    throw new InvalidOperationException("Unmapped InvalidOperationException"),
+                {
+                    await Task.Yield();
+                    throw new InvalidOperationException("Unmapped InvalidOperationException");
+                },
                 new InvalidOperationException("Unmapped InvalidOperationException")
             );
         }
