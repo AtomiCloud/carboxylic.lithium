@@ -37,6 +37,16 @@ pre-commit-lib.run {
       files = "^UnitTest/.*\\.cs$";
     };
 
+    a-dotnet-lint-Lithium-Test-Helper = {
+      enable = true;
+      name = "Lint .NET 'LithiumTestHelper' Project";
+      description = "Run formatter for .NET Project 'LithiumTestHelper'";
+      entry = "${packages.dotnet}/bin/dotnet format style --no-restore --severity info --verify-no-changes -v d ./Lithium/Lithium.csproj";
+      language = "system";
+      pass_filenames = false;
+      files = "^LithiumTestHelper/.*\\.cs$";
+    };
+
     a-infisical = {
       enable = true;
       name = "Secrets Scanning";
