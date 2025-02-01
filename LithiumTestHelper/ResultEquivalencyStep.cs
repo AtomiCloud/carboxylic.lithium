@@ -64,7 +64,30 @@ public class ResultEquivalencyStep : IEquivalencyStep
         if (subject && expectation)
         {
             // success case
-            return EquivalencyResult.ContinueWithNext;
+            var sValueField = sType.GetField(
+                "_value",
+                BindingFlags.Instance | BindingFlags.NonPublic
+            );
+            if (sValueField == null)
+                return EquivalencyResult.ContinueWithNext;
+            var sValue = sValueField.GetValue(subjectOriginal);
+
+            var eValueField = eType.GetField(
+                "_value",
+                BindingFlags.Instance | BindingFlags.NonPublic
+            );
+            if (eValueField == null)
+                return EquivalencyResult.ContinueWithNext;
+            var eValue = eValueField.GetValue(expectationOriginal);
+
+            if (sValue is null)
+            {
+                eValue.Should().BeNull();
+                return EquivalencyResult.EquivalencyProven;
+            }
+
+            sValue.Should().BeEquivalentTo(eValue);
+            return EquivalencyResult.EquivalencyProven;
         }
 
         // failure case
