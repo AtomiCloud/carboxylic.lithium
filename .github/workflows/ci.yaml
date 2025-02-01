@@ -1,0 +1,132 @@
+name: CI-CD
+
+on:
+  push:
+
+env:
+  COVERAGE_THRESHOLD: 80
+  ATOMI_SERVICE: Lithium
+
+jobs:
+  precommit:
+    name: Pre-commit Check
+    runs-on:
+      - nscloud-ubuntu-22.04-amd64-4x8-with-cache
+      - nscloud-cache-size-50gb
+      - nscloud-cache-tag-carboxylic-lithium-nix-store-cache
+      - nscloud-git-mirror-1gb
+    steps:
+      # Setup
+      - uses: AtomiCloud/actions.setup-nix@v1
+      - uses: AtomiCloud/actions.cache-nuget@v1
+
+      # pre commit
+      - name: Run pre-commit
+        run: nix develop .#ci -c ./scripts/ci/pre-commit.sh
+
+  sonarqube:
+    name: SonarQube
+    runs-on:
+      - nscloud-ubuntu-22.04-amd64-4x8-with-cache
+      - nscloud-cache-size-50gb
+      - nscloud-cache-tag-carboxylic-lithium-sonarqube-cache
+      - nscloud-git-mirror-1gb
+    steps:
+      # Setup
+      - uses: AtomiCloud/actions.setup-nix@v1
+      - uses: AtomiCloud/actions.cache-nuget@v1
+
+      # sonarqube
+      - name: Build and analyze
+        env:
+          ATOMI_PLATFORM: 'carboxylic'
+          ATOMI_SERVICE: 'lithium'
+
+          SONAR_ORG: 'atomi-cloud'
+          SONAR_HOST: 'https://sonarcloud.io'
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: nix develop .#sonar -c scripts/ci/sonarqube.sh
+
+  test:
+    name: Test and Coverage
+    runs-on:
+      - nscloud-ubuntu-22.04-amd64-4x8-with-cache
+      - nscloud-cache-size-50gb
+      - nscloud-cache-tag-carboxylic-lithium-test-cache
+      - nscloud-git-mirror-1gb
+    steps:
+      # Setup
+      - uses: AtomiCloud/actions.setup-nix@v1
+      - uses: AtomiCloud/actions.cache-nuget@v1
+
+      # Test
+      - name: Run Test
+        env:
+          ATOMI_SERVICE: ${{ env.ATOMI_SERVICE }}
+        run: nix develop .#ci -c ./scripts/ci/test.sh ${{ env.COVERAGE_THRESHOLD }}
+
+  publish:
+    name: Publish Current Commit
+    runs-on:
+      - nscloud-ubuntu-22.04-amd64-4x8-with-cache
+      - nscloud-cache-size-50gb
+      - nscloud-cache-tag-carboxylic-lithium-publish-nuget-cache
+      - nscloud-git-mirror-1gb
+    steps:
+      # Setup
+      - uses: AtomiCloud/actions.setup-nix@v1
+      - uses: AtomiCloud/actions.cache-nuget@v1
+
+      # Publish
+      - name: Publish
+        env:
+          GITHUB_REPO_REF: ${{ github.repository }}
+          GITHUB_SHA: ${{ github.sha }}
+          GITHUB_BRANCH: ${{ env.GITHUB_REF_SLUG_URL }}
+
+          RELEASE: 'false'
+
+          NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
+        run: nix develop .#ci -c scripts/ci/publish.sh
+
+  release:
+    name: Semantic Release
+    needs:
+      - precommit
+      - publish
+      - test
+      - sonarqube
+
+    if: github.ref == 'refs/heads/main'
+    runs-on:
+      - nscloud-ubuntu-22.04-amd64-4x8-with-cache
+      - nscloud-cache-size-50gb
+      - nscloud-cache-tag-carboxylic-lithium-releaser-nix-store-cache
+      - nscloud-git-mirror-1gb
+    steps:
+      # Setup
+      - uses: AtomiCloud/actions.setup-nix@v1
+      - uses: AtomiCloud/actions.cache-npm@v1
+      - uses: AtomiCloud/actions.cache-nuget@v1
+
+      # Release
+      - name: Release
+        env:
+          GITHUB_REPO_REF: ${{ github.repository }}
+          GITHUB_SHA: ${{ github.sha }}
+          GITHUB_BRANCH: ${{ env.GITHUB_REF_SLUG_URL }}
+
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+        run: nix develop .#releaser -c scripts/ci/release.sh
+      - name: Publish
+        env:
+          GITHUB_REPO_REF: ${{ github.repository }}
+          GITHUB_SHA: ${{ github.sha }}
+          GITHUB_BRANCH: ${{ env.GITHUB_REF_SLUG_URL }}
+
+          RELEASE: 'true'
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+          NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
+        run: nix develop .#ci -c scripts/ci/publish.sh

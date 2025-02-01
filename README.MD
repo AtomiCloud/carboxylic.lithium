@@ -1,0 +1,20 @@
+# Result
+
+[![Sonarcloud Status](https://sonarcloud.io/api/project_badges/measure?project=AtomiCloud_carboxylic.lithium&metric=alert_status)](https://sonarcloud.io/dashboard?id=AtomiCloud_carboxylic.lithium )
+[![SonarCloud Coverage](https://sonarcloud.io/api/project_badges/measure?project=AtomiCloud_carboxylic.lithium&metric=coverage)](https://sonarcloud.io/component_measures/metric/coverage/list?id=AtomiCloud_carboxylic.lithium)
+[![SonarCloud Bugs](https://sonarcloud.io/api/project_badges/measure?project=AtomiCloud_carboxylic.lithium&metric=bugs)](https://sonarcloud.io/component_measures/metric/reliability_rating/list?id=AtomiCloud_carboxylic.lithium)
+[![SonarCloud Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=AtomiCloud_carboxylic.lithium&metric=vulnerabilities)](https://sonarcloud.io/component_measures/metric/security_rating/list?id=AtomiCloud_carboxylic.lithium)
+[![GitHub Release Date](https://img.shields.io/github/release-date/AtomiCloud/carboxylic.lithium)](https://github.com/AtomiCloud/carboxylic.lithium/releases)
+[![GitHub commit activity](https://img.shields.io/github/commit-activity/m/AtomiCloud/carboxylic.lithium)](https://github.com/AtomiCloud/carboxylic.lithium/commits/main)
+![GitHub commits since latest release](https://img.shields.io/github/commits-since/AtomiCloud/carboxylic.lithium/latest)
+[![NuGet Downloads](https://img.shields.io/nuget/dt/AtomiCloud.Result)](https://www.nuget.org/packages/AtomiCloud.Result)
+![GitHub branch check runs](https://img.shields.io/github/check-runs/AtomiCloud/carboxylic.lithium/main)
+
+
+Result Type for Railway Oriented Programming in C#
+
+# Installation
+
+```bash
+dotnet add package AtomiCloud.Result
+```
