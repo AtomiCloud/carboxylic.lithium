@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lithium", "Lithium\Lithium.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTest", "UnitTest\UnitTest.csproj", "{2770CEC3-5B19-41BA-972B-5796B3EF9DA5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LithiumTest", "LithiumTest\LithiumTest.csproj", "{5D6ACAC7-0235-4C45-95EE-AE0AA5F0365D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{2770CEC3-5B19-41BA-972B-5796B3EF9DA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2770CEC3-5B19-41BA-972B-5796B3EF9DA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2770CEC3-5B19-41BA-972B-5796B3EF9DA5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5D6ACAC7-0235-4C45-95EE-AE0AA5F0365D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D6ACAC7-0235-4C45-95EE-AE0AA5F0365D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D6ACAC7-0235-4C45-95EE-AE0AA5F0365D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D6ACAC7-0235-4C45-95EE-AE0AA5F0365D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

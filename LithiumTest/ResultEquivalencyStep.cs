@@ -1,9 +1,9 @@
-using System.Reflection;
+﻿using System.Reflection;
 using CarboxylicLithium;
 using FluentAssertions;
 using FluentAssertions.Equivalency;
 
-namespace UnitTest;
+namespace LithiumTest;
 
 public class ResultEquivalencyStep : IEquivalencyStep
 {
