@@ -1,5 +1,6 @@
 using FluentAssertions;
 using FluentAssertions.Extensibility;
+using LithiumTest;
 using UnitTest;
 
 [assembly: AssertionEngineInitializer(typeof(Initializer), nameof(Initializer.Initialize))]

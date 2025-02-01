@@ -27,6 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\LithiumTest\LithiumTest.csproj" />
     <ProjectReference Include="..\Lithium\Lithium.csproj" />
   </ItemGroup>
 
