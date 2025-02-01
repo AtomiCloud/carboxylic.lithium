@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/AtomiCloud/carboxylic.lithium/compare/v1.0.0...v1.0.1) (2025-02-01)
+
+
+### 🐛 Bug Fixes 🐛
+
+* trigger release ([ef460fb](https://github.com/AtomiCloud/carboxylic.lithium/commit/ef460fbec5623de5ebbdd036dfc6c47d87b19a28))
+
 ## 1.0.0 (2025-02-01)
 
 
