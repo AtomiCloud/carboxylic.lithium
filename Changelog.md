@@ -1,3 +1,15 @@
+## [1.2.0](https://github.com/AtomiCloud/carboxylic.lithium/compare/v1.1.0...v1.2.0) (2025-02-01)
+
+
+### ✨ Features ✨
+
+* publish separate lib for test helper ([5649145](https://github.com/AtomiCloud/carboxylic.lithium/commit/56491457b83f542d726039a56100f0af01f9860e))
+
+
+### 🐛 Bug Fixes 🐛
+
+* incorrect build scripts ([6156fd9](https://github.com/AtomiCloud/carboxylic.lithium/commit/6156fd963f37f0b30eda133812a0bd634a48c8ef))
+
 ## [1.1.0](https://github.com/AtomiCloud/carboxylic.lithium/compare/v1.0.1...v1.1.0) (2025-02-01)
 
 
