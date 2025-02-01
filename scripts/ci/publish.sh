@@ -20,11 +20,11 @@ echo "🪵 Current Branch: $BRANCH"
 if [ "${RELEASE}" == "true" ]; then
   echo "🔍 Full release detected, building with version"
   dotnet pack ./Lithium/Lithium.csproj --output nupkgs
-  dotnet pack ./LithiumTest/LithiumTest.csproj --output nupkgs
+  dotnet pack ./LithiumTestHelper/LithiumTestHelper.csproj --output nupkgs
 else
   echo "🔍 Pre-release detected, building with version suffix, $RELEASE_VERSION"
   dotnet pack ./Lithium/Lithium.csproj --version-suffix "$RELEASE_VERSION" --output nupkgs
-  dotnet pack ./LithiumTest/LithiumTest.csproj --version-suffix "$RELEASE_VERSION" --output nupkgs
+  dotnet pack ./LithiumTestHelper/LithiumTestHelper.csproj --version-suffix "$RELEASE_VERSION" --output nupkgs
 fi
 
 echo "📦 Publishing packages..."
