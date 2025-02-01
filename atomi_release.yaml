@@ -158,3 +158,12 @@ types:
       default:
         desc: Dependency updates
         release: false
+      patch:
+        desc: Dependency updates
+        release: patch
+      minor:
+        desc: Dependency updates
+        release: minor
+      major:
+        desc: Dependency updates
+        release: major
