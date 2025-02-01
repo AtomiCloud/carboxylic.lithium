@@ -1,3 +1,10 @@
+## 1.0.0 (2025-02-01)
+
+
+### ✨ Features ✨
+
+* initial commit ([3ace134](https://github.com/AtomiCloud/carboxylic.lithium/commit/3ace1340f5dc4239f9f3561667bb1af134f7b67c))
+
 ## 1.0.0 (2025-01-31)
 
 
