@@ -1,0 +1,32 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net9.0</TargetFramework>
+        <RootNamespace>CarboxylicLithiumTestHelper</RootNamespace>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <Description>Test Helper for Result Type for Railway Oriented Programming in C#</Description>
+        <PackageIcon>logo.png</PackageIcon>
+        <PackageLicenseFile>LICENSE</PackageLicenseFile>
+        <RepositoryUrl>RepositoryUrl</RepositoryUrl>
+        <Authors>Ernest Ng</Authors>
+        <VersionPrefix>1.1.0</VersionPrefix>
+        <PackageId>AtomiCloud.Result.TestHelper</PackageId>
+        <PackageReadmeFile>README.MD</PackageReadmeFile>
+    </PropertyGroup>
+    
+    <ItemGroup>
+        <None Include="..\README.MD" Pack="true" PackagePath="\"/>
+        <None Include="..\LICENSE" Pack="true" PackagePath="\"/>
+        <None Include="..\logo.png" Pack="true" PackagePath="\"/>
+    </ItemGroup>
+    
+    <ItemGroup>
+      <PackageReference Include="FluentAssertions" Version="8.0.1" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Lithium\Lithium.csproj" />
+    </ItemGroup>
+
+</Project>

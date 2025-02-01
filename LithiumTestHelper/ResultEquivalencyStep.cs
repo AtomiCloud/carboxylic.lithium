@@ -3,7 +3,7 @@ using CarboxylicLithium;
 using FluentAssertions;
 using FluentAssertions.Equivalency;
 
-namespace LithiumTest;
+namespace CarboxylicLithiumTestHelper;
 
 public class ResultEquivalencyStep : IEquivalencyStep
 {
