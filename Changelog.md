@@ -1,3 +1,10 @@
+## [1.2.1](https://github.com/AtomiCloud/carboxylic.lithium/compare/v1.2.0...v1.2.1) (2025-02-01)
+
+
+### 🐛 Bug Fixes 🐛
+
+* add cheri as collaborator ([5ff53b3](https://github.com/AtomiCloud/carboxylic.lithium/commit/5ff53b3d146b35c82e07d751aa52d9a329b11128))
+
 ## [1.2.0](https://github.com/AtomiCloud/carboxylic.lithium/compare/v1.1.0...v1.2.0) (2025-02-01)
 
 

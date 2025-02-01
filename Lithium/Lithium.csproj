@@ -10,7 +10,7 @@
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <RepositoryUrl>RepositoryUrl</RepositoryUrl>
     <Authors>Ernest Ng</Authors>
-    <VersionPrefix>1.2.0</VersionPrefix>
+    <VersionPrefix>1.2.1</VersionPrefix>
     <PackageId>AtomiCloud.Result</PackageId>
     <PackageReadmeFile>README.MD</PackageReadmeFile>
   </PropertyGroup>
