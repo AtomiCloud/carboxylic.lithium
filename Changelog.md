@@ -1,3 +1,15 @@
+## [1.1.0](https://github.com/AtomiCloud/carboxylic.lithium/compare/v1.0.1...v1.1.0) (2025-02-01)
+
+
+### ✨ Features ✨
+
+* export equivalency step for result type ([e93127d](https://github.com/AtomiCloud/carboxylic.lithium/commit/e93127d977eb405084f9d8883763c985556d28cd))
+
+
+### 🔼 Dependency Upstreams 🔼
+
+* upgrade all dependencies ([25c3b2d](https://github.com/AtomiCloud/carboxylic.lithium/commit/25c3b2dcd7aec46fe1937fd9bd2847caf4123a9f))
+
 ## [1.0.1](https://github.com/AtomiCloud/carboxylic.lithium/compare/v1.0.0...v1.0.1) (2025-02-01)
 
 
