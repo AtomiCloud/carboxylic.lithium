@@ -2,4 +2,4 @@
 id: commit-conventions
 title: Commit Conventions
 ---
-var___convention_docs___
+var__convention_docs__

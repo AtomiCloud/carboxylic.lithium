@@ -1,3 +1,10 @@
+## [1.4.0](https://github.com/AtomiCloud/carboxylic.lithium/compare/v1.3.0...v1.4.0) (2025-04-09)
+
+
+### ✨ Features ✨
+
+* **configurations:** upgrade configurations ([bca158f](https://github.com/AtomiCloud/carboxylic.lithium/commit/bca158fa467c971c57e844b0ed13d518674710cf))
+
 ## [1.3.0](https://github.com/AtomiCloud/carboxylic.lithium/compare/v1.2.1...v1.3.0) (2025-02-01)
 
 
