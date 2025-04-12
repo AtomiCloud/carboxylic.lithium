@@ -6,11 +6,6 @@
       "version": "2023.2.5",
       "commands": ["dotnet-dotcover"],
       "rollForward": false
-    },
-    "dotnet-sonarscanner": {
-      "version": "9.0.2",
-      "commands": ["dotnet-sonarscanner"],
-      "rollForward": false
     }
   }
 }
