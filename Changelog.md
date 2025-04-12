@@ -1,3 +1,11 @@
+## [1.5.0](https://github.com/AtomiCloud/carboxylic.lithium/compare/v1.4.0...v1.5.0) (2025-04-12)
+
+
+### ✨ Features ✨
+
+* **ci:** remove sonar coverage ([#24](https://github.com/AtomiCloud/carboxylic.lithium/issues/24)) ([6c4940e](https://github.com/AtomiCloud/carboxylic.lithium/commit/6c4940e9fcd83a5d801351b2548a4628c52f3749))
+* **ci:** remove sonar coverage ([111ce16](https://github.com/AtomiCloud/carboxylic.lithium/commit/111ce16a295d772db1ba0658bd669acea8d8c8e2))
+
 ## [1.4.0](https://github.com/AtomiCloud/carboxylic.lithium/compare/v1.3.0...v1.4.0) (2025-04-09)
 
 
