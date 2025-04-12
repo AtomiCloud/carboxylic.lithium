@@ -1,3 +1,11 @@
+## [1.5.1](https://github.com/AtomiCloud/carboxylic.lithium/compare/v1.5.0...v1.5.1) (2025-04-12)
+
+
+### 🐛 Bug Fixes 🐛
+
+* **atomi_release:** incorrect convention docs in atomi_release ([#25](https://github.com/AtomiCloud/carboxylic.lithium/issues/25)) ([b263093](https://github.com/AtomiCloud/carboxylic.lithium/commit/b2630937a475c2204145d920ddb319d247f40db3))
+* **atomi_release:** incorrect convention docs in atomi_release ([e3e94c3](https://github.com/AtomiCloud/carboxylic.lithium/commit/e3e94c389e2b59fa4771e1436eada3980960e1e7))
+
 ## [1.5.0](https://github.com/AtomiCloud/carboxylic.lithium/compare/v1.4.0...v1.5.0) (2025-04-12)
 
 
