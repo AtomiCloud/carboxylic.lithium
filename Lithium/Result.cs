@@ -137,15 +137,6 @@ public readonly struct Result<TSucc>
     }
 
     /// <summary>
-    /// Checks if Result contains a Success
-    /// </summary>
-    /// <returns>True if Result is contains a Success</returns>
-    public bool IsSuccess()
-    {
-        return _isSuccess;
-    }
-
-    /// <summary>
     /// Checks if Result is a Failure, returning the failure in the out parameter
     /// </summary>
     /// <param name="error">out parameter to hold the error value</param>
@@ -154,6 +145,15 @@ public readonly struct Result<TSucc>
     {
         error = !_isSuccess ? _exception : default;
         return !_isSuccess;
+    }
+
+    /// <summary>
+    /// Checks if Result contains a Success
+    /// </summary>
+    /// <returns>True if Result is contains a Success</returns>
+    public bool IsSuccess()
+    {
+        return _isSuccess;
     }
 
     /// <summary>
