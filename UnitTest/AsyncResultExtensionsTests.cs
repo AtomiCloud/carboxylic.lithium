@@ -739,10 +739,7 @@ public class AsyncResultExtensionsTests
     )
     {
         // Act
-        var act = async () =>
-        {
-            await subject.DoAwait(doType, action, Errors.MapNone);
-        };
+        var act = async () => await subject.DoAwait(doType, action, Errors.MapNone);
 
         // Assert
         // Expect the original exception to propagate
@@ -902,10 +899,7 @@ public class AsyncResultExtensionsTests
     )
     {
         // Act
-        var act = async () =>
-        {
-            await subject.DoAwait(doType, asyncFunc, Errors.MapNone);
-        };
+        var act = async () => await subject.DoAwait(doType, asyncFunc, Errors.MapNone);
 
         // Assert
         await act.Should()
@@ -1052,10 +1046,7 @@ public class AsyncResultExtensionsTests
     )
     {
         // Act
-        var act = async () =>
-        {
-            await subject.ThenAwait(asyncFunc);
-        };
+        var act = async () => await subject.ThenAwait(asyncFunc);
 
         // Assert
         await act.Should()
@@ -1608,10 +1599,7 @@ public class AsyncResultExtensionsTests
     )
     {
         // Act
-        var act = async () =>
-        {
-            await subject.Then(function);
-        };
+        var act = async () => await subject.Then(function);
 
         // Assert
         await act.Should()
@@ -1748,10 +1736,7 @@ public class AsyncResultExtensionsTests
     )
     {
         // Act
-        var act = async () =>
-        {
-            await subject.Then(function, Errors.MapNone);
-        };
+        var act = async () => await subject.Then(function, Errors.MapNone);
 
         // Assert
         await act.Should()
@@ -1893,10 +1878,7 @@ public class AsyncResultExtensionsTests
     )
     {
         // Act
-        var act = async () =>
-        {
-            await subject.AssertAwait(assertion);
-        };
+        var act = async () => await subject.AssertAwait(assertion);
 
         // Assert
         await act.Should()
@@ -2078,10 +2060,7 @@ public class AsyncResultExtensionsTests
     )
     {
         // Act
-        var act = async () =>
-        {
-            await subject.AssertAwait(assertion, Errors.MapNone);
-        };
+        var act = async () => await subject.AssertAwait(assertion, Errors.MapNone);
 
         // Assert
         await act.Should()
@@ -2369,10 +2348,7 @@ public class AsyncResultExtensionsTests
     )
     {
         // Act
-        var act = async () =>
-        {
-            await subject.Assert(assertion, Errors.MapNone);
-        };
+        var act = async () => await subject.Assert(assertion, Errors.MapNone);
 
         // Assert
         await act.Should()
@@ -2614,10 +2590,7 @@ public class AsyncResultExtensionsTests
     )
     {
         // Act
-        var act = async () =>
-        {
-            await subject.IfAwait(predicate, Then, Else);
-        };
+        var act = async () => await subject.IfAwait(predicate, Then, Else);
 
         // Assert
         await act.Should()
@@ -2736,10 +2709,7 @@ public class AsyncResultExtensionsTests
     )
     {
         // Act
-        var act = async () =>
-        {
-            await subject.IfAwait(predicate, Then, Else);
-        };
+        var act = async () => await subject.IfAwait(predicate, Then, Else);
 
         // Assert
         await act.Should()
@@ -2858,10 +2828,7 @@ public class AsyncResultExtensionsTests
     )
     {
         // Act
-        var act = async () =>
-        {
-            await subject.IfAwait(predicate, Then, Else);
-        };
+        var act = async () => await subject.IfAwait(predicate, Then, Else);
 
         // Assert
         await act.Should()
@@ -3088,10 +3055,7 @@ public class AsyncResultExtensionsTests
     )
     {
         // Act
-        var act = async () =>
-        {
-            await subject.If(predicate, Then, Else);
-        };
+        var act = async () => await subject.If(predicate, Then, Else);
 
         // Assert
         await act.Should()
@@ -3196,10 +3160,7 @@ public class AsyncResultExtensionsTests
     )
     {
         // Act
-        var act = async () =>
-        {
-            await subject.If(predicate, Then, Else);
-        };
+        var act = async () => await subject.If(predicate, Then, Else);
 
         // Assert
         await act.Should()
@@ -3304,10 +3265,7 @@ public class AsyncResultExtensionsTests
     )
     {
         // Act
-        var act = async () =>
-        {
-            await subject.If(predicate, Then, Else);
-        };
+        var act = async () => await subject.If(predicate, Then, Else);
 
         // Assert
         await act.Should()
@@ -3427,10 +3385,7 @@ public class AsyncResultExtensionsTests
     )
     {
         // Act
-        var act = async () =>
-        {
-            await subject.Do(doType, transformFunc);
-        };
+        var act = async () => await subject.Do(doType, transformFunc);
 
         // Assert
         await act.Should()
@@ -3566,10 +3521,7 @@ public class AsyncResultExtensionsTests
     )
     {
         // Act
-        var act = async () =>
-        {
-            await subject.Do(doType, function, mapException);
-        };
+        var act = async () => await subject.Do(doType, function, mapException);
 
         // Assert
         await act.Should()
@@ -3714,10 +3666,7 @@ public class AsyncResultExtensionsTests
     )
     {
         // Act
-        var act = async () =>
-        {
-            await subject.Do(doType, action, mapException);
-        };
+        var act = async () => await subject.Do(doType, action, mapException);
 
         // Assert
         await act.Should()
@@ -3856,10 +3805,7 @@ public class AsyncResultExtensionsTests
     )
     {
         // Act
-        var act = async () =>
-        {
-            await subject.Then(function, mapException);
-        };
+        var act = async () => await subject.Then(function, mapException);
 
         // Assert
         await act.Should()

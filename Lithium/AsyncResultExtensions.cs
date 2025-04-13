@@ -2,7 +2,6 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace CarboxylicLithium;
 
-#pragma warning disable CS1998
 /// <summary>
 /// Static class for extensions methods manipulating Async Results
 /// </summary>
@@ -34,7 +33,6 @@ public static class AsyncResultExtensions
     /// <typeparam name="TInput">Type of the input Result</typeparam>
     /// <typeparam name="T">Return type of the function</typeparam>
     /// <returns>Object of type T</returns>
-    [SuppressMessage("ReSharper", "InconsistentNaming")]
     public static async Task<T> MatchAwait<TInput, T>(
         this Task<Result<TInput>> res,
         Func<TInput, Task<T>> Success,
@@ -54,7 +52,6 @@ public static class AsyncResultExtensions
     /// <param name="Success">Async function to execute on Success</param>
     /// <param name="Failure">Async function to execute on Failure</param>
     /// <typeparam name="TInput">Type of the input Result</typeparam>
-    [SuppressMessage("ReSharper", "InconsistentNaming")]
     public static async Task MatchAwait<TInput>(
         this Task<Result<TInput>> res,
         Func<TInput, Task> Success,
@@ -76,7 +73,6 @@ public static class AsyncResultExtensions
     /// <typeparam name="TInput">Type of the input Result</typeparam>
     /// <typeparam name="T">Return type of the function</typeparam>
     /// <returns>Object of type T</returns>
-    [SuppressMessage("ReSharper", "InconsistentNaming")]
     public static async Task<T> Match<TInput, T>(
         this Task<Result<TInput>> res,
         Func<TInput, T> Success,
@@ -95,7 +91,6 @@ public static class AsyncResultExtensions
     /// <param name="Success">Function to execute on Success</param>
     /// <param name="Failure">Function to execute on Failure</param>
     /// <typeparam name="TInput">Type of the input Result</typeparam>
-    [SuppressMessage("ReSharper", "InconsistentNaming")]
     public static async Task Match<TInput>(
         this Task<Result<TInput>> res,
         Action<TInput> Success,
@@ -437,7 +432,6 @@ public static class AsyncResultExtensions
     /// <param name="Then">The async function to execute if predicate returns True</param>
     /// <param name="Else">The async function to execute if predicate returns False</param>
     /// <returns>Either the Success, or a Failure</returns>
-    [SuppressMessage("ReSharper", "InconsistentNaming")]
     public static Task<Result<TResult>> IfAwait<TSucc, TResult>(
         this Task<Result<TSucc>> res,
         Func<TSucc, Task<Result<bool>>> predicate,
@@ -461,7 +455,6 @@ public static class AsyncResultExtensions
     /// <param name="Then">The function to execute if predicate returns True</param>
     /// <param name="Else">The function to execute if predicate returns False</param>
     /// <returns>Either the Success, or a Failure</returns>
-    [SuppressMessage("ReSharper", "InconsistentNaming")]
     public static async Task<Result<TResult>> If<TSucc, TResult>(
         this Task<Result<TSucc>> res,
         Func<TSucc, Result<bool>> predicate,

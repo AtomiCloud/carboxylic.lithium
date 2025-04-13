@@ -24,10 +24,6 @@ with packages;
     sg
   ];
 
-  sonar = [
-    jdk
-  ];
-
   releaser = [
     sg
   ];

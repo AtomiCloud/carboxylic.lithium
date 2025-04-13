@@ -1,9 +1,6 @@
 # Result
 
-[![Sonarcloud Status](https://sonarcloud.io/api/project_badges/measure?project=AtomiCloud_carboxylic.lithium&metric=alert_status)](https://sonarcloud.io/dashboard?id=AtomiCloud_carboxylic.lithium )
-[![SonarCloud Coverage](https://sonarcloud.io/api/project_badges/measure?project=AtomiCloud_carboxylic.lithium&metric=coverage)](https://sonarcloud.io/component_measures/metric/coverage/list?id=AtomiCloud_carboxylic.lithium)
-[![SonarCloud Bugs](https://sonarcloud.io/api/project_badges/measure?project=AtomiCloud_carboxylic.lithium&metric=bugs)](https://sonarcloud.io/component_measures/metric/reliability_rating/list?id=AtomiCloud_carboxylic.lithium)
-[![SonarCloud Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=AtomiCloud_carboxylic.lithium&metric=vulnerabilities)](https://sonarcloud.io/component_measures/metric/security_rating/list?id=AtomiCloud_carboxylic.lithium)
+[![DeepSource](https://app.deepsource.com/gh/AtomiCloud/carboxylic.lithium.svg/?label=active+issues)](https://app.deepsource.com/gh/AtomiCloud/carboxylic.lithium/)
 [![GitHub Release Date](https://img.shields.io/github/release-date/AtomiCloud/carboxylic.lithium)](https://github.com/AtomiCloud/carboxylic.lithium/releases)
 [![GitHub commit activity](https://img.shields.io/github/commit-activity/m/AtomiCloud/carboxylic.lithium)](https://github.com/AtomiCloud/carboxylic.lithium/commits/main)
 ![GitHub commits since latest release](https://img.shields.io/github/commits-since/AtomiCloud/carboxylic.lithium/latest)

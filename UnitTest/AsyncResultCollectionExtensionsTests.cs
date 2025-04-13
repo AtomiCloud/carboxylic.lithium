@@ -487,10 +487,7 @@ public class AsyncResultCollectionExtensionsTests
     )
     {
         // Act
-        var act = async () =>
-        {
-            _ = await collection.Get();
-        };
+        var act = async () => await collection.Get();
 
         // Assert
         await act.Should().ThrowAsync<AggregateException>("there were failures in the collection.");
@@ -1636,7 +1633,7 @@ public class AsyncResultCollectionExtensionsTests
 
                     return (Result<string>)"SafeValue";
                 },
-                new InvalidOperationException($"Func physically threw for i=10")
+                new InvalidOperationException("Func physically threw for i=10")
             );
         }
     }
@@ -2033,10 +2030,7 @@ public class AsyncResultCollectionExtensionsTests
     )
     {
         // Act
-        var act = async () =>
-        {
-            await Task.WhenAll(inputs.DoEach(doType, action, Errors.MapNone));
-        };
+        var act = async () => await Task.WhenAll(inputs.DoEach(doType, action, Errors.MapNone));
 
         // Assert
         await act.Should().ThrowAsync<Exception>().WithMessage(expected.Message);

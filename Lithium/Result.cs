@@ -335,7 +335,6 @@ public readonly struct Result<TSucc>
     /// <param name="Then">The function to execute if predicate returns True</param>
     /// <param name="Else">The function to execute if predicate returns False</param>
     /// <returns>Either the Success, or a Failure</returns>
-    [SuppressMessage("ReSharper", "InconsistentNaming")]
     public Result<TResult> If<TResult>(
         Func<TSucc, Result<bool>> predicate,
         Func<TSucc, Result<TResult>> Then,
@@ -354,7 +353,7 @@ public readonly struct Result<TSucc>
     /// <returns>Mapped Failure if Result is Failure</returns>
     public Result<TSucc> MapFailure(Func<Exception, Exception> mapper)
     {
-        return Match<Result<TSucc>>(s => s, e => mapper(e));
+        return Match<Result<TSucc>>(s => s, e => (Result<TSucc>)mapper(e));
     }
 
     /// <summary>
@@ -366,7 +365,6 @@ public readonly struct Result<TSucc>
     /// <param name="Failure">Function to execute on Failure</param>
     /// <typeparam name="T">Return type of the function</typeparam>
     /// <returns>Object of type T</returns>
-    [SuppressMessage("ReSharper", "InconsistentNaming")]
     public T Match<T>(Func<TSucc, T> Success, Func<Exception, T> Failure)
     {
         return _isSuccess ? Success(_value!) : Failure(_exception!);
@@ -380,7 +378,6 @@ public readonly struct Result<TSucc>
     /// <param name="Success">Function to execute on Success</param>
     /// <param name="Failure">Function to execute on Failure</param>
     /// <returns>Returns Unit, denoting null return (void function)</returns>
-    [SuppressMessage("ReSharper", "InconsistentNaming")]
     public void Match(Action<TSucc> Success, Action<Exception> Failure)
     {
         if (_isSuccess)

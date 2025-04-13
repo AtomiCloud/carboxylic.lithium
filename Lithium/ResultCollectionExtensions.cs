@@ -274,7 +274,6 @@ public static class ResultCollectionExtensions
     /// <param name="Then">The function to execute if predicate returns True</param>
     /// <param name="Else">The function to execute if predicate returns False</param>
     /// <returns>Collection after executing function on each element</returns>
-    [SuppressMessage("ReSharper", "InconsistentNaming")]
     public static IEnumerable<Result<TResult>> IfEach<TSucc, TResult>(
         this IEnumerable<Result<TSucc>> results,
         Func<TSucc, Result<bool>> predicate,
@@ -294,7 +293,6 @@ public static class ResultCollectionExtensions
     /// <typeparam name="TSucc">Input type</typeparam>
     /// <typeparam name="TResult">Return type</typeparam>
     /// <returns>Collection after executing function on each element</returns>
-    [SuppressMessage("ReSharper", "InconsistentNaming")]
     public static IEnumerable<TResult> MatchEach<TSucc, TResult>(
         this IEnumerable<Result<TSucc>> results,
         Func<TSucc, TResult> Success,
@@ -312,7 +310,6 @@ public static class ResultCollectionExtensions
     /// <param name="Failure">The function to execute if Result is Error</param>
     /// <typeparam name="TSucc">Input type</typeparam>
     /// <returns>Collection after executing function on each element</returns>
-    [SuppressMessage("ReSharper", "InconsistentNaming")]
     public static void MatchEach<TSucc>(
         this IEnumerable<Result<TSucc>> results,
         Action<TSucc> Success,
