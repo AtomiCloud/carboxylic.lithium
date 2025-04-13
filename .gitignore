@@ -10,3 +10,5 @@ dotCover.Output/
 dotCover.Output.*
 *.*.DotSettings.user
 .vscode/
+**/TestResults/
+coverage/

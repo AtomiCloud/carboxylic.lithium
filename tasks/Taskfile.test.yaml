@@ -1,17 +1,27 @@
 version: '3'
 
+vars:
+  UNIT_TEST_DIR: UnitTest
+  UNIT_TEST_COVERAGE_THRESHOLD: 50
+  UNIT_TEST_TARGETS: Lithium,LithiumTestHelper
+
 tasks:
   default:
-    desc: 'Test the library'
+    desc: 'Unit Test the library'
     cmds:
       - task: unit:watch
 
   unit:
-    desc: 'Test the library'
+    desc: 'Unit Test the library'
     cmds:
-      - dotnet test {{.CLI_ARGS}}
+      - dotnet test {{.UNIT_TEST_DIR}} {{.CLI_ARGS}}
 
   unit:watch:
-    desc: 'Test the library with coverage'
+    desc: 'Unit Test the library and watch for changes'
     cmds:
-      - dotnet watch test --project UnitTest {{.CLI_ARGS}}
+      - dotnet watch test --project {{.UNIT_TEST_DIR}} {{.CLI_ARGS}}
+
+  unit:cover:
+    desc: 'Unit Test the library and show coverage'
+    cmds:
+      - ./scripts/local/cover.sh {{.UNIT_TEST_DIR}} {{.UNIT_TEST_TARGETS}} {{.UNIT_TEST_COVERAGE_THRESHOLD}}

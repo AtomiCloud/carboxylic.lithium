@@ -32,7 +32,7 @@ plugins:
   - module: '@semantic-release/exec'
     version: 6.0.3
     config:
-      prepareCmd: scripts/ci/update_version.sh ${nextRelease.version}
+      prepareCmd: scripts/ci/update_version.sh ${nextRelease.version} Lithium,LithiumTestHelper
 
   # Commit Additional Changes & Artifacts
   - module: '@semantic-release/git'
