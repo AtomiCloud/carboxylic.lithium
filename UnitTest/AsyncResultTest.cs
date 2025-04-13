@@ -591,10 +591,7 @@ public class AsyncResultTests
         var asyncResultFunc = throwingAction.ToAsyncResultFunc(Errors.MapNone);
 
         // Act
-        var act = async () =>
-        {
-            _ = await asyncResultFunc(123);
-        };
+        var act = async () => await asyncResultFunc(123);
 
         // Assert
         await act.Should().ThrowAsync<FormatException>().WithMessage("Should be rethrown");
@@ -701,10 +698,7 @@ public class AsyncResultTests
         var asyncResultFunc = throwingFunc.ToAsyncResultFunc();
 
         // Act
-        var act = async () =>
-        {
-            _ = await asyncResultFunc(123);
-        };
+        var act = async () => await asyncResultFunc(123);
 
         // Assert
         await act.Should().ThrowAsync<FormatException>().WithMessage("Uncaught exception");
