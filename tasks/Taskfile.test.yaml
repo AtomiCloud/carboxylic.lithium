@@ -1,0 +1,17 @@
+version: '3'
+
+tasks:
+  default:
+    desc: 'Test the library'
+    cmds:
+      - task: unit:watch
+
+  unit:
+    desc: 'Test the library'
+    cmds:
+      - dotnet test {{.CLI_ARGS}}
+
+  unit:watch:
+    desc: 'Test the library with coverage'
+    cmds:
+      - dotnet watch test --project UnitTest {{.CLI_ARGS}}
