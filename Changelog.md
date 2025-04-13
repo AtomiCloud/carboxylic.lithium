@@ -1,3 +1,19 @@
+## [1.5.2](https://github.com/AtomiCloud/carboxylic.lithium/compare/v1.5.1...v1.5.2) (2025-04-13)
+
+
+### 🐛 Bug Fixes 🐛
+
+* deepsource lambda lint failure ([f5f0cb7](https://github.com/AtomiCloud/carboxylic.lithium/commit/f5f0cb7b09ca6ac8b5c5afb2f5d2939397e74ba2))
+* deepsource lambda lint failure ([#28](https://github.com/AtomiCloud/carboxylic.lithium/issues/28)) ([067f755](https://github.com/AtomiCloud/carboxylic.lithium/commit/067f7551befc3db3bb4d93ae817fc493b32ea8e8))
+* deepsource lint errors ([e22261b](https://github.com/AtomiCloud/carboxylic.lithium/commit/e22261be0de61963496323f4a51cf52ff3fd084b))
+* **ci:** use auth-bot for releaser ([#29](https://github.com/AtomiCloud/carboxylic.lithium/issues/29)) ([b0bd80d](https://github.com/AtomiCloud/carboxylic.lithium/commit/b0bd80dceea3158a547faf32ee3cad136e7f4fd2))
+* **ci:** use auth-bot for releaser ([f6e2b86](https://github.com/AtomiCloud/carboxylic.lithium/commit/f6e2b8670ee0bd9127da310ec57754f771b4b08a))
+
+
+### 🔼 Dependency Upstreams 🔼
+
+* **default:** update FluentAssertions ([f0b29ff](https://github.com/AtomiCloud/carboxylic.lithium/commit/f0b29ff73987ec2bfb6a64351c4fd00d5c29ccee))
+
 ## [1.5.1](https://github.com/AtomiCloud/carboxylic.lithium/compare/v1.5.0...v1.5.1) (2025-04-12)
 
 
