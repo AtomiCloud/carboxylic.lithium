@@ -227,10 +227,7 @@ public class AsyncResultTests
         var asyncResultFunc = throwingFunc.ToAsyncResultFunc(Errors.MapNone);
 
         // Act
-        var act = async () =>
-        {
-            _ = await asyncResultFunc(123);
-        };
+        var act = async () => await asyncResultFunc(123);
 
         // Assert - expecting unwrapped exception
         await act.Should().ThrowAsync<FormatException>().WithMessage("Should be rethrown");
@@ -363,10 +360,7 @@ public class AsyncResultTests
         var asyncResultFunc = throwingFunc.ToAsyncResultFunc(Errors.MapNone);
 
         // Act
-        var act = async () =>
-        {
-            _ = await asyncResultFunc(5);
-        };
+        var act = async () => _ = await asyncResultFunc(5);
 
         // Assert
         await act.Should()
@@ -468,10 +462,7 @@ public class AsyncResultTests
         var asyncResultFunc = throwingFunc.ToAsyncResultFunc(Errors.MapNone);
 
         // Act
-        var act = async () =>
-        {
-            _ = await asyncResultFunc(123);
-        };
+        var act = async () => await asyncResultFunc(123);
 
         // Assert
         await act.Should().ThrowAsync<FormatException>().WithMessage("Should be rethrown");
@@ -983,10 +974,7 @@ public class AsyncResultTests
     )
     {
         // Act
-        var act = async () =>
-        {
-            _ = await input.Get();
-        };
+        var act = async () => await input.Get();
 
         // Assert
         await act.Should()

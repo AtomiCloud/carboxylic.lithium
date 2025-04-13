@@ -8,7 +8,7 @@ env:
 
 jobs:
   precommit:
-    name: Pre-commit Check
+    name: Pre-Commit
     runs-on:
       - nscloud-ubuntu-22.04-amd64-4x8-with-cache
       - nscloud-cache-size-50gb

@@ -43,7 +43,7 @@ public static class Utils
     /// <param name="o">Input object</param>
     /// <typeparam name="T">Type to cast to</typeparam>
     /// <returns>Result holding either input object cast to T or InvalidCastException.</returns>
-    public static Result<T> As<T>(this object o)
+    public static Result<T> As<T>(this object o) // skipcq: CS-R1112
     {
         if (o is T t)
             return t;

@@ -18,8 +18,7 @@ let
       with pkgs-2411;
       {
 
-        dotnet = dotnet-sdk_9;
-        jdk = zulu17;
+        dotnet = dotnet-sdk;
 
         inherit
           xmlstarlet

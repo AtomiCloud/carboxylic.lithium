@@ -474,7 +474,6 @@ public static class AsyncResultCollectionExtensions
     /// <param name="Then">The function to execute if predicate returns True</param>
     /// <param name="Else">The function to execute if predicate returns False</param>
     /// <returns>Collection after executing function on each element</returns>
-    [SuppressMessage("ReSharper", "InconsistentNaming")]
     public static IEnumerable<Task<Result<TResult>>> IfEach<TSucc, TResult>(
         this IEnumerable<Task<Result<TSucc>>> results,
         Func<TSucc, Result<bool>> predicate,
@@ -494,7 +493,6 @@ public static class AsyncResultCollectionExtensions
     /// <param name="Then">The async function to execute if predicate returns True</param>
     /// <param name="Else">The async function to execute if predicate returns False</param>
     /// <returns>Collection after executing function on each element</returns>
-    [SuppressMessage("ReSharper", "InconsistentNaming")]
     public static IEnumerable<Task<Result<TResult>>> IfAwaitEach<TSucc, TResult>(
         this IEnumerable<Task<Result<TSucc>>> results,
         Func<TSucc, Task<Result<bool>>> predicate,
@@ -514,7 +512,6 @@ public static class AsyncResultCollectionExtensions
     /// <typeparam name="TSucc">Input type</typeparam>
     /// <typeparam name="TResult">Return type</typeparam>
     /// <returns>Collection after executing function on each element</returns>
-    [SuppressMessage("ReSharper", "InconsistentNaming")]
     public static IEnumerable<Task<TResult>> MatchAwaitEach<TSucc, TResult>(
         this IEnumerable<Task<Result<TSucc>>> results,
         Func<TSucc, Task<TResult>> Success,
@@ -532,7 +529,6 @@ public static class AsyncResultCollectionExtensions
     /// <param name="Failure">The function to execute if Result is Error</param>
     /// <typeparam name="TSucc">Input type</typeparam>
     /// <returns>Collection after executing function on each element</returns>
-    [SuppressMessage("ReSharper", "InconsistentNaming")]
     public static IEnumerable<Task> MatchAwaitEach<TSucc>(
         this IEnumerable<Task<Result<TSucc>>> results,
         Func<TSucc, Task> Success,
@@ -551,7 +547,6 @@ public static class AsyncResultCollectionExtensions
     /// <typeparam name="TSucc">Input type</typeparam>
     /// <typeparam name="TResult">Return type</typeparam>
     /// <returns>Collection after executing function on each element</returns>
-    [SuppressMessage("ReSharper", "InconsistentNaming")]
     public static IEnumerable<Task<TResult>> MatchEach<TSucc, TResult>(
         this IEnumerable<Task<Result<TSucc>>> results,
         Func<TSucc, TResult> Success,
@@ -569,7 +564,6 @@ public static class AsyncResultCollectionExtensions
     /// <param name="Failure">The function to execute if Result is Error</param>
     /// <typeparam name="TSucc">Input type</typeparam>
     /// <returns>Collection after executing function on each element</returns>
-    [SuppressMessage("ReSharper", "InconsistentNaming")]
     public static IEnumerable<Task> MatchEach<TSucc>(
         this IEnumerable<Task<Result<TSucc>>> results,
         Action<TSucc> Success,
