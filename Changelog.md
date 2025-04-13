@@ -1,3 +1,26 @@
+## [1.5.1](https://github.com/AtomiCloud/carboxylic.lithium/compare/v1.5.0...v1.5.1) (2025-04-12)
+
+
+### 🐛 Bug Fixes 🐛
+
+* **atomi_release:** incorrect convention docs in atomi_release ([#25](https://github.com/AtomiCloud/carboxylic.lithium/issues/25)) ([b263093](https://github.com/AtomiCloud/carboxylic.lithium/commit/b2630937a475c2204145d920ddb319d247f40db3))
+* **atomi_release:** incorrect convention docs in atomi_release ([e3e94c3](https://github.com/AtomiCloud/carboxylic.lithium/commit/e3e94c389e2b59fa4771e1436eada3980960e1e7))
+
+## [1.5.0](https://github.com/AtomiCloud/carboxylic.lithium/compare/v1.4.0...v1.5.0) (2025-04-12)
+
+
+### ✨ Features ✨
+
+* **ci:** remove sonar coverage ([#24](https://github.com/AtomiCloud/carboxylic.lithium/issues/24)) ([6c4940e](https://github.com/AtomiCloud/carboxylic.lithium/commit/6c4940e9fcd83a5d801351b2548a4628c52f3749))
+* **ci:** remove sonar coverage ([111ce16](https://github.com/AtomiCloud/carboxylic.lithium/commit/111ce16a295d772db1ba0658bd669acea8d8c8e2))
+
+## [1.4.0](https://github.com/AtomiCloud/carboxylic.lithium/compare/v1.3.0...v1.4.0) (2025-04-09)
+
+
+### ✨ Features ✨
+
+* **configurations:** upgrade configurations ([bca158f](https://github.com/AtomiCloud/carboxylic.lithium/commit/bca158fa467c971c57e844b0ed13d518674710cf))
+
 ## [1.3.0](https://github.com/AtomiCloud/carboxylic.lithium/compare/v1.2.1...v1.3.0) (2025-02-01)
 
 

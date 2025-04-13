@@ -1,0 +1,10 @@
+version = 1
+
+test_patterns = ["UnitTest/**/*.cs"]
+
+[[analyzers]]
+name = "csharp"
+
+[[analyzers]]
+name = "shell"
+

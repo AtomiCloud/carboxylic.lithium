@@ -9,10 +9,6 @@ with env;
     buildInputs = system ++ main ++ lint;
     inherit shellHook;
   };
-  sonar = pkgs.mkShell {
-    buildInputs = system ++ main ++ lint ++ sonar;
-    inherit shellHook;
-  };
   releaser = pkgs.mkShell {
     buildInputs = system ++ main ++ lint ++ releaser;
     inherit shellHook;
