@@ -15,5 +15,5 @@ echo "✅ Done!"
 
 # run tests
 echo "🧪 Running and Coverage..."
-dotnet test "$test_dir"
+dotnet test --logger:junit "$test_dir"
 echo "✅ Done!"
