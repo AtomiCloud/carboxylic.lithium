@@ -11,5 +11,5 @@
 #   status:
 #     project: true
 #     patch: true
-# comment:
-#   layout: 'header, diff, flags, files, footer'
+comment:
+  layout: 'header, diff, files, footer'
