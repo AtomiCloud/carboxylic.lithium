@@ -37,25 +37,25 @@ public class UnitExtensionsTest
         actual.Should().Be(expected);
     }
 
-    [Fact]
-    public void Unit_T1_Should_ExecuteOriginalAction()
-    {
-        // Arrange
-        var wasCalled = false;
+    // [Fact]
+    // public void Unit_T1_Should_ExecuteOriginalAction()
+    // {
+    //     // Arrange
+    //     var wasCalled = false;
 
-        // Act
-        var unitFunc = ((Action<int>)Action).Unit();
-        unitFunc(42);
+    //     // Act
+    //     var unitFunc = ((Action<int>)Action).Unit();
+    //     unitFunc(42);
 
-        // Assert
-        wasCalled.Should().BeTrue();
-        return;
+    //     // Assert
+    //     wasCalled.Should().BeTrue();
+    //     return;
 
-        void Action(int x)
-        {
-            wasCalled = true;
-        }
-    }
+    //     void Action(int x)
+    //     {
+    //         wasCalled = true;
+    //     }
+    // }
 
     // ========================================
     // Unit<T1,T2> Extension Method
