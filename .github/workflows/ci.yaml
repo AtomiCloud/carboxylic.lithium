@@ -5,7 +5,6 @@ on:
 
 env:
   ATOMI_SERVICE: Lithium
-  UNIT_TEST_COVERAGE_THRESHOLD: 50
 
 jobs:
   precommit:
@@ -64,7 +63,7 @@ jobs:
 
       # Coverage
       - name: Get Unit Test Coverage
-        run: nix develop .#ci -c ./scripts/local/cover.sh UnitTest Lithium,LithiumTestHelper ${{ env.UNIT_TEST_COVERAGE_THRESHOLD }}
+        run: nix develop .#ci -c ./scripts/local/cover.sh UnitTest Lithium,LithiumTestHelper
 
       # Connect to Codecov
       - name: Upload coverage reports to Codecov

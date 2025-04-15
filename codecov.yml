@@ -1,9 +1,7 @@
-codecov:
-
 coverage:
   status:
-    project: #add everything under here, more options at https://docs.codecov.com/docs/commit-status
-      unit:
+    project:
+      UnitTest:
         target: 80%
         threshold: 3%
         base: auto

@@ -2,7 +2,6 @@ version: '3'
 
 vars:
   UNIT_TEST_DIR: UnitTest
-  UNIT_TEST_COVERAGE_THRESHOLD: 50
   UNIT_TEST_TARGETS: Lithium,LithiumTestHelper
 
 tasks:
@@ -24,4 +23,4 @@ tasks:
   unit:cover:
     desc: 'Unit Test the library and show coverage'
     cmds:
-      - ./scripts/local/cover.sh {{.UNIT_TEST_DIR}} {{.UNIT_TEST_TARGETS}} {{.UNIT_TEST_COVERAGE_THRESHOLD}}
+      - ./scripts/local/cover.sh {{.UNIT_TEST_DIR}} {{.UNIT_TEST_TARGETS}}

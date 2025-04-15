@@ -2,7 +2,6 @@
 
 test_dir="$1"
 target="$2"
-threshold=${3:-50}
 
 # Ensure test_dir is not null or empty
 [ -z "$test_dir" ] && echo "❌ Error: test directory parameter is required" && exit 1
@@ -42,7 +41,6 @@ done
 echo "✅ Coverage processing complete!"
 
 echo ""
-exit_code=0
 
 # Split target by comma and process each package
 IFS=',' read -ra packages <<<"$target"
@@ -62,17 +60,7 @@ for package in "${packages[@]}"; do
   # Convert coverage to percentage
   package_percentage=$(echo "$package_coverage * 100" | bc -l | awk '{printf "%.2f", $0}')
 
-  echo "🧪 $package: $package_percentage% (threshold: $threshold%)"
-
-  # Check if coverage meets threshold
-  if (($(echo "$package_percentage < $threshold" | bc -l))); then
-    echo "⚠️ Error: $package coverage is below threshold!"
-    exit_code=1
-  fi
+  echo "🧪 Coverage for $package: $package_percentage%"
 done
 
 echo ""
-
-[ $exit_code -eq 1 ] && exit 1
-
-echo "✅ Coverage threshold met!"
