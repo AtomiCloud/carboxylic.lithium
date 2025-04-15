@@ -213,9 +213,7 @@ public class UnitExtensionsTest
         // Arrange
         var result = string.Empty;
         Action<int, string, bool, char> action = (x, s, b, c) =>
-        {
             result = $"{s}{c}{x}{(b ? "True" : "False")}";
-        };
 
         // Act
         var unitFunc = action.Unit();
@@ -328,9 +326,7 @@ public class UnitExtensionsTest
         // Arrange
         var result = 0;
         Action<int, int, int, int, int, int> action = (a, b, c, d, e, f) =>
-        {
             result = a + b + c + d + e + f;
-        };
 
         // Act
         var unitFunc = action.Unit();
@@ -396,9 +392,7 @@ public class UnitExtensionsTest
         // Arrange
         var concatenated = string.Empty;
         Action<char, char, char, char, char, char, char> action = (a, b, c, d, e, f, g) =>
-        {
             concatenated = new string(new[] { a, b, c, d, e, f, g });
-        };
 
         // Act
         var unitFunc = action.Unit();
@@ -466,9 +460,7 @@ public class UnitExtensionsTest
         // Arrange
         var product = 1;
         Action<int, int, int, int, int, int, int, int> action = (a, b, c, d, e, f, g, h) =>
-        {
             product = a * b * c * d * e * f * g * h;
-        };
 
         // Act
         var unitFunc = action.Unit();
@@ -516,9 +508,7 @@ public class UnitExtensionsTest
         // Arrange
         var sum = 0;
         Action<int, int, int, int, int, int, int, int, int> action = (a, b, c, d, e, f, g, h, i) =>
-        {
             sum = a + b + c + d + e + f + g + h + i;
-        };
 
         // Act
         var unitFunc = action.Unit();
