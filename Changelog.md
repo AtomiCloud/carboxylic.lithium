@@ -1,3 +1,10 @@
+## [1.8.0](https://github.com/AtomiCloud/carboxylic.lithium/compare/v1.7.0...v1.8.0) (2025-04-15)
+
+
+### ✨ Features ✨
+
+* **codecov:** enable comments ([f1a7aab](https://github.com/AtomiCloud/carboxylic.lithium/commit/f1a7aab6c18d3071c66bd38c3cd6a4fd8582b40f))
+
 ## [1.7.0](https://github.com/AtomiCloud/carboxylic.lithium/compare/v1.6.0...v1.7.0) (2025-04-15)
 
 
