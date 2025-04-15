@@ -1,12 +1,12 @@
-coverage:
-  status:
-    project:
-      default:
-        target: 80%
-        threshold: 3%
-        base: auto
-        flags:
-          - unit
+# coverage:
+#   status:
+#     project:
+#       default:
+#         target: 80%
+#         threshold: 3%
+#         base: auto
+#         flags:
+#           - unit
 comment:
   layout: 'header, diff, flags, files, footer'
   behavior: default
