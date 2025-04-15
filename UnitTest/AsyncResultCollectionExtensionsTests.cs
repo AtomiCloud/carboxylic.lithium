@@ -4554,4 +4554,112 @@ public class AsyncResultCollectionExtensionsTests
             .WithMessage(expected.Message)
             .Where(x => x.GetType() == expected.GetType());
     }
+
+    // Tests for ToAsyncResultCollection (Overload A with IEnumerable<Result<TSucc>>)
+    private class ToAsyncResultCollection_OverloadA_Data
+        : TheoryData<IEnumerable<Result<int>>, IEnumerable<Task<Result<int>>>>
+    {
+        public ToAsyncResultCollection_OverloadA_Data()
+        {
+            // Single success result
+            Add([(Result<int>)42], [Task.FromResult((Result<int>)42)]);
+
+            // Multiple success results
+            Add(
+                [(Result<int>)10, (Result<int>)20, (Result<int>)30],
+                [
+                    Task.FromResult((Result<int>)10),
+                    Task.FromResult((Result<int>)20),
+                    Task.FromResult((Result<int>)30),
+                ]
+            );
+
+            // Empty collection
+            Add([], []);
+
+            // Collection with failures
+            Add(
+                [
+                    (Result<int>)15,
+                    (Result<int>)new InvalidOperationException("Test failure"),
+                    (Result<int>)25,
+                ],
+                [
+                    Task.FromResult((Result<int>)15),
+                    Task.FromResult((Result<int>)new InvalidOperationException("Test failure")),
+                    Task.FromResult((Result<int>)25),
+                ]
+            );
+
+            // Collection with only failures
+            Add(
+                [
+                    (Result<int>)new ArgumentException("Arg error"),
+                    (Result<int>)new NullReferenceException("Null error"),
+                ],
+                [
+                    Task.FromResult((Result<int>)new ArgumentException("Arg error")),
+                    Task.FromResult((Result<int>)new NullReferenceException("Null error")),
+                ]
+            );
+        }
+    }
+
+    [Theory]
+    [ClassData(typeof(ToAsyncResultCollection_OverloadA_Data))]
+    public async Task ToAsyncResultCollection_OverloadA_Should_ConvertCollection(
+        IEnumerable<Result<int>> input,
+        IEnumerable<Task<Result<int>>> expected
+    )
+    {
+        // Act
+        var result = input.ToAsyncResultCollection();
+
+        // Assert
+        var actualResults = await Task.WhenAll(result);
+        var expectedResults = await Task.WhenAll(expected);
+
+        actualResults.Should().BeEquivalentTo(expectedResults);
+    }
+
+    // Tests for ToAsyncResultCollection (Overload B with IEnumerable<TSucc>)
+    private class ToAsyncResultCollection_OverloadB_Data
+        : TheoryData<IEnumerable<int>, IEnumerable<Task<Result<int>>>>
+    {
+        public ToAsyncResultCollection_OverloadB_Data()
+        {
+            // Single value
+            Add([42], [Task.FromResult((Result<int>)42)]);
+
+            // Multiple values
+            Add(
+                [10, 20, 30],
+                [
+                    Task.FromResult((Result<int>)10),
+                    Task.FromResult((Result<int>)20),
+                    Task.FromResult((Result<int>)30),
+                ]
+            );
+
+            // Empty collection
+            Add([], []);
+        }
+    }
+
+    [Theory]
+    [ClassData(typeof(ToAsyncResultCollection_OverloadB_Data))]
+    public async Task ToAsyncResultCollection_OverloadB_Should_ConvertCollection(
+        IEnumerable<int> input,
+        IEnumerable<Task<Result<int>>> expected
+    )
+    {
+        // Act
+        var result = input.ToAsyncResultCollection();
+
+        // Assert
+        var actualResults = await Task.WhenAll(result);
+        var expectedResults = await Task.WhenAll(expected);
+
+        actualResults.Should().BeEquivalentTo(expectedResults);
+    }
 }
