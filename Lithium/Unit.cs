@@ -24,11 +24,11 @@ public struct Unit
         return string.Empty;
     }
 
+#pragma warning disable IDE0060
     /// <summary>
     /// Unit has no value and consequently has a hashcode of 0
     /// </summary>
     /// <returns>0</returns>
-#pragma warning disable IDE0060
     public readonly override int GetHashCode()
     {
         return 0;
