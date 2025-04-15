@@ -1,7 +1,7 @@
 coverage:
   status:
     project:
-      UnitTest:
+      default:
         target: 80%
         threshold: 3%
         base: auto
