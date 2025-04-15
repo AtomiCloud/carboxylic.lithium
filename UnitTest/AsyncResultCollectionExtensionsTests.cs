@@ -3951,4 +3951,277 @@ public class AsyncResultCollectionExtensionsTests
             .WithMessage(expected.Message)
             .Where(x => x.GetType() == expected.GetType());
     }
+
+    // Tests for MatchEach (Overload A with Func returning TResult)
+    private class MatchEach_OverloadA_Success_Data
+        : TheoryData<
+            IEnumerable<Task<Result<int>>>,
+            Func<int, string>,
+            Func<Exception, string>,
+            IEnumerable<Task<string>>
+        >
+    {
+        public MatchEach_OverloadA_Success_Data()
+        {
+            // Single success result
+            Add(
+                [Task.FromResult((Result<int>)42)],
+                val => $"Success: {val}",
+                err => $"Error: {err.Message}",
+                [Task.FromResult("Success: 42")]
+            );
+
+            // Multiple success results
+            Add(
+                [
+                    Task.FromResult((Result<int>)10),
+                    Task.FromResult((Result<int>)20),
+                    Task.FromResult((Result<int>)30),
+                ],
+                val => $"Success: {val}",
+                err => $"Error: {err.Message}",
+                [
+                    Task.FromResult("Success: 10"),
+                    Task.FromResult("Success: 20"),
+                    Task.FromResult("Success: 30"),
+                ]
+            );
+
+            // Empty collection
+            Add([], val => $"Success: {val}", err => $"Error: {err.Message}", []);
+        }
+    }
+
+    [Theory]
+    [ClassData(typeof(MatchEach_OverloadA_Success_Data))]
+    public async Task MatchEachA_Should_HandleSuccesses(
+        IEnumerable<Task<Result<int>>> inputs,
+        Func<int, string> success,
+        Func<Exception, string> failure,
+        IEnumerable<Task<string>> expected
+    )
+    {
+        // Act
+        var actual = inputs.MatchEach(success, failure);
+
+        // Assert
+        var actualResults = await Task.WhenAll(actual);
+        var expectedResults = await Task.WhenAll(expected);
+        actualResults.Should().BeEquivalentTo(expectedResults);
+    }
+
+    private class MatchEach_OverloadA_Failure_Data
+        : TheoryData<
+            IEnumerable<Task<Result<int>>>,
+            Func<int, string>,
+            Func<Exception, string>,
+            IEnumerable<Task<string>>
+        >
+    {
+        public MatchEach_OverloadA_Failure_Data()
+        {
+            // Single failure result
+            Add(
+                [Task.FromResult((Result<int>)new InvalidOperationException("Operation failed"))],
+                val => $"Success: {val}",
+                err => $"Error: {err.Message}",
+                [Task.FromResult("Error: Operation failed")]
+            );
+
+            // Mixed success and failure results
+            Add(
+                [
+                    Task.FromResult((Result<int>)10),
+                    Task.FromResult((Result<int>)new ArgumentException("Invalid argument")),
+                    Task.FromResult((Result<int>)30),
+                ],
+                val => $"Success: {val}",
+                err => $"Error: {err.Message}",
+                [
+                    Task.FromResult("Success: 10"),
+                    Task.FromResult("Error: Invalid argument"),
+                    Task.FromResult("Success: 30"),
+                ]
+            );
+
+            // Multiple failure results
+            Add(
+                [
+                    Task.FromResult((Result<int>)new InvalidOperationException("First error")),
+                    Task.FromResult((Result<int>)new ArgumentException("Second error")),
+                ],
+                val => $"Success: {val}",
+                err => $"Error: {err.Message}",
+                [Task.FromResult("Error: First error"), Task.FromResult("Error: Second error")]
+            );
+        }
+    }
+
+    [Theory]
+    [ClassData(typeof(MatchEach_OverloadA_Failure_Data))]
+    public async Task MatchEachA_Should_HandleFailures(
+        IEnumerable<Task<Result<int>>> inputs,
+        Func<int, string> success,
+        Func<Exception, string> failure,
+        IEnumerable<Task<string>> expected
+    )
+    {
+        // Act
+        var actual = inputs.MatchEach(success, failure);
+
+        // Assert
+        var actualResults = await Task.WhenAll(actual);
+        var expectedResults = await Task.WhenAll(expected);
+        actualResults.Should().BeEquivalentTo(expectedResults);
+    }
+
+    private class MatchEach_OverloadA_PropagateException_Data
+        : TheoryData<
+            IEnumerable<Task<Result<int>>>,
+            Func<int, string>,
+            Func<Exception, string>,
+            Exception
+        >
+    {
+        public MatchEach_OverloadA_PropagateException_Data()
+        {
+            // Exception in success handler
+            Add(
+                [Task.FromResult((Result<int>)42)],
+                val => throw new FormatException("Exception in success handler"),
+                err => $"Error: {err.Message}",
+                new FormatException("Exception in success handler")
+            );
+
+            // Exception in failure handler
+            Add(
+                [Task.FromResult((Result<int>)new InvalidOperationException("Original error"))],
+                val => $"Success: {val}",
+                err => throw new NullReferenceException("Exception in failure handler"),
+                new NullReferenceException("Exception in failure handler")
+            );
+        }
+    }
+
+    [Theory]
+    [ClassData(typeof(MatchEach_OverloadA_PropagateException_Data))]
+    public async Task MatchEachA_Should_PropagateException(
+        IEnumerable<Task<Result<int>>> inputs,
+        Func<int, string> success,
+        Func<Exception, string> failure,
+        Exception expected
+    )
+    {
+        // Act
+        var matchedResults = inputs.MatchEach(success, failure);
+        Func<Task> act = () => Task.WhenAll(matchedResults);
+
+        // Assert
+        await act.Should()
+            .ThrowAsync<Exception>()
+            .WithMessage(expected.Message)
+            .Where(x => x.GetType() == expected.GetType());
+    }
+
+    // Tests for MatchEach (Overload B with Action)
+    private class MatchEach_OverloadB_Data
+        : TheoryData<IEnumerable<Task<Result<int>>>, List<string>>
+    {
+        public MatchEach_OverloadB_Data()
+        {
+            // Success cases
+            var successLog1 = new List<string>();
+            Add([Task.FromResult((Result<int>)42)], successLog1);
+
+            // Multiple success results
+            var successLog2 = new List<string>();
+            Add([Task.FromResult((Result<int>)10), Task.FromResult((Result<int>)20)], successLog2);
+
+            // Failure cases
+            var failureLog1 = new List<string>();
+            Add(
+                [Task.FromResult((Result<int>)new InvalidOperationException("Operation failed"))],
+                failureLog1
+            );
+
+            // Mixed success and failure results
+            var mixedLog = new List<string>();
+            Add(
+                [
+                    Task.FromResult((Result<int>)5),
+                    Task.FromResult((Result<int>)new ArgumentException("Invalid argument")),
+                ],
+                mixedLog
+            );
+        }
+    }
+
+    [Theory]
+    [ClassData(typeof(MatchEach_OverloadB_Data))]
+    public async Task MatchEachB_Should_ExecuteActions(
+        IEnumerable<Task<Result<int>>> inputs,
+        List<string> log
+    )
+    {
+        // Act
+        var tasks = inputs.MatchEach(
+            val => log.Add($"Success: {val}"),
+            err => log.Add($"Error: {err.Message}")
+        );
+        await Task.WhenAll(tasks);
+
+        // Assert
+        var expected = new List<string>();
+        foreach (var input in await Task.WhenAll(inputs))
+        {
+            input.Match(
+                val => expected.Add($"Success: {val}"),
+                err => expected.Add($"Error: {err.Message}")
+            );
+        }
+        log.Should().BeEquivalentTo(expected);
+    }
+
+    private class MatchEach_OverloadB_PropagateException_Data
+        : TheoryData<IEnumerable<Task<Result<int>>>, Action<int>, Action<Exception>, Exception>
+    {
+        public MatchEach_OverloadB_PropagateException_Data()
+        {
+            // Exception in success action
+            Add(
+                [Task.FromResult((Result<int>)42)],
+                val => throw new InvalidCastException("Exception in success action"),
+                err => { },
+                new InvalidCastException("Exception in success action")
+            );
+
+            // Exception in failure action
+            Add(
+                [Task.FromResult((Result<int>)new ArgumentException("Original error"))],
+                val => { },
+                err => throw new DivideByZeroException("Exception in failure action"),
+                new DivideByZeroException("Exception in failure action")
+            );
+        }
+    }
+
+    [Theory]
+    [ClassData(typeof(MatchEach_OverloadB_PropagateException_Data))]
+    public async Task MatchEachB_Should_PropagateException(
+        IEnumerable<Task<Result<int>>> inputs,
+        Action<int> success,
+        Action<Exception> failure,
+        Exception expected
+    )
+    {
+        // Act
+        var matchedResults = inputs.MatchEach(success, failure);
+        Func<Task> act = () => Task.WhenAll(matchedResults);
+
+        // Assert
+        await act.Should()
+            .ThrowAsync<Exception>()
+            .WithMessage(expected.Message)
+            .Where(x => x.GetType() == expected.GetType());
+    }
 }
