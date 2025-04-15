@@ -1,3 +1,10 @@
+## [1.11.0](https://github.com/AtomiCloud/carboxylic.lithium/compare/v1.10.0...v1.11.0) (2025-04-15)
+
+
+### 🧪 Tests 🧪
+
+* **config:** another config ([8e60cc5](https://github.com/AtomiCloud/carboxylic.lithium/commit/8e60cc5ab4f7c250b5f04ec5fa11c4ba65fce869))
+
 ## [1.10.0](https://github.com/AtomiCloud/carboxylic.lithium/compare/v1.9.0...v1.10.0) (2025-04-15)
 
 
