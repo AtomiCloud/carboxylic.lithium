@@ -71,6 +71,5 @@ jobs:
         with:
           fail_ci_if_error: true
           verbose: true
-          flags: unit
           token: ${{ secrets.CODECOV_TOKEN }}
           files: coverage/UnitTest/coverage.cobertura.xml
