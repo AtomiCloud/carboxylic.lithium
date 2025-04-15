@@ -1,3 +1,14 @@
+## [1.6.0](https://github.com/AtomiCloud/carboxylic.lithium/compare/v1.5.2...v1.6.0) (2025-04-15)
+
+
+### ✨ Features ✨
+
+* **ci:** connect to codecov ([9381949](https://github.com/AtomiCloud/carboxylic.lithium/commit/9381949e0f73ffdd19c224f4d3c586d366172160))
+* **UnitTest:** correct test functions ([434fc5d](https://github.com/AtomiCloud/carboxylic.lithium/commit/434fc5d0739b2673a8e641d68d7a0562d279cd1f))
+* **codecov:** include codecov.yml ([598ada6](https://github.com/AtomiCloud/carboxylic.lithium/commit/598ada6485b1ab1f2b74b15b23a020d4f5c91d1a))
+* **default:** include test coverage ([1f81e33](https://github.com/AtomiCloud/carboxylic.lithium/commit/1f81e338b9b1c9056be9e8e9cfc8d19634cc9ab1))
+* **ci:** use codecov for threshold ([4f41b6d](https://github.com/AtomiCloud/carboxylic.lithium/commit/4f41b6d09dce1310f4dc0e3f3973c08d0c5421bb))
+
 ## [1.5.2](https://github.com/AtomiCloud/carboxylic.lithium/compare/v1.5.1...v1.5.2) (2025-04-13)
 
 
