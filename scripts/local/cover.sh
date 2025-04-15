@@ -29,7 +29,7 @@ mkdir -p "coverage/$test_dir"
 
 # Run tests and generate coverage
 echo "🧪 Running tests with coverage collection..."
-dotnet test "$test_dir" --collect:"XPlat Code Coverage;Format=json,lcov,cobertura" || true
+dotnet test "$test_dir" --collect:"XPlat Code Coverage;Format=json,lcov,cobertura"
 
 # Find and copy coverage files to the destination
 echo "📋 Copying coverage files to destination..."
