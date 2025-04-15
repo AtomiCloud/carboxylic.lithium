@@ -1,9 +1,17 @@
 coverage:
   status:
     project:
+      default: false
       UnitTest:
         target: 80%
         threshold: 3%
         base: auto
         flags:
           - unit
+comment:
+  layout: 'header, diff, flags, files, footer'
+  behavior: default
+  require_changes: false
+  require_base: false
+  require_head: false
+  hide_project_coverage: false
