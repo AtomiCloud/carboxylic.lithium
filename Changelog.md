@@ -1,3 +1,22 @@
+## [1.9.0](https://github.com/AtomiCloud/carboxylic.lithium/compare/v1.8.0...v1.9.0) (2025-04-15)
+
+
+### 🐛 Bug Fixes 🐛
+
+* **default:** breaking test ([a7d1dbe](https://github.com/AtomiCloud/carboxylic.lithium/commit/a7d1dbeea742f3f53b0a5d0e34155931f6d9dbcc))
+* **default:** deepsource lint errors ([5360db5](https://github.com/AtomiCloud/carboxylic.lithium/commit/5360db5e47c682700765e6510f065adce4982e9f))
+
+
+### 🧪 Tests 🧪
+
+* **default:** intentionally fail test ([77fb2f6](https://github.com/AtomiCloud/carboxylic.lithium/commit/77fb2f691a1040e6f3624d98924362b86c60adb5))
+* **default:** intentionally fail test ([0b31bab](https://github.com/AtomiCloud/carboxylic.lithium/commit/0b31bab4eb5621b8841b7fa168de142831cdad96))
+* **ci:** remove reporting test to codecov ([20b3ced](https://github.com/AtomiCloud/carboxylic.lithium/commit/20b3cedf3e751edc61e556e031c8111d369f7385))
+* **UnitTest:** remove test to test codecov efficacy ([a7a1323](https://github.com/AtomiCloud/carboxylic.lithium/commit/a7a1323b3d25b07f332da84cd77ecd4d826c989d))
+* **default:** unit ext ([#33](https://github.com/AtomiCloud/carboxylic.lithium/issues/33)) ([c16bb78](https://github.com/AtomiCloud/carboxylic.lithium/commit/c16bb786685f103cd3a1ec204beb098c6f207506))
+* **default:** unit ext ([e77b86f](https://github.com/AtomiCloud/carboxylic.lithium/commit/e77b86f4605be748d838825ed10555eaf0e70f28))
+* **default:** use cont on error instead of within shell script ([4b6c3e8](https://github.com/AtomiCloud/carboxylic.lithium/commit/4b6c3e893192e2648cd031e21dfac73bf64c5102))
+
 ## [1.8.0](https://github.com/AtomiCloud/carboxylic.lithium/compare/v1.7.0...v1.8.0) (2025-04-15)
 
 
