@@ -7,5 +7,9 @@
 #         base: auto
 #         flags:
 #           - unit
+coverage:
+  status:
+    project: true
+    patch: true
 comment:
   layout: 'header, diff, flags, files, footer'
