@@ -38,7 +38,6 @@ jobs:
       # Test
       - name: Run Test
         run: nix develop .#ci -c ./scripts/ci/test.sh UnitTest
-
       # Connect to Codecov
       - name: Upload test results to Codecov
         if: ${{ !cancelled() }}
@@ -48,6 +47,9 @@ jobs:
           verbose: true
           files: ./UnitTest/TestResults/TestResults.xml
           token: ${{ secrets.CODECOV_TOKEN }}
+
+      - name: Fail if tests failed
+        run: cat success
 
   unit-test-coverage:
     name: Unit Test Coverage
