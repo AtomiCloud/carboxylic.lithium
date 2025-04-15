@@ -15,5 +15,6 @@ echo "✅ Done!"
 
 # run tests
 echo "🧪 Running and Coverage..."
+# shellcheck disable=SC2015
 dotnet test --logger:junit "$test_dir"
 echo "✅ Done!"
