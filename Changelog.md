@@ -1,3 +1,24 @@
+## [1.7.0](https://github.com/AtomiCloud/carboxylic.lithium/compare/v1.6.0...v1.7.0) (2025-04-15)
+
+
+### 📜 Documentation 📜
+
+* **default:** include badge in readme ([f4db987](https://github.com/AtomiCloud/carboxylic.lithium/commit/f4db987a3d443bd3765d18b4a5dfa5f77929ec95))
+
+
+### 🐛 Bug Fixes 🐛
+
+* **Unit:** refactor warning disable directive ([4b03347](https://github.com/AtomiCloud/carboxylic.lithium/commit/4b03347b5085d3925767f173cf292c9f295d3de5))
+
+
+### 🧪 Tests 🧪
+
+* **codecov:** change codecov config to enable PR comment ([54a3deb](https://github.com/AtomiCloud/carboxylic.lithium/commit/54a3debd74025da1536748caee9adaef523064b0))
+* fully test IfEach and IfAwaitEach ([ed3c053](https://github.com/AtomiCloud/carboxylic.lithium/commit/ed3c053facfe15fdcfaa25e6d3bc6ad4b27fc831))
+* **MatchAwaitEach:** implement tests for MatchAwaitEach overloads ([0946a49](https://github.com/AtomiCloud/carboxylic.lithium/commit/0946a49ba4d88bc079b4274c48b1d8df00a62486))
+* **MatchEach:** implement tests for MatchEach overloads ([172ad42](https://github.com/AtomiCloud/carboxylic.lithium/commit/172ad42e3cf2c4220b1dbc7d6f597c7d2766e798))
+* **AsyncResultCollection:** ToAsyncResultCollection tests ([7dae768](https://github.com/AtomiCloud/carboxylic.lithium/commit/7dae7685e53838d16aa04d6c5db2531626cd4914))
+
 ## [1.6.0](https://github.com/AtomiCloud/carboxylic.lithium/compare/v1.5.2...v1.6.0) (2025-04-15)
 
 
