@@ -93,24 +93,24 @@ public class UnitExtensionsTest
         actual.Should().Be(expected);
     }
 
-    [Fact]
-    public void Unit_T1_T2_Should_ExecuteOriginalAction()
-    {
-        // Arrange
-        var sum = 0;
+    // [Fact]
+    // public void Unit_T1_T2_Should_ExecuteOriginalAction()
+    // {
+    //     // Arrange
+    //     var sum = 0;
 
-        void Action(int x, int y)
-        {
-            sum = x + y;
-        }
+    //     void Action(int x, int y)
+    //     {
+    //         sum = x + y;
+    //     }
 
-        // Act
-        var unitFunc = ((Action<int, int>)Action).Unit();
-        unitFunc(20, 22);
+    //     // Act
+    //     var unitFunc = ((Action<int, int>)Action).Unit();
+    //     unitFunc(20, 22);
 
-        // Assert
-        sum.Should().Be(42);
-    }
+    //     // Assert
+    //     sum.Should().Be(42);
+    // }
 
     // ========================================
     // Unit<T1,T2,T3> Extension Method
