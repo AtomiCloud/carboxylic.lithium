@@ -39,14 +39,14 @@ jobs:
       - name: Run Test
         run: nix develop .#ci -c ./scripts/ci/test.sh UnitTest
       # Connect to Codecov
-      - name: Upload test results to Codecov
-        if: ${{ !cancelled() }}
-        uses: codecov/test-results-action@v1
-        with:
-          fail_ci_if_error: true
-          verbose: true
-          files: ./UnitTest/TestResults/TestResults.xml
-          token: ${{ secrets.CODECOV_TOKEN }}
+      # - name: Upload test results to Codecov
+      #   if: ${{ !cancelled() }}
+      #   uses: codecov/test-results-action@v1
+      #   with:
+      #     fail_ci_if_error: true
+      #     verbose: true
+      #     files: ./UnitTest/TestResults/TestResults.xml
+      #     token: ${{ secrets.CODECOV_TOKEN }}
 
       - name: Fail if tests failed
         run: cat success
