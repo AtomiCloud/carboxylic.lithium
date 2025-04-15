@@ -27,7 +27,7 @@ public static class UnitExtensions
     /// <typeparam name="T1"></typeparam>
     /// <typeparam name="T2"></typeparam>
     /// <returns></returns>
-    public static Func<T1, T2, Unit> Unit<T1, T2>(Action<T1, T2> func)
+    public static Func<T1, T2, Unit> Unit<T1, T2>(this Action<T1, T2> func)
     {
         return (t1, t2) =>
         {
@@ -44,7 +44,7 @@ public static class UnitExtensions
     /// <typeparam name="T2"></typeparam>
     /// <typeparam name="T3"></typeparam>
     /// <returns></returns>
-    public static Func<T1, T2, T3, Unit> Unit<T1, T2, T3>(Action<T1, T2, T3> func)
+    public static Func<T1, T2, T3, Unit> Unit<T1, T2, T3>(this Action<T1, T2, T3> func)
     {
         return (t1, t2, t3) =>
         {
@@ -62,7 +62,7 @@ public static class UnitExtensions
     /// <typeparam name="T3"></typeparam>
     /// <typeparam name="T4"></typeparam>
     /// <returns></returns>
-    public static Func<T1, T2, T3, T4, Unit> Unit<T1, T2, T3, T4>(Action<T1, T2, T3, T4> func)
+    public static Func<T1, T2, T3, T4, Unit> Unit<T1, T2, T3, T4>(this Action<T1, T2, T3, T4> func)
     {
         return (t1, t2, t3, t4) =>
         {
@@ -82,7 +82,7 @@ public static class UnitExtensions
     /// <typeparam name="T5"></typeparam>
     /// <returns></returns>
     public static Func<T1, T2, T3, T4, T5, Unit> Unit<T1, T2, T3, T4, T5>(
-        Action<T1, T2, T3, T4, T5> func
+        this Action<T1, T2, T3, T4, T5> func
     )
     {
         return (t1, t2, t3, t4, t5) =>
@@ -104,7 +104,7 @@ public static class UnitExtensions
     /// <typeparam name="T6"></typeparam>
     /// <returns></returns>
     public static Func<T1, T2, T3, T4, T5, T6, Unit> Unit<T1, T2, T3, T4, T5, T6>(
-        Action<T1, T2, T3, T4, T5, T6> func
+        this Action<T1, T2, T3, T4, T5, T6> func
     )
     {
         return (t1, t2, t3, t4, t5, t6) =>
@@ -127,7 +127,7 @@ public static class UnitExtensions
     /// <typeparam name="T7"></typeparam>
     /// <returns></returns>
     public static Func<T1, T2, T3, T4, T5, T6, T7, Unit> Unit<T1, T2, T3, T4, T5, T6, T7>(
-        Action<T1, T2, T3, T4, T5, T6, T7> func
+        this Action<T1, T2, T3, T4, T5, T6, T7> func
     )
     {
         return (t1, t2, t3, t4, t5, t6, t7) =>
@@ -151,7 +151,7 @@ public static class UnitExtensions
     /// <typeparam name="T8"></typeparam>
     /// <returns></returns>
     public static Func<T1, T2, T3, T4, T5, T6, T7, T8, Unit> Unit<T1, T2, T3, T4, T5, T6, T7, T8>(
-        Action<T1, T2, T3, T4, T5, T6, T7, T8> func
+        this Action<T1, T2, T3, T4, T5, T6, T7, T8> func
     )
     {
         return (t1, t2, t3, t4, t5, t6, t7, t8) =>
@@ -185,7 +185,7 @@ public static class UnitExtensions
         T7,
         T8,
         T9
-    >(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9> func)
+    >(this Action<T1, T2, T3, T4, T5, T6, T7, T8, T9> func)
     {
         return (t1, t2, t3, t4, t5, t6, t7, t8, t9) =>
         {
@@ -220,7 +220,7 @@ public static class UnitExtensions
         T8,
         T9,
         T10
-    >(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> func)
+    >(this Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> func)
     {
         return (t1, t2, t3, t4, t5, t6, t7, t8, t9, t10) =>
         {
@@ -257,7 +257,7 @@ public static class UnitExtensions
         T9,
         T10,
         T11
-    >(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> func)
+    >(this Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> func)
     {
         return (t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11) =>
         {
@@ -296,7 +296,7 @@ public static class UnitExtensions
         T10,
         T11,
         T12
-    >(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> func)
+    >(this Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> func)
     {
         return (t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12) =>
         {
@@ -337,7 +337,7 @@ public static class UnitExtensions
         T11,
         T12,
         T13
-    >(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> func)
+    >(this Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> func)
     {
         return (t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13) =>
         {
@@ -380,7 +380,7 @@ public static class UnitExtensions
         T12,
         T13,
         T14
-    >(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> func)
+    >(this Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> func)
     {
         return (t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14) =>
         {
@@ -425,7 +425,7 @@ public static class UnitExtensions
         T13,
         T14,
         T15
-    >(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> func)
+    >(this Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> func)
     {
         return (t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15) =>
         {
