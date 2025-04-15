@@ -4637,7 +4637,7 @@ public class AsyncResultCollectionExtensionsTests
                 [
                     Task.FromResult((Result<int>)10),
                     Task.FromResult((Result<int>)20),
-                    Task.FromResult((Result<int>)40),
+                    Task.FromResult((Result<int>)30),
                 ]
             );
 
