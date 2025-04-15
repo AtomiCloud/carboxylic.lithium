@@ -493,6 +493,31 @@ public class AsyncResultCollectionExtensionsTests
         await act.Should().ThrowAsync<AggregateException>("there were failures in the collection.");
     }
 
+    private class Get_Should_ReturnEmptyCollection_WhenInputIsEmpty_Data
+        : TheoryData<IEnumerable<Task<Result<int>>>>
+    {
+        public Get_Should_ReturnEmptyCollection_WhenInputIsEmpty_Data()
+        {
+            // Empty collection case
+            Add(Array.Empty<Task<Result<int>>>());
+        }
+    }
+
+    [Theory]
+    [ClassData(typeof(Get_Should_ReturnEmptyCollection_WhenInputIsEmpty_Data))]
+    public async Task Get_Should_ReturnEmptyCollection_WhenInputIsEmpty(
+        IEnumerable<Task<Result<int>>> collection
+    )
+    {
+        // Act
+        var result = await collection.Get();
+
+        // Assert
+        result
+            .Should()
+            .BeEmpty("an empty collection of results should return an empty collection");
+    }
+
     // 5 END
 
     // ==============
@@ -649,6 +674,29 @@ public class AsyncResultCollectionExtensionsTests
 
         // Assert
         actualSuccesses.Should().BeEmpty("there are no successes in the collection.");
+    }
+
+    private class GetSuccesses_Should_ReturnEmpty_WhenInputIsEmpty_Data
+        : TheoryData<IEnumerable<Task<Result<int>>>>
+    {
+        public GetSuccesses_Should_ReturnEmpty_WhenInputIsEmpty_Data()
+        {
+            // Empty collection case
+            Add(Array.Empty<Task<Result<int>>>());
+        }
+    }
+
+    [Theory]
+    [ClassData(typeof(GetSuccesses_Should_ReturnEmpty_WhenInputIsEmpty_Data))]
+    public async Task GetSuccesses_Should_ReturnEmpty_WhenInputIsEmpty(
+        IEnumerable<Task<Result<int>>> collection
+    )
+    {
+        // Act
+        var result = await collection.GetSuccesses().ToListAsync();
+
+        // Assert
+        result.Should().BeEmpty("an empty input collection should return an empty collection");
     }
 
     // 7 END
@@ -1489,7 +1537,7 @@ public class AsyncResultCollectionExtensionsTests
 
     // 13 END
 
-    // ================================================================================
+    // ========================================================================================
     // 14) DoEach<TSucc, TResult>(
     //      this IEnumerable<Task<Result<TSucc>>> results,
     //      DoType type,
@@ -1510,7 +1558,7 @@ public class AsyncResultCollectionExtensionsTests
     //      - DoType.Ignore => original success remains success
     //
     // We'll split these scenarios into multiple TheoryData classes for clarity.
-    // ================================================================================
+    // ========================================================================================
 
     // ====================================================
     // Scenario A: All input successes, function => success
@@ -3430,6 +3478,472 @@ public class AsyncResultCollectionExtensionsTests
     {
         // Act
         Func<Task> act = () => Task.WhenAll(inputs.AssertEach(assertion, Errors.MapNone));
+
+        // Assert
+        await act.Should()
+            .ThrowAsync<Exception>()
+            .WithMessage(expected.Message)
+            .Where(x => x.GetType() == expected.GetType());
+    }
+
+    private class IfEach_Should_ExecuteThen_WhenPredicateTrue_Data
+        : TheoryData<
+            IEnumerable<Task<Result<int>>>,
+            Func<int, Result<bool>>,
+            Func<int, Result<string>>,
+            Func<int, Result<string>>,
+            IEnumerable<Task<Result<string>>>
+        >
+    {
+        public IfEach_Should_ExecuteThen_WhenPredicateTrue_Data()
+        {
+            // All predicates return true
+            Add(
+                [Task.FromResult((Result<int>)5), Task.FromResult((Result<int>)10)],
+                val => true,
+                val => $"Then_{val}",
+                val => $"Else_{val}",
+                [
+                    Task.FromResult((Result<string>)"Then_5"),
+                    Task.FromResult((Result<string>)"Then_10"),
+                ]
+            );
+
+            // Mixed data with only successful items
+            Add(
+                [Task.FromResult((Result<int>)3), Task.FromResult((Result<int>)7)],
+                val => val > 2,
+                val => $"Then_{val}",
+                val => $"Else_{val}",
+                [
+                    Task.FromResult((Result<string>)"Then_3"),
+                    Task.FromResult((Result<string>)"Then_7"),
+                ]
+            );
+
+            // Empty collection
+            Add([], val => true, val => $"Then_{val}", val => $"Else_{val}", []);
+        }
+    }
+
+    [Theory]
+    [ClassData(typeof(IfEach_Should_ExecuteThen_WhenPredicateTrue_Data))]
+    public async Task IfEach_Should_ExecuteThen_WhenPredicateTrue(
+        IEnumerable<Task<Result<int>>> inputs,
+        Func<int, Result<bool>> predicate,
+        Func<int, Result<string>> thenFunc,
+        Func<int, Result<string>> elseFunc,
+        IEnumerable<Task<Result<string>>> expected
+    )
+    {
+        // Act
+        var result = inputs.IfEach(predicate, thenFunc, elseFunc);
+
+        // Assert
+        var actual = await Task.WhenAll(result);
+        var expectedArray = await Task.WhenAll(expected);
+
+        actual.Should().BeEquivalentTo(expectedArray);
+    }
+
+    private class IfEach_Should_ExecuteElse_WhenPredicateFalse_Data
+        : TheoryData<
+            IEnumerable<Task<Result<int>>>,
+            Func<int, Result<bool>>,
+            Func<int, Result<string>>,
+            Func<int, Result<string>>,
+            IEnumerable<Task<Result<string>>>
+        >
+    {
+        public IfEach_Should_ExecuteElse_WhenPredicateFalse_Data()
+        {
+            // All predicates return false
+            Add(
+                [Task.FromResult((Result<int>)5), Task.FromResult((Result<int>)10)],
+                val => false,
+                val => $"Then_{val}",
+                val => $"Else_{val}",
+                [
+                    Task.FromResult((Result<string>)"Else_5"),
+                    Task.FromResult((Result<string>)"Else_10"),
+                ]
+            );
+
+            // Mixed predicate results
+            Add(
+                [Task.FromResult((Result<int>)1), Task.FromResult((Result<int>)4)],
+                val => val > 3,
+                val => $"Then_{val}",
+                val => $"Else_{val}",
+                [
+                    Task.FromResult((Result<string>)"Else_1"),
+                    Task.FromResult((Result<string>)"Then_4"),
+                ]
+            );
+        }
+    }
+
+    [Theory]
+    [ClassData(typeof(IfEach_Should_ExecuteElse_WhenPredicateFalse_Data))]
+    public async Task IfEach_Should_ExecuteElse_WhenPredicateFalse(
+        IEnumerable<Task<Result<int>>> inputs,
+        Func<int, Result<bool>> predicate,
+        Func<int, Result<string>> thenFunc,
+        Func<int, Result<string>> elseFunc,
+        IEnumerable<Task<Result<string>>> expected
+    )
+    {
+        // Act
+        var result = inputs.IfEach(predicate, thenFunc, elseFunc);
+
+        // Assert
+        var actual = await Task.WhenAll(result);
+        var expectedArray = await Task.WhenAll(expected);
+
+        actual.Should().BeEquivalentTo(expectedArray);
+    }
+
+    private class IfEach_Should_RetainFailures_Data
+        : TheoryData<
+            IEnumerable<Task<Result<int>>>,
+            Func<int, Result<bool>>,
+            Func<int, Result<string>>,
+            Func<int, Result<string>>,
+            IEnumerable<Task<Result<string>>>
+        >
+    {
+        public IfEach_Should_RetainFailures_Data()
+        {
+            // Collection with failures
+            Add(
+                [
+                    Task.FromResult((Result<int>)5),
+                    Task.FromResult((Result<int>)new InvalidOperationException("Test failure")),
+                    Task.FromResult((Result<int>)10),
+                ],
+                val => true,
+                val => $"Then_{val}",
+                val => $"Else_{val}",
+                [
+                    Task.FromResult((Result<string>)"Then_5"),
+                    Task.FromResult((Result<string>)new InvalidOperationException("Test failure")),
+                    Task.FromResult((Result<string>)"Then_10"),
+                ]
+            );
+
+            // Collection with only failures
+            Add(
+                [
+                    Task.FromResult((Result<int>)new ArgumentException("Arg error 1")),
+                    Task.FromResult((Result<int>)new NullReferenceException("Null error")),
+                ],
+                val => true,
+                val => $"Then_{val}",
+                val => $"Else_{val}",
+                [
+                    Task.FromResult((Result<string>)new ArgumentException("Arg error 1")),
+                    Task.FromResult((Result<string>)new NullReferenceException("Null error")),
+                ]
+            );
+        }
+    }
+
+    [Theory]
+    [ClassData(typeof(IfEach_Should_RetainFailures_Data))]
+    public async Task IfEach_Should_RetainFailures(
+        IEnumerable<Task<Result<int>>> inputs,
+        Func<int, Result<bool>> predicate,
+        Func<int, Result<string>> thenFunc,
+        Func<int, Result<string>> elseFunc,
+        IEnumerable<Task<Result<string>>> expected
+    )
+    {
+        // Act
+        var result = inputs.IfEach(predicate, thenFunc, elseFunc);
+
+        // Assert
+        var actual = await Task.WhenAll(result);
+        var expectedArray = await Task.WhenAll(expected);
+
+        actual.Should().BeEquivalentTo(expectedArray);
+    }
+
+    private class IfEach_Should_PropagateException_Data
+        : TheoryData<
+            IEnumerable<Task<Result<int>>>,
+            Func<int, Result<bool>>,
+            Func<int, Result<string>>,
+            Func<int, Result<string>>,
+            Exception
+        >
+    {
+        public IfEach_Should_PropagateException_Data()
+        {
+            // Exception in predicate
+            Add(
+                [Task.FromResult((Result<int>)5)],
+                val => throw new FormatException("Exception in predicate"),
+                val => $"Then_{val}",
+                val => $"Else_{val}",
+                new FormatException("Exception in predicate")
+            );
+
+            // Exception in then function
+            Add(
+                [Task.FromResult((Result<int>)7)],
+                val => true,
+                val => throw new ArgumentNullException("value", "Exception in then function"),
+                val => $"Else_{val}",
+                new ArgumentNullException("value", "Exception in then function")
+            );
+
+            // Exception in else function
+            Add(
+                [Task.FromResult((Result<int>)3)],
+                val => false,
+                val => $"Then_{val}",
+                val => throw new InvalidOperationException("Exception in else function"),
+                new InvalidOperationException("Exception in else function")
+            );
+        }
+    }
+
+    [Theory]
+    [ClassData(typeof(IfEach_Should_PropagateException_Data))]
+    public async Task IfEach_Should_PropagateException(
+        IEnumerable<Task<Result<int>>> inputs,
+        Func<int, Result<bool>> predicate,
+        Func<int, Result<string>> thenFunc,
+        Func<int, Result<string>> elseFunc,
+        Exception expected
+    )
+    {
+        // Act
+        Func<Task> act = () => Task.WhenAll(inputs.IfEach(predicate, thenFunc, elseFunc));
+
+        // Assert
+        await act.Should()
+            .ThrowAsync<Exception>()
+            .WithMessage(expected.Message)
+            .Where(x => x.GetType() == expected.GetType());
+    }
+
+    private class IfAwaitEach_Should_ExecuteThen_WhenPredicateTrue_Data
+        : TheoryData<
+            IEnumerable<Task<Result<int>>>,
+            Func<int, Task<Result<bool>>>,
+            Func<int, Task<Result<string>>>,
+            Func<int, Task<Result<string>>>,
+            IEnumerable<Task<Result<string>>>
+        >
+    {
+        public IfAwaitEach_Should_ExecuteThen_WhenPredicateTrue_Data()
+        {
+            // All predicates return true
+            Add(
+                [Task.FromResult((Result<int>)5), Task.FromResult((Result<int>)10)],
+                val => Task.FromResult((Result<bool>)true),
+                val => Task.FromResult((Result<string>)$"Then_{val}"),
+                val => Task.FromResult((Result<string>)$"Else_{val}"),
+                [
+                    Task.FromResult((Result<string>)"Then_5"),
+                    Task.FromResult((Result<string>)"Then_10"),
+                ]
+            );
+
+            // Mixed predicates with only successful items
+            Add(
+                [Task.FromResult((Result<int>)3), Task.FromResult((Result<int>)7)],
+                val => Task.FromResult((Result<bool>)(val > 2)),
+                val => Task.FromResult((Result<string>)$"Then_{val}"),
+                val => Task.FromResult((Result<string>)$"Else_{val}"),
+                [
+                    Task.FromResult((Result<string>)"Then_3"),
+                    Task.FromResult((Result<string>)"Then_7"),
+                ]
+            );
+        }
+    }
+
+    [Theory]
+    [ClassData(typeof(IfAwaitEach_Should_ExecuteThen_WhenPredicateTrue_Data))]
+    public async Task IfAwaitEach_Should_ExecuteThen_WhenPredicateTrue(
+        IEnumerable<Task<Result<int>>> inputs,
+        Func<int, Task<Result<bool>>> predicate,
+        Func<int, Task<Result<string>>> thenFunc,
+        Func<int, Task<Result<string>>> elseFunc,
+        IEnumerable<Task<Result<string>>> expected
+    )
+    {
+        // Act
+        var result = inputs.IfAwaitEach(predicate, thenFunc, elseFunc);
+
+        // Assert
+        var actual = await Task.WhenAll(result);
+        var expectedArray = await Task.WhenAll(expected);
+
+        actual.Should().BeEquivalentTo(expectedArray);
+    }
+
+    private class IfAwaitEach_Should_ExecuteElse_WhenPredicateFalse_Data
+        : TheoryData<
+            IEnumerable<Task<Result<int>>>,
+            Func<int, Task<Result<bool>>>,
+            Func<int, Task<Result<string>>>,
+            Func<int, Task<Result<string>>>,
+            IEnumerable<Task<Result<string>>>
+        >
+    {
+        public IfAwaitEach_Should_ExecuteElse_WhenPredicateFalse_Data()
+        {
+            // All predicates return false
+            Add(
+                [Task.FromResult((Result<int>)5), Task.FromResult((Result<int>)10)],
+                val => Task.FromResult((Result<bool>)false),
+                val => Task.FromResult((Result<string>)$"Then_{val}"),
+                val => Task.FromResult((Result<string>)$"Else_{val}"),
+                [
+                    Task.FromResult((Result<string>)"Else_5"),
+                    Task.FromResult((Result<string>)"Else_10"),
+                ]
+            );
+
+            // Mixed predicate results
+            Add(
+                [Task.FromResult((Result<int>)1), Task.FromResult((Result<int>)4)],
+                val => Task.FromResult((Result<bool>)(val > 3)),
+                val => Task.FromResult((Result<string>)$"Then_{val}"),
+                val => Task.FromResult((Result<string>)$"Else_{val}"),
+                [
+                    Task.FromResult((Result<string>)"Else_1"),
+                    Task.FromResult((Result<string>)"Then_4"),
+                ]
+            );
+        }
+    }
+
+    [Theory]
+    [ClassData(typeof(IfAwaitEach_Should_ExecuteElse_WhenPredicateFalse_Data))]
+    public async Task IfAwaitEach_Should_ExecuteElse_WhenPredicateFalse(
+        IEnumerable<Task<Result<int>>> inputs,
+        Func<int, Task<Result<bool>>> predicate,
+        Func<int, Task<Result<string>>> thenFunc,
+        Func<int, Task<Result<string>>> elseFunc,
+        IEnumerable<Task<Result<string>>> expected
+    )
+    {
+        // Act
+        var result = inputs.IfAwaitEach(predicate, thenFunc, elseFunc);
+
+        // Assert
+        var actual = await Task.WhenAll(result);
+        var expectedArray = await Task.WhenAll(expected);
+
+        actual.Should().BeEquivalentTo(expectedArray);
+    }
+
+    private class IfAwaitEach_Should_RetainFailures_Data
+        : TheoryData<
+            IEnumerable<Task<Result<int>>>,
+            Func<int, Task<Result<bool>>>,
+            Func<int, Task<Result<string>>>,
+            Func<int, Task<Result<string>>>,
+            IEnumerable<Task<Result<string>>>
+        >
+    {
+        public IfAwaitEach_Should_RetainFailures_Data()
+        {
+            // Collection with failures
+            Add(
+                [
+                    Task.FromResult((Result<int>)5),
+                    Task.FromResult((Result<int>)new InvalidOperationException("Test failure")),
+                    Task.FromResult((Result<int>)10),
+                ],
+                val => Task.FromResult((Result<bool>)true),
+                val => Task.FromResult((Result<string>)$"Then_{val}"),
+                val => Task.FromResult((Result<string>)$"Else_{val}"),
+                [
+                    Task.FromResult((Result<string>)"Then_5"),
+                    Task.FromResult((Result<string>)new InvalidOperationException("Test failure")),
+                    Task.FromResult((Result<string>)"Then_10"),
+                ]
+            );
+        }
+    }
+
+    [Theory]
+    [ClassData(typeof(IfAwaitEach_Should_RetainFailures_Data))]
+    public async Task IfAwaitEach_Should_RetainFailures(
+        IEnumerable<Task<Result<int>>> inputs,
+        Func<int, Task<Result<bool>>> predicate,
+        Func<int, Task<Result<string>>> thenFunc,
+        Func<int, Task<Result<string>>> elseFunc,
+        IEnumerable<Task<Result<string>>> expected
+    )
+    {
+        // Act
+        var result = inputs.IfAwaitEach(predicate, thenFunc, elseFunc);
+
+        // Assert
+        var actual = await Task.WhenAll(result);
+        var expectedArray = await Task.WhenAll(expected);
+
+        actual.Should().BeEquivalentTo(expectedArray);
+    }
+
+    private class IfAwaitEach_Should_PropagateException_Data
+        : TheoryData<
+            IEnumerable<Task<Result<int>>>,
+            Func<int, Task<Result<bool>>>,
+            Func<int, Task<Result<string>>>,
+            Func<int, Task<Result<string>>>,
+            Exception
+        >
+    {
+        public IfAwaitEach_Should_PropagateException_Data()
+        {
+            // Exception in predicate
+            Add(
+                [Task.FromResult((Result<int>)5)],
+                val => throw new FormatException("Exception in predicate"),
+                val => Task.FromResult((Result<string>)$"Then_{val}"),
+                val => Task.FromResult((Result<string>)$"Else_{val}"),
+                new FormatException("Exception in predicate")
+            );
+
+            // Exception in then function
+            Add(
+                [Task.FromResult((Result<int>)7)],
+                val => Task.FromResult((Result<bool>)true),
+                val => throw new ArgumentNullException("value", "Exception in then function"),
+                val => Task.FromResult((Result<string>)$"Else_{val}"),
+                new ArgumentNullException("value", "Exception in then function")
+            );
+
+            // Exception in else function
+            Add(
+                [Task.FromResult((Result<int>)3)],
+                val => Task.FromResult((Result<bool>)false),
+                val => Task.FromResult((Result<string>)$"Then_{val}"),
+                val => throw new InvalidOperationException("Exception in else function"),
+                new InvalidOperationException("Exception in else function")
+            );
+        }
+    }
+
+    [Theory]
+    [ClassData(typeof(IfAwaitEach_Should_PropagateException_Data))]
+    public async Task IfAwaitEach_Should_PropagateException(
+        IEnumerable<Task<Result<int>>> inputs,
+        Func<int, Task<Result<bool>>> predicate,
+        Func<int, Task<Result<string>>> thenFunc,
+        Func<int, Task<Result<string>>> elseFunc,
+        Exception expected
+    )
+    {
+        // Act
+        Func<Task> act = () => Task.WhenAll(inputs.IfAwaitEach(predicate, thenFunc, elseFunc));
 
         // Assert
         await act.Should()
