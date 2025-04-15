@@ -1,7 +1,9 @@
 version: '3'
 
+includes:
+  test: tasks/Taskfile.test.yaml
+
 env:
-  COVERAGE_THRESHOLD: 50
   ATOMI_SERVICE: Lithium
 
 tasks:
@@ -9,32 +11,9 @@ tasks:
     desc: 'Setup the repository'
     cmds:
       - dotnet restore
-      - dotnet tool restore
       - ./scripts/local/secrets.sh
 
   build:
     desc: 'Build the library'
     cmds:
       - dotnet build
-
-  test:
-    desc: 'Test the library'
-    cmds:
-      - dotnet test
-
-  test:cover:
-    desc: 'Test the library with coverage'
-    silent: true
-    cmds:
-      - ./scripts/ci/test.sh ${COVERAGE_THRESHOLD}
-  test:cover:html:
-    desc: 'Test the library with html output'
-    silent: true
-    cmds:
-      - dotnet build --no-incremental > /dev/null
-      - dotnet dotcover test --dcReportType=HTML
-  test:clean:
-    desc: 'Clean the test results'
-    cmds:
-      - rm -rf ./dotCover.Output
-      - rm ./dotCover.Output.*

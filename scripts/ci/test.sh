@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+test_dir="$1"
+
 set -eou pipefail
 
 echo "⬇️ Installing Dependencies..."
@@ -13,5 +15,5 @@ echo "✅ Done!"
 
 # run tests
 echo "🧪 Running and Coverage..."
-dotnet test
+dotnet test --logger:junit "$test_dir"
 echo "✅ Done!"

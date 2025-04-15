@@ -1,0 +1,9 @@
+coverage:
+  status:
+    project:
+      UnitTest:
+        target: 80%
+        threshold: 3%
+        base: auto
+        flags:
+          - unit

@@ -1,4 +1,4 @@
-name: CI-CD
+name: CI
 
 on:
   push:
@@ -23,12 +23,12 @@ jobs:
       - name: Run pre-commit
         run: nix develop .#ci -c ./scripts/ci/pre-commit.sh
 
-  test:
-    name: Tests
+  unit-test:
+    name: Unit Tests
     runs-on:
       - nscloud-ubuntu-22.04-amd64-4x8-with-cache
       - nscloud-cache-size-50gb
-      - nscloud-cache-tag-carboxylic-lithium-test-cache
+      - nscloud-cache-tag-carboxylic-lithium-unit-test-cache
       - nscloud-git-mirror-1gb
     steps:
       # Setup
@@ -37,41 +37,40 @@ jobs:
 
       # Test
       - name: Run Test
-        run: nix develop .#ci -c ./scripts/ci/test.sh
-  release:
-    name: Semantic Release
-    needs:
-      - precommit
-      - test
+        run: nix develop .#ci -c ./scripts/ci/test.sh UnitTest
 
-    if: github.ref == 'refs/heads/main'
+      # Connect to Codecov
+      - name: Upload test results to Codecov
+        if: ${{ !cancelled() }}
+        uses: codecov/test-results-action@v1
+        with:
+          fail_ci_if_error: true
+          verbose: true
+          files: ./UnitTest/TestResults/TestResults.xml
+          token: ${{ secrets.CODECOV_TOKEN }}
+
+  unit-test-coverage:
+    name: Unit Test Coverage
     runs-on:
       - nscloud-ubuntu-22.04-amd64-4x8-with-cache
       - nscloud-cache-size-50gb
-      - nscloud-cache-tag-carboxylic-lithium-releaser-nix-store-cache
+      - nscloud-cache-tag-carboxylic-lithium-unit-test-coverage-cache
       - nscloud-git-mirror-1gb
     steps:
       # Setup
       - uses: AtomiCloud/actions.setup-nix@v2
-        with:
-          auth-bot-app-id: ${{ vars.AUTH_BOT_APP_ID }}
-          auth-bot-secret-key: ${{ secrets.AUTH_BOT_SECRET_KEY }}
-
-      - uses: AtomiCloud/actions.cache-npm@v1
       - uses: AtomiCloud/actions.cache-nuget@v1
 
-      # Release
-      - name: Release
-        env:
-          GITHUB_REPO_REF: ${{ github.repository }}
-          GITHUB_SHA: ${{ github.sha }}
-          GITHUB_BRANCH: ${{ env.GITHUB_REF_SLUG_URL }}
+      # Coverage
+      - name: Get Unit Test Coverage
+        run: nix develop .#ci -c ./scripts/local/cover.sh UnitTest Lithium,LithiumTestHelper
 
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-        run: nix develop .#releaser -c scripts/ci/release.sh
-      - name: Publish
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
-        run: nix develop .#ci -c scripts/ci/publish.sh
+      # Connect to Codecov
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v5
+        with:
+          fail_ci_if_error: true
+          verbose: true
+          flags: unit
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: coverage/UnitTest/coverage.cobertura.xml
