@@ -1,3 +1,10 @@
+## [1.12.1](https://github.com/AtomiCloud/carboxylic.lithium/compare/v1.12.0...v1.12.1) (2025-04-16)
+
+
+### 🐛 Bug Fixes 🐛
+
+* releaser commit should be no release ([f5c170b](https://github.com/AtomiCloud/carboxylic.lithium/commit/f5c170b4e2dd719ee1aaf57223b834b07f9aeacd))
+
 ## [1.12.0](https://github.com/AtomiCloud/carboxylic.lithium/compare/v1.11.0...v1.12.0) (2025-04-16)
 
 
