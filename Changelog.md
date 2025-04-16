@@ -1,3 +1,17 @@
+## [1.12.0](https://github.com/AtomiCloud/carboxylic.lithium/compare/v1.11.0...v1.12.0) (2025-04-16)
+
+
+### 🐛 Bug Fixes 🐛
+
+* **default:** remove token from badge coverage ([514669c](https://github.com/AtomiCloud/carboxylic.lithium/commit/514669cdb8c22be626d10a05a6dfb15904f68966))
+
+
+### 🧪 Tests 🧪
+
+* **default:** increase coverage ([#39](https://github.com/AtomiCloud/carboxylic.lithium/issues/39)) ([d486779](https://github.com/AtomiCloud/carboxylic.lithium/commit/d486779cf8e8d89a5f5c0ecddafc58352e7068de))
+* **default:** increase coverage ([b2b9246](https://github.com/AtomiCloud/carboxylic.lithium/commit/b2b92466369d1f0d014b88d1378bdcd4c66875a6))
+* **default:** increase test coverage ([bcf9b7f](https://github.com/AtomiCloud/carboxylic.lithium/commit/bcf9b7ffddde2e14f250fa3547883cb0c4d1d632))
+
 ## [1.11.0](https://github.com/AtomiCloud/carboxylic.lithium/compare/v1.10.0...v1.11.0) (2025-04-15)
 
 
