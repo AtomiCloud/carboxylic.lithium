@@ -1,6 +1,6 @@
 # Result
 
-[![codecov](https://codecov.io/gh/AtomiCloud/carboxylic.lithium/graph/badge.svg?token=YPADP9IIGB)](https://codecov.io/gh/AtomiCloud/carboxylic.lithium)
+[![codecov](https://codecov.io/gh/AtomiCloud/carboxylic.lithium/graph/badge.svg)](https://codecov.io/gh/AtomiCloud/carboxylic.lithium)
 [![DeepSource](https://app.deepsource.com/gh/AtomiCloud/carboxylic.lithium.svg/?label=active+issues)](https://app.deepsource.com/gh/AtomiCloud/carboxylic.lithium/)
 [![GitHub Release Date](https://img.shields.io/github/release-date/AtomiCloud/carboxylic.lithium)](https://github.com/AtomiCloud/carboxylic.lithium/releases)
 [![GitHub commit activity](https://img.shields.io/github/commit-activity/m/AtomiCloud/carboxylic.lithium)](https://github.com/AtomiCloud/carboxylic.lithium/commits/main)
