@@ -20,7 +20,7 @@
     <None Include="..\logo.png" Pack="true" PackagePath="\"/>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="FluentAssertions" Version="8.2.0"/>
+    <PackageReference Include="FluentAssertions" Version="8.9.0"/>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Lithium\Lithium.csproj"/>
