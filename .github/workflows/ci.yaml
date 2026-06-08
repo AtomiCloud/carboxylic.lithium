@@ -65,7 +65,7 @@ jobs:
       # Connect to Codecov
       - name: Upload coverage reports to Codecov
         if: ${{ always() }}
-        uses: codecov/codecov-action@v5
+        uses: codecov/codecov-action@v7
         with:
           fail_ci_if_error: true
           verbose: true
