@@ -14,7 +14,7 @@ jobs:
     steps:
       # Setup
       - uses: AtomiCloud/actions.setup-nix@v2
-      - uses: AtomiCloud/actions.cache-nuget@v1
+      - uses: AtomiCloud/actions.cache-nuget@v2
 
       # pre commit
       - name: Run pre-commit
@@ -30,7 +30,7 @@ jobs:
     steps:
       # Setup
       - uses: AtomiCloud/actions.setup-nix@v2
-      - uses: AtomiCloud/actions.cache-nuget@v1
+      - uses: AtomiCloud/actions.cache-nuget@v2
 
       # Test
       - name: Run Test
@@ -56,7 +56,7 @@ jobs:
     steps:
       # Setup
       - uses: AtomiCloud/actions.setup-nix@v2
-      - uses: AtomiCloud/actions.cache-nuget@v1
+      - uses: AtomiCloud/actions.cache-nuget@v2
 
       # Coverage
       - name: Get Unit Test Coverage
